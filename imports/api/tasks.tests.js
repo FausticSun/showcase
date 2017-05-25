@@ -9,7 +9,7 @@ import { Tasks } from './tasks.js';
 if (Meteor.isServer) {
   describe('Tasks', () => {
     describe('methods', () => {
-      const userid = random.id();
+      const userId = Random.id();
       let taskId;
 
       beforeEach(() => {
