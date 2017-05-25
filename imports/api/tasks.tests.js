@@ -2,14 +2,14 @@
 
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
-import { assert } from 'meteor/practicalmeteor:chai'
+import { assert } from 'meteor/practicalmeteor:chai';
 
 import { Tasks } from './tasks.js';
 
 if (Meteor.isServer) {
   describe('Tasks', () => {
     describe('methods', () => {
-      const userid = random.id();
+      const userId = Random.id();
       let taskId;
 
       beforeEach(() => {

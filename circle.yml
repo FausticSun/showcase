@@ -1,0 +1,13 @@
+dependencies:
+  override:
+    - meteor || curl https://install.meteor.com | /bin/sh
+    - npm install
+checkout:
+  post:
+    - git submodule update --init
+test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/reports
+    - meteor npm run lint --silent -- --format junit --output-file $CIRCLE_TEST_REPORTS/reports/eslint.xml
+  override:
+    - SERVER_TEST_REPORTER=xunit XUNIT_FILE=$CIRCLE_TEST_REPORTS/reports/tests.xml meteor test --once --driver-package dispatch:mocha

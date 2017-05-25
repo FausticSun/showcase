@@ -3,10 +3,12 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "pretest": "meteor npm run lint --silent"
+    "pretest": "meteor npm run lint --silent",
+    "test": "meteor test --once --driver-package dispatch:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
+    "bcrypt": "^1.0.2",
     "classnames": "^2.2.5",
     "meteor-node-stubs": "~0.2.4",
     "react": "^15.5.4",
@@ -42,14 +44,14 @@
       "meteor"
     ],
     "extends": [
-      "plugin:meteor/recommended",
-      "airbnb"
+      "@meteorjs/eslint-config-meteor"
     ],
     "rules": {
       "import/extensions": [
         "off",
         "never"
-      ]
+      ],
+      "import/prefer-default-export": "off"
     }
   }
 }
