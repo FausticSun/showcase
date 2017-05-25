@@ -26,7 +26,7 @@ class App extends Component {
     Tasks.insert({
       text,
       createdAt: new Date(), // current time
-      owner: Meteor.userID(),
+      owner: Meteor.userId(),
       username: Meteor.user().username,
     });
 
