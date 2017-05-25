@@ -22,3 +22,4 @@ accounts-ui
 accounts-password
 dispatch:mocha
 practicalmeteor:mocha
+practicalmeteor:chai
