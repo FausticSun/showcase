@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
 
