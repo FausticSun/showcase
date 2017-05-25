@@ -50,7 +50,8 @@
       "import/extensions": [
         "off",
         "never"
-      ]
+      ],
+      "import/prefer-default-export": "off"
     }
   }
 }

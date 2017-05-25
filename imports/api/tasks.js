@@ -21,7 +21,7 @@ Meteor.methods({
     check(text, String);
 
     // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
+    if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
 
@@ -66,6 +66,6 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
 
-    Tasks.update(taskId, { $set : { private: setToPrivate } });
+    Tasks.update(taskId, { $set: { private: setToPrivate } });
   },
 });
