@@ -14,7 +14,7 @@ export default class AccountsUIWrapper extends Component {
     Blaze.remove(this.view);
   }
   render() {
-    // Just Render a placeholder container that will be filled in
+    // Just render a placeholder container that will be filled in
     return <span ref="container" />;
   }
 }
