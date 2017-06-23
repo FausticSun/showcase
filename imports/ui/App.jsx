@@ -4,7 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Canvases } from '../api/canvases.js';
 
 import Canvas from './Canvas.jsx';
-
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 // App component - represents the whole app
 class App extends Component {
   renderCanvas() {
@@ -30,6 +30,7 @@ App.propTypes = {
 
 export default createContainer(() => {
   return {
-    canvases: Canvases.find({}).fetch(),
+    canvases: Canvases.find({}, { sort: { createdAt: -1 } }).fetch(),
+    currentUser: Meteor.user(),
   };
 }, App);

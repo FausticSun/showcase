@@ -5,6 +5,8 @@ import { Canvases } from '../api/canvases.js';
 import Canvas from './Canvas.jsx';
 import Tag from './Tag.jsx';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+
 export default class Upload extends React.Component {
   constructor(props) {
     super(props);
@@ -14,17 +16,20 @@ export default class Upload extends React.Component {
   _handleSubmit(e) {
     e.preventDefault();
 
-    const text = this.state.imagePreviewUrl;
+    const imgData = this.state.imagePreviewUrl;
     const tags = this.state.tags;
     const height = document.getElementById("imgBox").naturalHeight;
     const width = document.getElementById("imgBox").naturalWidth;
-    Canvases.insert({
-      text,
-      createdAt: new Date(), // current time
-      tags,
-      width,
-      height,
-    });
+    // Canvases.insert({
+    //   imgData,
+    //   createdAt: new Date(), // current time
+    //   tags,
+    //   width,
+    //   height,
+    //   owner: Meteor.userId(),           // _id of logged in user
+    //   username: Meteor.user().username,
+    // });
+    Meteor.call('canvases.insert',[imgData, tags, width, height])
     console.log('handle uploading-', this.state.file);
 
     //Reroute to home
@@ -57,6 +62,7 @@ export default class Upload extends React.Component {
     this.setState({ x: xpercent, y: ypercent, tags: b });
     //console.log('URL: ', this.state.tags);
   }
+  //Render tags in the tagHolder div
   renderTags() {
     return this.state.tags.map((index) => (
       <Tag key={index} number={index} />

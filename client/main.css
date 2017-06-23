@@ -120,13 +120,7 @@ header .hide-completed {
 .toggle-private {
   margin-left: 5px;
 }
-.canvasWrapper {
 
-  width: 500px;
-  height: auto;
-  margin-left: 55px;
-  margin-bottom: 50px;
-}
 .canvasimage{
   border: 1px black solid;
   width: 100%;
@@ -193,6 +187,16 @@ img{
   background: white;
   text-align: center;
 }
+.postWrapper{
+  font-size: 20px;
+  margin-left: 55px;
+  margin-bottom: 50px;
+}
+.canvasWrapper {
+  width: 500px;
+  height: auto;
+}
+
 &:hover{
   background: #efefef;
 }
