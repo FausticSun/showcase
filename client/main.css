@@ -120,14 +120,14 @@ header .hide-completed {
 .toggle-private {
   margin-left: 5px;
 }
-#canvasWrapper {
+.canvasWrapper {
 
   width: 500px;
   height: auto;
   margin-left: 55px;
   margin-bottom: 50px;
 }
-#canvasimage{
+.canvasimage{
   border: 1px black solid;
   width: 100%;
 }
@@ -182,8 +182,8 @@ img{
   position: absolute;
 }
 .canvastagholder{
-  width: 800px;
-  height: 600px;
+  width: inherit;
+  height: inherit;
   position: absolute;
 }
 .tag{

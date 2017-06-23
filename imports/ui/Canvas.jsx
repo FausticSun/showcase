@@ -14,11 +14,11 @@ export default class Canvas extends Component {
   }
   render() {
     return (
-      <div id='canvasWrapper'>
+      <div className='canvasWrapper'>
         <div className='canvastagholder'>
           {this.renderTags()};
         </div>
-        <img id='canvasimage' src={this.props.canvas.text} />
+        <img className='canvasimage' src={this.props.canvas.text} />
         <button className="delete" onClick={this.delete.bind(this)}>
           &times;
         </button>
