@@ -16,7 +16,7 @@ export default class Tag extends Component {
       return (
         <div className='tag' style={this.divStyle} >
           <div className="singleTag">{this.props.number[2]}</div>
-          <div className="label">{this.props.number[3]}</div>
+          <div className="label"><a className='labelUrl' href={this.props.number[4]}>{this.props.number[3]}</a></div>
         </div>
       );
   }

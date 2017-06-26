@@ -56,9 +56,10 @@ class Upload extends React.Component {
     e.preventDefault();
     var b = this.state.tags;
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    const url = ReactDOM.findDOMNode(this.refs.urlInput).value.trim();
     var xpercent = this.state.tempTag[0];
     var ypercent = this.state.tempTag[1];
-    b.push([ xpercent, ypercent, b.length + 1, text]);
+    b.push([ xpercent, ypercent, b.length + 1, text, url]);
     this.setState({ x: xpercent, y: ypercent, tags: b, tempTag:[] });
     //console.log('URL: ', this.state.tags);
     this.shrinkTempHolder();
@@ -83,10 +84,17 @@ class Upload extends React.Component {
       return (
         <div className='tag' style={xyposition} >
           <div className="singleTag">{this.state.tags.length + 1}</div>
+          <form >
+            <input
+              ref="textInput"
+              placeholder="Description"
+            />
+          </form>
           <form onSubmit={this._onSubmitLabel.bind(this)}>
-          <input
-            ref="textInput"
-          />
+            <input
+              ref="urlInput"
+              placeholder="url"
+            />
           </form>
         </div>
       );
@@ -146,7 +154,7 @@ class Upload extends React.Component {
           <h1>Mouse coordinates: { x } { y }</h1>
         </div>
         :
-        <div>PLEASE FOKKIN SIGN IN M8</div> }
+        <div className='postWrapper'>PLEASE SIGN IN</div> }
       </div>
     )
   }

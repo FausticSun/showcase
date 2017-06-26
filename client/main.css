@@ -188,14 +188,17 @@ img{
 }
 .tag{
   position: absolute;
+  font-size: 16px;
 
 }
 .singleTag{
   color: black;
   background: white;
   text-align: center;
+  padding:4px;
   width: 16px;
   height: 16px;
+  margin-bottom: 5px;
 }
 .postWrapper{
   font-size: 20px;
@@ -209,6 +212,15 @@ img{
 
 &:hover{
   background: #efefef;
+}
+.label{
+  background: white;
+
+}
+.labelUrl{
+  text-decoration: none;
+  color:black;
+  padding: 10px;
 }
 @media (max-width: 600px) {
   li {

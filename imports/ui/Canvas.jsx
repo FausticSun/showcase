@@ -13,6 +13,7 @@ class Canvas extends Component {
     this.divStyle = {
       height: newheight+ 'px',
     };
+
   }
   delete() {
     Meteor.call('canvases.remove',this.props.canvas._id);
@@ -32,11 +33,14 @@ class Canvas extends Component {
             {this.renderTags()}
           </div>
           <img className='canvasimage' src={this.props.canvas.imgData} />
-          { this.props.currentUser==this.props.canvas.owner ?
+          { this.props.currentUser.username==this.props.canvas.username ?
             <button className="delete" onClick={this.delete.bind(this)}>
               &times;
             </button>
           : ''}
+          <button className="delete" onClick={this.delete.bind(this)}>
+            &times; MASTER DELETE
+          </button>
         </div>
       </article>
     );
