@@ -177,6 +177,15 @@ img{
   font-size: 10pt;
   cursor: pointer;
 }
+.tagholder{
+  width: 800px;
+  height: 600px;
+  position: absolute;
+}
+.tag{
+  position: absolute;
+  color: white;
+}
 &:hover{
   background: #efefef;
 }

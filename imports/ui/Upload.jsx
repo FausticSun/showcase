@@ -4,10 +4,10 @@ import { Meteor } from 'meteor/meteor';
 import { Canvases } from '../api/canvases.js';
 import Canvas from './Canvas.jsx';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-export default class ImageUpload extends React.Component {
+export default class Upload extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {file: '',imagePreviewUrl: '', x: 0, y: 0,tags : [] };
+    this.state = {file: '',imagePreviewUrl: '', x: 0, y: 0,tags : []};
     console.log('HI');
   }
 
@@ -42,21 +42,27 @@ export default class ImageUpload extends React.Component {
   _onMouseMove(e) {
     let {imagePreviewUrl} = this.state;
     const position = ReactDOM.findDOMNode(this.refs.elem).getBoundingClientRect();
-    console.log(position, e.nativeEvent.offsetX, e.screenX, e.nativeEvent.offsetY, e.screenY);
+    console.log(position, e.nativeEvent.offsetX, e.screenX, e.nativeEvent.offsetY, e.screenY,position.height, position.width);
     const a = {imagePreviewUrl};
     var b = this.state.tags;
-    b.push([ e.nativeEvent.offsetX, e.nativeEvent.offsetY ]);
-    this.setState({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY, tags: b });
+    var xpercent = e.nativeEvent.offsetX/position.width * 100;
+    var ypercent = e.nativeEvent.offsetY/position.height * 100;
+    b.push([ xpercent + '%', ypercent + '%']);
+    this.setState({ x: xpercent, y: ypercent, tags: b });
     console.log('URL: ', this.state.tags);
   }
-
+  renderTags() {
+    return this.state.tags.map((index) => (
+      <Tag key={index} number={index} />
+    ));
+  }
   render() {
     const { x, y } = this.state;
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     let $uploadBox = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img onMouseDown={this._onMouseMove.bind(this)} className='preview' src={imagePreviewUrl} />);
+      $imagePreview = (<img className='preview' src={imagePreviewUrl} />);
       $uploadBox = (<button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
     );
     } else {
@@ -66,14 +72,43 @@ export default class ImageUpload extends React.Component {
 
     return (
       <div className="previewComponent">
-        <div ref="elem" className="imgPreview">
-          {$imagePreview}
-        </div>
         <form>
           {$uploadBox}
         </form>
+        <div className="tagholder" onMouseDown={this._onMouseMove.bind(this)}>
+          {this.renderTags()}
+        </div>
+        <div ref="elem" className="imgPreview">
+          {$imagePreview}
+        </div>
         <h1>Mouse coordinates: { x } { y }</h1>
       </div>
     )
+  }
+}
+class Tag extends Component {
+  constructor(props) {
+    super(props);
+    this.divStyle = {
+      left: this.props.number[0],
+      top:  this.props.number[1]
+    };
+  }
+  _onMouseMove(e) {
+    let {imagePreviewUrl} = this.state;
+    const position = ReactDOM.findDOMNode(this.refs.elem).getBoundingClientRect();
+    console.log(position, e.nativeEvent.offsetX, e.screenX, e.nativeEvent.offsetY, e.screenY,position.height, position.width);
+    const a = {imagePreviewUrl};
+    var b = this.state.tags;
+    var xpercent = e.nativeEvent.offsetX/position.width * 100;
+    var ypercent = e.nativeEvent.offsetY/position.height * 100;
+    b.push([ xpercent + '%', ypercent + '%']);
+    this.setState({ x: xpercent, y: ypercent, tags: b });
+    console.log('URL: ', this.state.tags);
+  }
+  render () {
+      return (
+          <div className="tag" style={this.divStyle}>{this.props.number[0]} + {this.props.number[1]}</div>
+      );
   }
 }
