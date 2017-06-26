@@ -127,7 +127,6 @@ header .hide-completed {
 }
 .previewComponent{
   width: 100%;
-  margin-left: 12.5%;
 }
 .preview{
   width: 100%;
@@ -156,6 +155,9 @@ img{
     width: 100%;
     height: 100%;
 }
+.uploadWrapper{
+  margin-left: 12.5%;
+}
 .previewText{
   width: 100%;
   margin-top: 20px;
@@ -181,11 +183,14 @@ img{
 }
 .tag{
   position: absolute;
+
+}
+.singleTag{
   color: black;
-  width: 16px;
-  height: 16px;
   background: white;
   text-align: center;
+  width: 16px;
+  height: 16px;
 }
 .postWrapper{
   font-size: 20px;

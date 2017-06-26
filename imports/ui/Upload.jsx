@@ -6,8 +6,9 @@ import Canvas from './Canvas.jsx';
 import Tag from './Tag.jsx';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import { createContainer } from 'meteor/react-meteor-data';
 
-export default class Upload extends React.Component {
+class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {file: '',imagePreviewUrl: '', x: 0, y: 0,tags : []};
@@ -63,9 +64,14 @@ export default class Upload extends React.Component {
     //console.log('URL: ', this.state.tags);
   }
   //Render tags in the tagHolder div
+  appendLabel() {
+    console.log('ran');
+    ReactDOM.render(<Label />, document.getElementById('label1'));
+
+  }
   renderTags() {
     return this.state.tags.map((index) => (
-      <Tag key={index} number={index} />
+      <Tag onLoad={this.appendLabel} key={index} number={index} />
     ));
   }
   _resize(){
@@ -89,18 +95,36 @@ export default class Upload extends React.Component {
     }
 
     return (
-      <div className="previewComponent">
-        <form>
-          {$uploadBox}
-        </form>
-        <div className="tagholder" id='tagWrapper' onMouseDown={this._onImgClickTag.bind(this)}>
-          {this.renderTags()}
+      <div className='uploadWrapper'>
+        { this.props.currentUser ?
+        <div className="previewComponent">
+          <form>
+            {$uploadBox}
+          </form>
+          <div className="tagholder" id='tagWrapper' onMouseDown={this._onImgClickTag.bind(this)}>
+            {this.renderTags()}
+          </div>
+          <div ref="elem" className="imgPreview">
+            {$imagePreview}
+          </div>
+          <h1>Mouse coordinates: { x } { y }</h1>
         </div>
-        <div ref="elem" className="imgPreview">
-          {$imagePreview}
-        </div>
-        <h1>Mouse coordinates: { x } { y }</h1>
+        :
+        <div>PLEASE FOKKIN SIGN IN M8</div> }
       </div>
     )
   }
 }
+
+class Label extends React.Component {
+  render() {
+    return (
+      <div>LOL FUCK</div>
+    )
+  }
+}
+export default createContainer(() => {
+  return {
+    currentUser: Meteor.user(),
+  };
+}, Upload);
