@@ -87,7 +87,6 @@ ul {
   font-size: 1em;
   border: none;
   position: absolute;
-  margin-top: -560px;
 }
 
 li {
@@ -178,6 +177,11 @@ img{
   cursor: pointer;
 }
 .tagholder{
+  width: 800px;
+  height: 600px;
+  position: absolute;
+}
+.canvastagholder{
   width: 800px;
   height: 600px;
   position: absolute;

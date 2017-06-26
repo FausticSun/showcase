@@ -1,13 +1,12 @@
 import React from 'react';
 import AccountsUIWrapper from '../../ui/AccountsUIWrapper.jsx';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-function goHome(){
-  FlowRouter.go('/');
-}
+import '../../startup/accounts-config.js';
 
 export const MainLayout = ({content}) => (
   <div className='main-layout'>
     <header>
+      <AccountsUIWrapper />
       <div >
         <a href='/' id='showcasehead'>Showcase</a>
       </div>
