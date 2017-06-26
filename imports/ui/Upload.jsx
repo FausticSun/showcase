@@ -9,21 +9,25 @@ export default class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {file: '',imagePreviewUrl: '', x: 0, y: 0,tags : []};
-    console.log('HI');
   }
 
   _handleSubmit(e) {
     e.preventDefault();
-    // TODO: do something with -> this.state.file
+
     const text = this.state.imagePreviewUrl;
     const tags = this.state.tags;
+    const height = document.getElementById("imgBox").naturalHeight;
+    const width = document.getElementById("imgBox").naturalWidth;
     Canvases.insert({
       text,
       createdAt: new Date(), // current time
       tags,
+      width,
+      height,
     });
     console.log('handle uploading-', this.state.file);
 
+    //Reroute to home
     FlowRouter.go('/');
   }
 
@@ -32,32 +36,37 @@ export default class Upload extends React.Component {
 
     let reader = new FileReader();
     let file = e.target.files[0];
-
     reader.onloadend = () => {
       this.setState({
         file: file,
         imagePreviewUrl: reader.result
       });
     }
+    reader.readAsDataURL(file);
 
-    reader.readAsDataURL(file)
   }
-  _onMouseMove(e) {
+  _onImgClickTag(e) {
     let {imagePreviewUrl} = this.state;
     const position = ReactDOM.findDOMNode(this.refs.elem).getBoundingClientRect();
-    console.log(position, e.nativeEvent.offsetX, e.screenX, e.nativeEvent.offsetY, e.screenY,position.height, position.width);
+    //console.log(position, e.nativeEvent.offsetX, e.screenX, e.nativeEvent.offsetY, e.screenY,position.height, position.width);
     const a = {imagePreviewUrl};
     var b = this.state.tags;
     var xpercent = e.nativeEvent.offsetX/position.width * 100;
     var ypercent = e.nativeEvent.offsetY/position.height * 100;
-    b.push([ xpercent + '%', ypercent + '%']);
+    b.push([ xpercent + '%', ypercent + '%', b.length + 1]);
     this.setState({ x: xpercent, y: ypercent, tags: b });
-    console.log('URL: ', this.state.tags);
+    //console.log('URL: ', this.state.tags);
   }
   renderTags() {
     return this.state.tags.map((index) => (
       <Tag key={index} number={index} />
     ));
+  }
+  _resize(){
+    const imgheight = document.getElementById("imgBox").naturalHeight;
+    const imgwidth = document.getElementById("imgBox").naturalWidth;
+    const newheight = imgheight * 800/imgwidth;
+    document.getElementById("tagWrapper").style.height = newheight + 'px';
   }
   render() {
     const { x, y } = this.state;
@@ -65,7 +74,7 @@ export default class Upload extends React.Component {
     let $imagePreview = null;
     let $uploadBox = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img className='preview' src={imagePreviewUrl} />);
+      $imagePreview = (<img className='preview' id='imgBox' src={imagePreviewUrl} onLoad={(e)=>this._resize(e)}/>);
       $uploadBox = (<button className="submitButton" type="submit" onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
     );
     } else {
@@ -78,7 +87,7 @@ export default class Upload extends React.Component {
         <form>
           {$uploadBox}
         </form>
-        <div className="tagholder" onMouseDown={this._onMouseMove.bind(this)}>
+        <div className="tagholder" id='tagWrapper' onMouseDown={this._onImgClickTag.bind(this)}>
           {this.renderTags()}
         </div>
         <div ref="elem" className="imgPreview">

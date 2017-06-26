@@ -178,7 +178,6 @@ img{
 }
 .tagholder{
   width: 800px;
-  height: 600px;
   position: absolute;
 }
 .canvastagholder{
@@ -188,7 +187,11 @@ img{
 }
 .tag{
   position: absolute;
-  color: white;
+  color: black;
+  width: 16px;
+  height: 16px;
+  background: white;
+  text-align: center;
 }
 &:hover{
   background: #efefef;

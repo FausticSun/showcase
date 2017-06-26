@@ -11,7 +11,8 @@ export default class Tag extends Component {
   }
   render () {
       return (
-          <div className="tag" style={this.divStyle}>{this.props.number[0]} + {this.props.number[1]}</div>
+//          <div className="tag" style={this.divStyle}>{this.props.number[0]} + {this.props.number[1]}</div>
+        <div className="tag" style={this.divStyle}>{this.props.number[2]}</div>
       );
   }
 }

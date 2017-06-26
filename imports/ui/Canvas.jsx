@@ -4,6 +4,15 @@ import Tag from './Tag.jsx';
 
 // Canvas component - represents a single todo item
 export default class Canvas extends Component {
+  constructor(props) {
+    super(props);
+    const imgheight = this.props.canvas.height;
+    const imgwidth = this.props.canvas.width;
+    const newheight = imgheight * 500/imgwidth;
+    this.divStyle = {
+      height: newheight+ 'px',
+    };
+  }
   delete() {
     Canvases.remove(this.props.canvas._id);
   }
@@ -15,7 +24,7 @@ export default class Canvas extends Component {
   render() {
     return (
       <div className='canvasWrapper'>
-        <div className='canvastagholder'>
+        <div className='canvastagholder' style={this.divStyle}>
           {this.renderTags()};
         </div>
         <img className='canvasimage' src={this.props.canvas.text} />
