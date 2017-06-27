@@ -7,21 +7,22 @@ import { createContainer } from 'meteor/react-meteor-data';
 class Canvas extends Component {
   constructor(props) {
     super(props);
+
+    //Resizing the canvas picture to the proportionate height
     const imgheight = this.props.canvas.height;
     const imgwidth = this.props.canvas.width;
     const newheight = imgheight * 500/imgwidth;
-    this.divStyle = {
+    this.proportionatePicHeight = {
       height: newheight+ 'px',
     };
-
   }
   delete() {
+    //Using API cos Insecure removed
     Meteor.call('canvases.remove',this.props.canvas._id);
-    // Canvases.remove(this.props.canvas._id);
   }
   renderTags() {
     return this.props.canvas.tags.map((index) => (
-      <Tag key={index} number={index} />
+      <Tag key={index} objArray={index} />
     ));
   }
   render() {
@@ -29,11 +30,11 @@ class Canvas extends Component {
       <article className='postWrapper'>
         <div>{this.props.canvas.username}</div>
         <div className='canvasWrapper'>
-          <div className='canvastagholder' style={this.divStyle}>
+          <div className='canvastagholder' style={this.proportionatePicHeight}>
             {this.renderTags()}
           </div>
           <img className='canvasimage' src={this.props.canvas.imgData} />
-          <div>
+          <div className='deleteHolder'> //super temporary
             { Meteor.user() && this.props.currentUser.username==this.props.canvas.username ?
               <button className="delete" onClick={this.delete.bind(this)}>
                 &times; USER DELETE
