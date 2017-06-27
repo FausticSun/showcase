@@ -22,6 +22,7 @@ class Canvas extends Component {
     Meteor.call('canvases.remove', this.props.canvas._id);
   }
   likePost(){
+    console.log(Meteor.user());
     Meteor.call('canvases.likePost', [this.props.currentUser.username,this.props.canvas._id])
   }
   renderTags() {
@@ -49,17 +50,20 @@ class Canvas extends Component {
                 <button className="delete" onClick={this.delete.bind(this)}>
                   &times; USER DELETE
                 </button>
-              : ''}
+              : '' }
               <button className="delete" onClick={this.delete.bind(this)}>
                 &times; MASTER DELETE
               </button>
             </div>
           </div>
           <div className='likesWrapper'>
-            { this.props.canvas.likes.indexOf(this.props.currentUser.username) === -1 ?
-              <button onClick={this.likePost.bind(this)}>Like</button> :
-              <button onClick={this.likePost.bind(this)}>Unlike</button>
-            }
+            { Meteor.user() ?
+              <div>
+              { this.props.canvas.likes.indexOf(this.props.currentUser.username) === -1 ?
+                <button onClick={this.likePost.bind(this)}>Like</button> :
+                <button onClick={this.likePost.bind(this)}>Unlike</button>
+              }
+              </div> : '' }
             {this.props.canvas.likes.length} people like this
           </div>
           <div className='labelWrapper'>
