@@ -33,14 +33,16 @@ class Canvas extends Component {
             {this.renderTags()}
           </div>
           <img className='canvasimage' src={this.props.canvas.imgData} />
-          { this.props.currentUser.username==this.props.canvas.username ?
+          <div>
+            { Meteor.user() && this.props.currentUser.username==this.props.canvas.username ?
+              <button className="delete" onClick={this.delete.bind(this)}>
+                &times; USER DELETE
+              </button>
+            : ''}
             <button className="delete" onClick={this.delete.bind(this)}>
-              &times;
+              &times; MASTER DELETE
             </button>
-          : ''}
-          <button className="delete" onClick={this.delete.bind(this)}>
-            &times; MASTER DELETE
-          </button>
+          </div>
         </div>
       </article>
     );

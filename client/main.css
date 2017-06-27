@@ -88,7 +88,6 @@ ul {
   background: none;
   font-size: 1em;
   border: none;
-  position: absolute;
 }
 
 li {
@@ -166,6 +165,8 @@ img{
 }
 #tempTagHolder{
   z-index: 10;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.5);
 }
 .submitButton{
   padding: 12px;
@@ -176,6 +177,14 @@ img{
   font-weight: 700;
   font-size: 10pt;
   cursor: pointer;
+}
+.cancelTempTagButton{
+  float: right;
+  color: white;
+  font-weight: bold;
+  background: none;
+  font-size: 1em;
+  border: none;
 }
 .tagholder{
   width: 800px;

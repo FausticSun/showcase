@@ -65,11 +65,6 @@ class Upload extends React.Component {
     this.shrinkTempHolder();
     return false;
   }
-  //Render tags in the tagHolder div
-  appendLabel() {
-    console.log('ran');
-    ReactDOM.render(<Label />, document.getElementById('label1'));
-  }
   renderTags() {
     return this.state.tags.map((index) => (
       <Tag onLoad={this.appendLabel} key={index} number={index} />
@@ -100,21 +95,29 @@ class Upload extends React.Component {
       );
     }
   }
+  cancelTemp(){
+    this.setState({tempTag: []});
+    this.shrinkTempHolder();
+  }
   _resize(){
     const imgheight = document.getElementById("imgBox").naturalHeight;
     const imgwidth = document.getElementById("imgBox").naturalWidth;
     const newheight = imgheight * 800/imgwidth;
     document.getElementById("tagWrapper").style.height = newheight + 'px';
+    document.getElementById("tempTagHolder").style.height = newheight + 'px';
+
   }
-  shrinkTempHolder(){
-    document.getElementById("tempTagHolder").style.height = '0px';
-  }
+
   _resizeTempHolder(){
     const imgheight = document.getElementById("imgBox").naturalHeight;
     const imgwidth = document.getElementById("imgBox").naturalWidth;
     const newheight = imgheight * 800/imgwidth;
     console.log('Resizing the div');
-    document.getElementById("tempTagHolder").style.height = newheight + 'px';
+    document.getElementById("tempTagHolder").style.visibility = 'visible';
+  }
+
+  shrinkTempHolder(){
+    document.getElementById("tempTagHolder").style.visibility = 'hidden';
   }
   render() {
     const { x, y } = this.state;
@@ -144,6 +147,9 @@ class Upload extends React.Component {
           </form>
           <div id="tempTagHolder" className="tagholder">
             {$tagPreview}
+            <button className="cancelTempTagButton" onClick={this.cancelTemp.bind(this)}>
+              Cancel &times;
+            </button>
           </div>
           <div className="tagholder" id='tagWrapper' onMouseDown={this._onImgClickToTag.bind(this)}>
             {this.renderTags()}
