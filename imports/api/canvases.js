@@ -33,4 +33,15 @@ Meteor.methods({
     check(taskId, String);
     Canvases.remove(taskId);
   },
+  'canvases.likePost'(argArray) {
+    var liker = argArray[0];
+    var taskId = argArray[1] +'';
+    var likeArray = Canvases.findOne({"_id":taskId}).likes;
+    if(likeArray.indexOf(liker)===-1){
+      likeArray.push(liker);
+    } else{
+      likeArray.splice(likeArray.indexOf(liker) ,1);
+    }
+    Canvases.update({'_id': taskId}, {$set: {likes:likeArray}});
+  },
 });

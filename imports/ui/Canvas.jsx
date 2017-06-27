@@ -16,11 +16,13 @@ class Canvas extends Component {
     this.proportionatePicHeight = {
       height: newheight+ 'px',
     };
-    console.log(this.props.canvas.likes.length);
   }
   delete() {
     //Using API cos Insecure removed
-    Meteor.call('canvases.remove',this.props.canvas._id);
+    Meteor.call('canvases.remove', this.props.canvas._id);
+  }
+  likePost(){
+    Meteor.call('canvases.likePost', [this.props.currentUser.username,this.props.canvas._id])
   }
   renderTags() {
     return this.props.canvas.tags.map((index) => (
@@ -54,6 +56,10 @@ class Canvas extends Component {
             </div>
           </div>
           <div className='likesWrapper'>
+            { this.props.canvas.likes.indexOf(this.props.currentUser.username) === -1 ?
+              <button onClick={this.likePost.bind(this)}>Like</button> :
+              <button onClick={this.likePost.bind(this)}>Unlike</button>
+            }
             {this.props.canvas.likes.length} people like this
           </div>
           <div className='labelWrapper'>
