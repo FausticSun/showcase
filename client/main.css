@@ -83,37 +83,24 @@ ul {
 }
 
 .delete {
-  float: right;
   font-weight: bold;
   background: none;
   font-size: 1em;
   border: none;
 }
-
+ol{
+  -webkit-padding-start: 0px;
+}
 li {
-  position: relative;
-  list-style: none;
   padding: 15px;
   border-bottom: #eee solid 1px;
 }
 
-li .text {
-  margin-left: 10px;
+.labelTextUrl{
+  margin-left: 15px;
+  text-decoration: none;
+  color: black;
 }
-
-li.checked {
-  color: #888;
-}
-
-li.checked .text {
-  text-decoration: line-through;
-}
-
-li.private {
-  background: #eee;
-  border-color: #ddd;
-}
-
 header .hide-completed {
   float: right;
 }
@@ -123,7 +110,7 @@ header .hide-completed {
 }
 
 .canvasimage{
-  border: 1px black solid;
+  border-bottom: 1px black solid;
   width: 100%;
 }
 .previewComponent{
@@ -156,6 +143,10 @@ img{
     width: 100%;
     height: 100%;
 }
+article{
+    border: 2px solid black;
+}
+
 .uploadWrapper{
   margin-left: 12.5%;
 }
@@ -208,17 +199,23 @@ img{
   width: 16px;
   height: 16px;
   margin-bottom: 5px;
+  border-radius: 25px;
 }
 .postWrapper{
   font-size: 20px;
-  margin-left: 55px;
+}
+.postContents{
+  margin-top: 10px;
+  margin-left: 50px;
   margin-bottom: 50px;
 }
 .canvasWrapper {
   width: 500px;
   height: auto;
 }
-
+.canvasUserName{
+  margin-left: 5px;
+}
 &:hover{
   background: #efefef;
 }
@@ -230,18 +227,4 @@ img{
   text-decoration: none;
   color:black;
   padding: 10px;
-}
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
-
-  .search {
-    width: 150px;
-    clear: both;
-  }
-
-  .new-task input {
-    padding-bottom: 5px;
-  }
 }

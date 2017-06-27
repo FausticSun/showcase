@@ -12,7 +12,7 @@ Meteor.methods({
     width = insertArray[2];
     height = insertArray[3];
     check(imgData, String);
-
+    likes = [];
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
@@ -24,6 +24,7 @@ Meteor.methods({
       tags,
       width,
       height,
+      likes,
       owner: Meteor.userId(),           // _id of logged in user
       username: Meteor.user().username,
     });
