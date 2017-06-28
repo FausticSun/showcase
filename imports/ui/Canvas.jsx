@@ -16,6 +16,7 @@ class Canvas extends Component {
     this.proportionatePicHeight = {
       height: newheight+ 'px',
     };
+    console.log(this.props.canvas._id);
   }
   delete() {
     //Using API cos Insecure removed

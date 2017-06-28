@@ -4,17 +4,27 @@ import { check } from 'meteor/check';
 
 export const Canvases = new Mongo.Collection('canvases');
 
+if (Meteor.isServer) {
+  // This code only runs on the server
+  Meteor.publish('canvases', function tasksPublication() {
+    return Canvases.find({
+      $or: [
+        { owner: this.userId },
+      ],
+    });
+  });
+}
 
 Meteor.methods({
   'canvases.insert'(insertArray) {
-    imgData = insertArray[0];
-    tags = insertArray[1];
-    width = insertArray[2];
-    height = insertArray[3];
-    check(imgData, String);
-    likes = [];
+    check(insertArray, Array);
+    let imgData = insertArray[0];
+    let tags = insertArray[1];
+    let width = insertArray[2];
+    let height = insertArray[3];
+    let likes = [];
     // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
+    if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
 
@@ -34,14 +44,21 @@ Meteor.methods({
     Canvases.remove(taskId);
   },
   'canvases.likePost'(argArray) {
-    var liker = argArray[0];
-    var taskId = argArray[1] +'';
-    var likeArray = Canvases.findOne({"_id":taskId}).likes;
+    check(argArray, Array);
+
+    let liker = argArray[0];
+    let taskId = argArray[1] +'';
+    let likeArray = Canvases.findOne({"_id":taskId}).likes;
     if(likeArray.indexOf(liker)===-1){
       likeArray.push(liker);
     } else{
       likeArray.splice(likeArray.indexOf(liker) ,1);
     }
     Canvases.update({'_id': taskId}, {$set: {likes:likeArray}});
+  },
+  'canvases.retrieve'(canvasId) {
+    check(canvasId, String);
+
+    return Canvases.findOne("_id" : canvasId);
   },
 });
