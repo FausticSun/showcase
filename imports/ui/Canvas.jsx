@@ -16,6 +16,7 @@ class Canvas extends Component {
     this.proportionatePicHeight = {
       height: newheight+ 'px',
     };
+    this.URL = '/p/' + this.props.canvas._id;
     console.log(this.props.canvas._id);
   }
   delete() {
@@ -40,7 +41,10 @@ class Canvas extends Component {
     return (
       <article className='postWrapper'>
         <div className='postContents'>
-          <div className='canvasUserName'>{this.props.canvas.username}</div>
+          <div className='canvasUserName'>
+            {this.props.canvas.username}
+            <a href={this.URL}>See this post in full</a>
+          </div>
           <div className='canvasWrapper'>
             <div className='canvastagholder' style={this.proportionatePicHeight}>
               {this.renderTags()}
