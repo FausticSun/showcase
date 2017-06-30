@@ -4,16 +4,7 @@ import { check } from 'meteor/check';
 
 export const Canvases = new Mongo.Collection('canvases');
 
-if (Meteor.isServer) {
-  // This code only runs on the server
-  Meteor.publish('canvases', function tasksPublication() {
-    return Canvases.find({
-      $or: [
-        { owner: this.userId },
-      ],
-    });
-  });
-}
+
 
 Meteor.methods({
   'canvases.insert'(insertArray) {
@@ -22,6 +13,7 @@ Meteor.methods({
     let tags = insertArray[1];
     let width = insertArray[2];
     let height = insertArray[3];
+    let hubName = insertArray[4];
     let likes = [];
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
@@ -35,6 +27,7 @@ Meteor.methods({
       width,
       height,
       likes,
+      hubName,
       owner: Meteor.userId(),           // _id of logged in user
       username: Meteor.user().username,
     });

@@ -17,7 +17,7 @@ class Canvas extends Component {
       height: newheight+ 'px',
     };
     this.URL = '/p/' + this.props.canvas._id;
-    console.log(this.props.canvas._id);
+    console.log("Canvas hub: " + this.props.canvas.hubName);
   }
   delete() {
     //Using API cos Insecure removed
@@ -75,6 +75,9 @@ class Canvas extends Component {
             <ol>
               {this.renderLabels()}
             </ol>
+          </div>
+          <div className='hubs'>
+            As found in Hub : {this.props.canvas.hubName}
           </div>
         </div>
       </article>

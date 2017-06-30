@@ -6,6 +6,8 @@ import App from '../ui/App.jsx';
 import Upload from '../ui/Upload.jsx';
 import Post from '../ui/Post.jsx';
 import PostContainer from '../ui/PostContainer.jsx';
+import Hub from '../ui/Hub.jsx';
+import HubContainer from '../ui/HubContainer.jsx';
 FlowRouter.route('/', {
   action() {
     mount(MainLayout, {
@@ -23,10 +25,18 @@ FlowRouter.route('/upload', {
 
 FlowRouter.route('/p/:postId', {
   action: function(params) {
-    console.log(params.postId)
-    let tempCanvas = Meteor.call('canvases.retrieve', params.postId);
+    console.log("Route(ID): " +params.postId)
     mount(MainLayout, {
         content: (<PostContainer postId={params.postId}/>)
+    })
+  }
+})
+
+FlowRouter.route('/hub/:hubName', {
+  action: function(params) {
+    console.log("Route(hub): " + params.hubName)
+    mount(MainLayout, {
+        content: (<HubContainer hubName={params.hubName}/>)
     })
   }
 })

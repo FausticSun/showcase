@@ -28,9 +28,10 @@ class Upload extends React.Component {
     const tags = this.state.tags;
     const height = document.getElementById("imgBox").naturalHeight;
     const width = document.getElementById("imgBox").naturalWidth;
+    const hubName = ReactDOM.findDOMNode(this.refs.hubInput).value.trim();
 
     //Using API to insert as Array of Objects
-    Meteor.call('canvases.insert',[imgData, tags, width, height])
+    Meteor.call('canvases.insert',[imgData, tags, width, height, hubName])
 
     //Reroute to home
     FlowRouter.go('/');
@@ -150,6 +151,10 @@ class Upload extends React.Component {
         { this.props.currentUser ?
         <div className="previewComponent">
           <form>
+            <input
+              ref="hubInput"
+              placeholder="Hub"
+            />
             {$uploadBox}
           </form>
           <div id="tempTagHolder" className="tagholder">

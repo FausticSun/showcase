@@ -6,10 +6,10 @@ import { Canvases } from '../api/canvases.js';
 import Canvas from './Canvas.jsx';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 // App component - represents the whole app
-export default class Post extends Component {
+export default class Hub extends Component {
   constructor(props){
     super(props);
-    // console.log('FUCK THIS: ' + this.props.postId);
+    console.log('HubName: ' + this.props.hub );
   }
   renderCanvas() {
     return this.props.canvases.map((canvas) => (
