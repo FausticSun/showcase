@@ -8,7 +8,7 @@ import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 // App component - represents the whole app
 class App extends Component {
   renderCanvas() {
-    return this.props.canvases.map((canvas) => (
+    return this.props.canvases.map(canvas => (
       <Canvas key={canvas._id} canvas={canvas} />
     ));
   }
@@ -28,9 +28,7 @@ App.propTypes = {
   canvases: PropTypes.array.isRequired,
 };
 
-export default createContainer(() => {
-  return {
-    canvases: Canvases.find({}, { sort: { createdAt: -1 } }).fetch(),
-    currentUser: Meteor.user(),
-  };
-}, App);
+export default createContainer(() => ({
+  canvases: Canvases.find({}, { sort: { createdAt: -1 } }).fetch(),
+  currentUser: Meteor.user(),
+}), App);
