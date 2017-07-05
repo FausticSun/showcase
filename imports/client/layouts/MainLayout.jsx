@@ -1,7 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AccountsUIWrapper from '../../ui/AccountsUIWrapper.jsx';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Meteor } from 'meteor/meteor';
 
 import '../../startup/accounts-config.js';
 
@@ -13,7 +12,7 @@ export const MainLayout = ({ content }) => (
         <a href="/" id="showcasehead">Showcase</a>
       </div>
 
-      <a href="/upload">>Upload</a>
+      <a href="/upload">Upload</a>
 
       <div>
         <a href="/hub/EDC">EDC</a>
@@ -29,3 +28,7 @@ export const MainLayout = ({ content }) => (
     </div>
   </div>
 );
+
+MainLayout.propTypes = {
+  content: PropTypes.element.isRequired,
+};
