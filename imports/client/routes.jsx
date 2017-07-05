@@ -7,6 +7,7 @@ import Upload from '../ui/Upload.jsx';
 import Post from '../ui/Post.jsx';
 import PostContainer from '../ui/PostContainer.jsx';
 import Hub from '../ui/Hub.jsx';
+import Login from '../ui/Login.jsx';
 import HubContainer from '../ui/HubContainer.jsx';
 FlowRouter.route('/', {
   action() {
@@ -40,3 +41,12 @@ FlowRouter.route('/hub/:hubName', {
     })
   }
 })
+
+FlowRouter.route('/login', {
+  name: 'login',
+  action: function() {
+    mount(MainLayout, {
+        content: (<Login />)
+    })
+  }
+});
