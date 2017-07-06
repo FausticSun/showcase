@@ -17,6 +17,7 @@ class Canvas extends Component {
       height: `${newheight}px`,
     };
     this.URL = `/p/${this.props.canvas._id}`;
+    this.canvasUserProfileLink = `/profile/${this.props.canvas.username}`;
     console.log(`Canvas hub: ${this.props.canvas.hubName}`);
   }
   delete() {
@@ -42,7 +43,7 @@ class Canvas extends Component {
       <article className="postWrapper">
         <div className="postContents">
           <div className="canvasUserName">
-            {this.props.canvas.username}
+            <a href={this.canvasUserProfileLink}>{this.props.canvas.username}</a>
             <a href={this.URL}>See this post in full</a>
           </div>
           <div className="canvasWrapper">
