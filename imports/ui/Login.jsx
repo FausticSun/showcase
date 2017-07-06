@@ -35,10 +35,13 @@ class Login extends Component {
       }
     });
   }
+  redirect(){
+    FlowRouter.go('/');
+  }
   render() {
     return (
       <div className="row">
-        <div className="col-md-6 col-md-offset-3">
+        <div>
           <h1>Login</h1>
             <EmailPasswordForm
               onSubmit={this.loginWithPassword}
@@ -46,7 +49,7 @@ class Login extends Component {
             />
         </div>
       </div>
-        )
+      )
     }
 }
 

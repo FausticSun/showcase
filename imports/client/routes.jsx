@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -52,8 +53,12 @@ FlowRouter.route('/profile/:profileName', {
 FlowRouter.route('/login', {
   name: 'login',
   action: function() {
-    mount(MainLayout, {
-        content: (<Login />)
-    })
+    if(!Meteor.userId()){
+      mount(MainLayout, {
+          content: (<Login />)
+      })
+    } else {
+      FlowRouter.go('/');
+    }
   }
 });
