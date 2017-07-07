@@ -35,9 +35,6 @@ class Login extends Component {
       }
     });
   }
-  redirect(){
-    FlowRouter.go('/');
-  }
   render() {
     return (
       <div className="row">

@@ -8,7 +8,7 @@ import Canvas from './Canvas.jsx';
 export default class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log(`HubName: ${this.props.hub}`);
+    console.log(`profileName: ${this.props.profile}`);
   }
   renderCanvas() {
     return this.props.canvases.map(canvas => (

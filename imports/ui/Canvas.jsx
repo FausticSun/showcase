@@ -17,8 +17,8 @@ class Canvas extends Component {
       height: `${newheight}px`,
     };
     this.URL = `/p/${this.props.canvas._id}`;
-    this.canvasUserProfileLink = `/profile/${this.props.canvas.username}`;
-    console.log(`Canvas hub: ${this.props.canvas.hubName}`);
+    this.canvasUserProfileLink = `/${this.props.canvas.username}`;
+    console.log(`Person: ${Meteor.userId()}`);
   }
   delete() {
     // Using API cos Insecure removed

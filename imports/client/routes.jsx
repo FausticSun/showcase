@@ -8,6 +8,8 @@ import Upload from '../ui/Upload.jsx';
 import PostContainer from '../ui/PostContainer.jsx';
 import Hub from '../ui/Hub.jsx';
 import Login from '../ui/Login.jsx';
+import SettingsContainer from '../ui/SettingsContainer.jsx';
+import Settings from '../ui/Settings.jsx';
 
 import HubContainer from '../ui/HubContainer.jsx';
 import ProfileContainer from '../ui/ProfileContainer.jsx';
@@ -41,15 +43,19 @@ FlowRouter.route('/hub/:hubName', {
         content: (<HubContainer hubName={params.hubName}/>)
     })
   }
-})
-FlowRouter.route('/profile/:profileName', {
-  action(params) {
-    mount(MainLayout, {
-        content: (<ProfileContainer profileName={params.profileName}/>)
-    })
-  }
-})
+});
 
+FlowRouter.route('/settings', {
+  action(params) {
+    if(Meteor.userId()){
+      mount(MainLayout, {
+          content: (<SettingsContainer userId={Meteor.userId()}/>)
+      })
+    } else {
+      FlowRouter.go('/login');
+    }
+  }
+});
 FlowRouter.route('/login', {
   name: 'login',
   action: function() {
@@ -60,5 +66,13 @@ FlowRouter.route('/login', {
     } else {
       FlowRouter.go('/');
     }
+  }
+});
+
+FlowRouter.route('/:profileName', {
+  action(params) {
+    mount(MainLayout, {
+        content: (<ProfileContainer profileName={params.profileName}/>)
+    })
   }
 });
