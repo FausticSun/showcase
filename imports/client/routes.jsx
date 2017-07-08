@@ -6,7 +6,6 @@ import { MainLayout } from './layouts/MainLayout.jsx';
 import App from '../ui/App.jsx';
 import Upload from '../ui/Upload.jsx';
 import PostContainer from '../ui/PostContainer.jsx';
-import Login from '../ui/Login.jsx';
 import SettingsContainer from '../ui/SettingsContainer.jsx';
 
 import HubContainer from '../ui/HubContainer.jsx';
@@ -51,18 +50,6 @@ FlowRouter.route('/settings', {
       });
     } else {
       FlowRouter.go('/login');
-    }
-  },
-});
-FlowRouter.route('/login', {
-  name: 'login',
-  action() {
-    if (!Meteor.userId()) {
-      mount(MainLayout, {
-        content: (<Login />),
-      });
-    } else {
-      FlowRouter.go('/');
     }
   },
 });
