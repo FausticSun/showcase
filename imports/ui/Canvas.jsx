@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
 import { Canvases } from '../api/canvases.js';
 import Tag from './Tag.jsx';
 import Label from './Label.jsx';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
-import { createContainer } from 'meteor/react-meteor-data';
 // Canvas component - represents a single canvas
 class Canvas extends Component {
   constructor(props) {
@@ -12,20 +11,18 @@ class Canvas extends Component {
     // Resizing the canvas picture to the proportionate height
     const imgheight = this.props.canvas.height;
     const imgwidth = this.props.canvas.width;
-    const newheight = imgheight * 500 / imgwidth;
+    const newheight = (imgheight * 500) / imgwidth;
     this.proportionatePicHeight = {
       height: `${newheight}px`,
     };
     this.URL = `/p/${this.props.canvas._id}`;
     this.canvasUserProfileLink = `/${this.props.canvas.username}`;
-    console.log(`Person: ${Meteor.userId()}`);
   }
-  delete() {
+  delete = () => {
     // Using API cos Insecure removed
     Meteor.call('canvases.remove', this.props.canvas._id);
   }
-  likePost() {
-    console.log(Meteor.user());
+  likePost = () => {
     Meteor.call('canvases.likePost', [this.props.currentUser.username, this.props.canvas._id]);
   }
   renderTags() {
@@ -50,14 +47,14 @@ class Canvas extends Component {
             <div className="canvastagholder" style={this.proportionatePicHeight}>
               {this.renderTags()}
             </div>
-            <img className="canvasimage" src={this.props.canvas.imgData} />
+            <img className="canvasimage" src={this.props.canvas.imgData} alt="" />
             <div className="deleteHolder">
-              { Meteor.user() && this.props.currentUser.username == this.props.canvas.username ?
-                <button className="delete" onClick={this.delete.bind(this)}>
+              { Meteor.user() && this.props.currentUser.username === this.props.canvas.username ?
+                <button className="delete" onClick={this.delete}>
                   &times; USER DELETE
                 </button>
               : '' }
-              <button className="delete" onClick={this.delete.bind(this)}>
+              <button className="delete" onClick={this.delete}>
                 &times; MASTER DELETE
               </button>
             </div>
@@ -66,8 +63,8 @@ class Canvas extends Component {
             { Meteor.user() ?
               <div>
                 { this.props.canvas.likes.indexOf(this.props.currentUser.username) === -1 ?
-                  <button onClick={this.likePost.bind(this)}>Like</button> :
-                  <button onClick={this.likePost.bind(this)}>Unlike</button>
+                  <button onClick={this.likePost}>Like</button> :
+                  <button onClick={this.likePost}>Unlike</button>
               }
               </div> : '' }
             {this.props.canvas.likes.length} people like this
@@ -89,8 +86,19 @@ class Canvas extends Component {
 Canvas.propTypes = {
   // This component gets the canvas to display through a React prop.
   // We can use propTypes to indicate it is required
-  canvas: PropTypes.object.isRequired,
-  currentUser: PropTypes.object,
+  canvas: PropTypes.shape({
+    height: PropTypes.number,
+    width: PropTypes.number,
+    username: PropTypes.string,
+    _id: PropTypes.string,
+    likes: PropTypes.array,
+    hubName: PropTypes.string,
+    imgData: PropTypes.string,
+    tags: PropTypes.array,
+  }).isRequired,
+  currentUser: PropTypes.shape({
+    username: PropTypes.string,
+  }).isRequired,
 };
 
 export default createContainer(() => ({
