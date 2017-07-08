@@ -4,7 +4,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Canvases } from '../api/canvases.js';
 
 import Canvas from './Canvas.jsx';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 // App component - represents the whole app
 class App extends Component {
   renderCanvas() {
@@ -25,7 +24,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  canvases: PropTypes.array.isRequired,
+  canvases: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default createContainer(() => ({
