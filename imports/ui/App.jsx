@@ -24,7 +24,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  canvases: PropTypes.arrayOf(PropTypes.element).isRequired,
+  canvases: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default createContainer(() => ({
