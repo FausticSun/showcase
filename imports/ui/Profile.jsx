@@ -25,6 +25,6 @@ export default class Profile extends Component {
 }
 
 Profile.propTypes = {
-  profile: PropTypes.String.isRequired,
+  profile: PropTypes.string.isRequired,
   canvases: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
