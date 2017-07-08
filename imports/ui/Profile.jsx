@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
-
-import { Canvases } from '../api/canvases.js';
-
 import Canvas from './Canvas.jsx';
+
 // App component - represents the whole app
 export default class Profile extends Component {
   constructor(props) {
@@ -26,3 +23,8 @@ export default class Profile extends Component {
     );
   }
 }
+
+Profile.propTypes = {
+  profile: PropTypes.String.isRequired,
+  canvases: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
