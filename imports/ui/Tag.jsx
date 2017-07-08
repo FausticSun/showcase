@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 
 // Task component - represents a single todo item
 export default class Tag extends Component {
@@ -22,3 +21,7 @@ export default class Tag extends Component {
     );
   }
 }
+
+Tag.propTypes = {
+  objArray: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
