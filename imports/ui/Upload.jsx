@@ -73,7 +73,7 @@ class Upload extends React.Component {
     return (this.state.tempTag.length > 0);
   }
 
-  cancelTemp() {
+  cancelTemp = () => {
     this.setState({ tempTag: [] });
     this.makeTempTagHolderHidden();
   }
