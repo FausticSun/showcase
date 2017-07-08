@@ -4,17 +4,15 @@ import { check } from 'meteor/check';
 
 export const Canvases = new Mongo.Collection('canvases');
 
-
-
 Meteor.methods({
   'canvases.insert'(insertArray) {
     check(insertArray, Array);
-    let imgData = insertArray[0];
-    let tags = insertArray[1];
-    let width = insertArray[2];
-    let height = insertArray[3];
-    let hubName = insertArray[4];
-    let likes = [];
+    const imgData = insertArray[0];
+    const tags = insertArray[1];
+    const width = insertArray[2];
+    const height = insertArray[3];
+    const hubName = insertArray[4];
+    const likes = [];
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
@@ -39,19 +37,19 @@ Meteor.methods({
   'canvases.likePost'(argArray) {
     check(argArray, Array);
 
-    let liker = argArray[0];
-    let taskId = argArray[1] +'';
-    let likeArray = Canvases.findOne({"_id":taskId}).likes;
-    if(likeArray.indexOf(liker)===-1){
+    const liker = argArray[0];
+    const taskId = argArray[1];
+    const likeArray = Canvases.findOne({ _id: taskId }).likes;
+    if (likeArray.indexOf(liker) === -1) {
       likeArray.push(liker);
-    } else{
-      likeArray.splice(likeArray.indexOf(liker) ,1);
+    } else {
+      likeArray.splice(likeArray.indexOf(liker), 1);
     }
-    Canvases.update({'_id': taskId}, {$set: {likes:likeArray}});
+    Canvases.update({ _id: taskId }, { $set: { likes: likeArray } });
   },
   'canvases.retrieve'(canvasId) {
     check(canvasId, String);
 
-    return Canvases.findOne("_id" : canvasId);
+    return Canvases.findOne({ _id: canvasId });
   },
 });
