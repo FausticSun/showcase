@@ -98,7 +98,11 @@ Canvas.propTypes = {
   }).isRequired,
   currentUser: PropTypes.shape({
     username: PropTypes.string,
-  }).isRequired,
+  }),
+};
+
+Canvas.defaultProps = {
+  currentUser: null,
 };
 
 export default createContainer(() => ({

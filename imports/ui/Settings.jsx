@@ -11,7 +11,7 @@ export default class Settings extends Component {
     console.log(user);
     this.state = { editName: false };
   }
-  toggleEdit() {
+  toggleEdit = () => {
     console.log(`Edit: ${this.editName}`);
     if (this.state.editName) {
       this.setState({ editName: false });
@@ -22,35 +22,34 @@ export default class Settings extends Component {
   renderEditName() {
     if (!this.state.editName) {
       return (<div>{this.props.currentUser.username}
-        <button onClick={this.toggleEdit.bind(this)}>EDIT</button>
+        <button onClick={this.toggleEdit}>EDIT</button>
       </div>);
     }
     return (
       <div>
         <form>
           <input
-            ref="textInput"
+            ref={textInput => (this.textInput = textInput)}
             placeholder={this.props.currentUser.username}
           />
         </form>
-        <button onClick={this.toggleEdit.bind(this)}>SAVE</button>
+        <button onClick={this.toggleEdit}>SAVE</button>
       </div>
     );
   }
   render() {
     const { currentUser } = this.props;
-    const lelflag = false;
     return (
       <article className="postWrapper">
         { currentUser ?
           <div>
             <h1>Settings</h1>
             <div>
-              <div><label>Name:</label>
+              <div><label htmlFor="name">Name:</label>
                 {this.renderEditName()}
               </div>
 
-              <div><label>Password:</label></div>
+              <div><label htmlFor="password">Password:</label></div>
             </div>
           </div>
         : <div>LOADING GIF</div> }
@@ -58,3 +57,9 @@ export default class Settings extends Component {
     );
   }
 }
+
+Settings.propTypes = {
+  currentUser: PropTypes.shape({
+    username: PropTypes.string,
+  }).isRequired,
+};
