@@ -1,12 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import { Meteor } from 'meteor/meteor';
-import { Canvases } from '../api/canvases.js';
-import Canvas from './Canvas.jsx';
-import Tag from './Tag.jsx';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 import { createContainer } from 'meteor/react-meteor-data';
+import React, { PropTypes } from 'react';
+import { Meteor } from 'meteor/meteor';
+import Tag from './Tag.jsx';
 
 class Upload extends React.Component {
   constructor(props) {
@@ -18,17 +14,39 @@ class Upload extends React.Component {
     tagholder
     image
   */
-  existsTempTag() {
-    return (this.state.tempTag.length > 0);
+
+  // Clicking on the tagHolder
+  onClickToTagImg = (e) => {
+    // Get relative left and top percentages, applying to element style later
+    const position = this.elem.getBoundingClientRect();
+    const xpercent = (e.nativeEvent.offsetX / position.width) * 100;
+    const ypercent = (e.nativeEvent.offsetY / position.height) * 100;
+    this.makeTempTagHolderVisible();
+    // Push to State, where renderTempTag will render the temporary tag
+    this.setState({ tempTag: [`${xpercent}%`, `${ypercent}%`] });
   }
-  _handleClickToUpload(e) {
+
+  onSubmitLabel = (e) => { // When user enters both Description and URL of tag and press enter
+    e.preventDefault();
+    const tagArray = this.state.tags;
+    const text = this.textInput.value.trim();
+    const url = this.urlInput.value.trim();
+    const xpercent = this.state.tempTag[0];
+    const ypercent = this.state.tempTag[1];
+    tagArray.push([xpercent, ypercent, tagArray.length + 1, text, url]);
+    this.setState({ x: xpercent, y: ypercent, tags: tagArray, tempTag: [] });
+    this.makeTempTagHolderHidden();
+    return false;
+  }
+
+  handleClickToUpload(e) {
     e.preventDefault();
 
     const imgData = this.state.imagePreviewUrl;
     const tags = this.state.tags;
     const height = document.getElementById('imgBox').naturalHeight;
     const width = document.getElementById('imgBox').naturalWidth;
-    const hubName = ReactDOM.findDOMNode(this.refs.hubInput).value.trim();
+    const hubName = this.hubInput.value.trim();
 
     // Using API to insert as Array of Objects
     Meteor.call('canvases.insert', [imgData, tags, width, height, hubName]);
@@ -37,7 +55,7 @@ class Upload extends React.Component {
     FlowRouter.go('/');
   }
 
-  _handleImageChange(e) {
+  handleImageChange(e) {
     e.preventDefault();
 
     const reader = new FileReader();
@@ -50,48 +68,29 @@ class Upload extends React.Component {
     };
     reader.readAsDataURL(file);
   }
-  // Clicking on the tagHolder
-  _onClickToTagImg(e) {
-    // Get relative left and top percentages, applying to element style later
-    const position = ReactDOM.findDOMNode(this.refs.elem).getBoundingClientRect();
-    const xpercent = e.nativeEvent.offsetX / position.width * 100;
-    const ypercent = e.nativeEvent.offsetY / position.height * 100;
-    this._makeTempTagHolderVisible();
-    // Push to State, where renderTempTag will render the temporary tag
-    this.setState({ tempTag: [`${xpercent}%`, `${ypercent}%`] });
+
+  existsTempTag() {
+    return (this.state.tempTag.length > 0);
   }
-  _onSubmitLabel(e) { // When user enters both Description and URL of tag and press enter
-    e.preventDefault();
-    const tagArray = this.state.tags;
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-    const url = ReactDOM.findDOMNode(this.refs.urlInput).value.trim();
-    const xpercent = this.state.tempTag[0];
-    const ypercent = this.state.tempTag[1];
-    tagArray.push([xpercent, ypercent, tagArray.length + 1, text, url]);
-    this.setState({ x: xpercent, y: ypercent, tags: tagArray, tempTag: [] });
-    this._makeTempTagHolderHidden();
-    return false;
-  }
-  _cancelTemp() {
+
+  cancelTemp() {
     this.setState({ tempTag: [] });
-    this._makeTempTagHolderHidden();
+    this.makeTempTagHolderHidden();
   }
-  _resize() {
+
+  resize = () => {
     const imgheight = document.getElementById('imgBox').naturalHeight;
     const imgwidth = document.getElementById('imgBox').naturalWidth;
-    const newheight = imgheight * 800 / imgwidth;
+    const newheight = (imgheight * 800) / imgwidth;
     document.getElementById('tagWrapper').style.height = `${newheight}px`;
     document.getElementById('tempTagHolder').style.height = `${newheight}px`;
   }
 
-  _makeTempTagHolderVisible() {
-    const imgheight = document.getElementById('imgBox').naturalHeight;
-    const imgwidth = document.getElementById('imgBox').naturalWidth;
-    const newheight = imgheight * 800 / imgwidth;
+  makeTempTagHolderVisible = () => {
     document.getElementById('tempTagHolder').style.visibility = 'visible';
   }
 
-  _makeTempTagHolderHidden() {
+  makeTempTagHolderHidden = () => {
     document.getElementById('tempTagHolder').style.visibility = 'hidden';
   }
 
@@ -101,7 +100,7 @@ class Upload extends React.Component {
       <Tag key={index} objArray={index} />
     ));
   }
-  renderTempTag() { // RENDERING THE SINGLE TEMPORARY TAGS
+  renderTempTag = () => { // RENDERING THE SINGLE TEMPORARY TAGS
     const xposition = this.state.tempTag[0];
     const yposition = this.state.tempTag[1];
     const xyposition = { left: xposition, top: yposition };
@@ -111,33 +110,33 @@ class Upload extends React.Component {
           <div className="singleTag">{this.state.tags.length + 1}</div>
           <form >
             <input
-              ref="textInput"
+              ref={textInput => (this.textInput = textInput)}
               placeholder="Description"
             />
           </form>
-          <form onSubmit={this._onSubmitLabel.bind(this)}>
+          <form onSubmit={this.onSubmitLabel}>
             <input
-              ref="urlInput"
+              ref={urlInput => (this.urlInput = urlInput)}
               placeholder="url"
             />
           </form>
         </div>
       );
     }
+    return <div>Nothing?</div>;
   }
 
   render() { // MAIN RENDER
-    const { x, y } = this.state;
     const { imagePreviewUrl } = this.state;
     let $imagePreview = null;
     let $uploadBox = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img className="preview" id="imgBox" src={imagePreviewUrl} onLoad={e => this._resize(e)} />);
-      $uploadBox = (<button className="submitButton" type="submit" onClick={e => this._handleClickToUpload(e)}>Upload Image</button>
+      $imagePreview = (<img className="preview" id="imgBox" src={imagePreviewUrl} onLoad={e => this.resize(e)} alt="" />);
+      $uploadBox = (<button className="submitButton" type="submit" onClick={e => this.handleClickToUpload(e)}>Upload Image</button>
     );
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-      $uploadBox = (<input className="fileInput" type="file" onChange={e => this._handleImageChange(e)} />);
+      $uploadBox = (<input className="fileInput" type="file" onChange={e => this.handleImageChange(e)} />);
     }
     let $tagPreview = '';
     if (this.existsTempTag()) { // A temporary tag is clicked
@@ -151,21 +150,21 @@ class Upload extends React.Component {
           <div className="previewComponent">
             <form>
               <input
-                ref="hubInput"
+                ref={hubInput => (this.hubInput = hubInput)}
                 placeholder="Hub"
               />
               {$uploadBox}
             </form>
             <div id="tempTagHolder" className="tagholder">
               {$tagPreview}
-              <button className="cancelTempTagButton" onClick={this._cancelTemp.bind(this)}>
+              <button className="cancelTempTagButton" onClick={this.cancelTemp}>
               Cancel &times;
             </button>
             </div>
-            <div className="tagholder" id="tagWrapper" onMouseDown={this._onClickToTagImg.bind(this)}>
+            <div className="tagholder" id="tagWrapper" onMouseDown={this.onClickToTagImg}>
               {this.renderTags()}
             </div>
-            <div ref="elem" className="imgPreview">
+            <div ref={elem => (this.elem = elem)} className="imgPreview">
               {$imagePreview}
             </div>
           </div>
@@ -176,6 +175,15 @@ class Upload extends React.Component {
     );
   }
 }
+
+Upload.propTypes = {
+  currentUser: PropTypes.shape({}),
+};
+
+Upload.defaultProps = {
+  currentUser: null,
+};
+
 export default createContainer(() => ({
   currentUser: Meteor.user(),
 }), Upload);
