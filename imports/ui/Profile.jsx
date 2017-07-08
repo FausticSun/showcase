@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
-
-import { Canvases } from '../api/canvases.js';
-
 import Canvas from './Canvas.jsx';
+
 // App component - represents the whole app
-class App extends Component {
+export default class Profile extends Component {
+  constructor(props) {
+    super(props);
+    console.log(`profileName: ${this.props.profile}`);
+  }
   renderCanvas() {
     return this.props.canvases.map(canvas => (
       <Canvas key={canvas._id} canvas={canvas} />
@@ -23,11 +24,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+Profile.propTypes = {
+  profile: PropTypes.string.isRequired,
   canvases: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
-export default createContainer(() => ({
-  canvases: Canvases.find({}, { sort: { createdAt: -1 } }).fetch(),
-  currentUser: Meteor.user(),
-}), App);
