@@ -8,7 +8,7 @@ import Canvas from './Canvas.jsx';
 export default ProfileContainer = createContainer(({ profileName }) => {
   console.log(`Container:${profileName}`);
   const canvases = Canvases.find(
-    { "username" : profileName },
+    { username: profileName },
     { sort: { createdAt: -1 } },
   ).fetch();
   const profile = profileName;

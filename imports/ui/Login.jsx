@@ -13,23 +13,22 @@ import EmailPasswordForm from './EmailPasswordForm.jsx';
 class Login extends Component {
   constructor() {
     super();
-    let registerMsg = "Don't have an account?";
+    const registerMsg = "Don't have an account?";
     this.state = {
       input: '',
-      pw: ''
+      pw: '',
     };
     this.loginWithPassword = this.loginWithPassword.bind(this);
-
   }
-  loginWithPassword(email,pw) {
+  loginWithPassword(email, pw) {
     // const email = this.state.input;
     // const password = this.state.pw;
-    console.log("EMAIL:" + email);
-    console.log("password:" + pw);
+    console.log(`EMAIL:${email}`);
+    console.log(`password:${pw}`);
 
     Meteor.loginWithPassword(email, pw, function(error) {
       if (error) {
-        console.log("There was an error:" + error.reason);
+        console.log(`There was an error:${error.reason}`);
       } else {
         FlowRouter.go('/');
       }
@@ -40,18 +39,16 @@ class Login extends Component {
       <div className="row">
         <div>
           <h1>Login</h1>
-            <EmailPasswordForm
-              onSubmit={this.loginWithPassword}
-              ref="epf"
-            />
+          <EmailPasswordForm
+            onSubmit={this.loginWithPassword}
+            ref="epf"
+          />
         </div>
       </div>
-      )
-    }
+    );
+  }
 }
 
-export default createContainer(() => {
-  return {
-    currentUser: Meteor.user(),
-  };
-}, Login);
+export default createContainer(() => ({
+  currentUser: Meteor.user(),
+}), Login);

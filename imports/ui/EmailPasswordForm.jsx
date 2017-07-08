@@ -24,15 +24,14 @@ class EmailPasswordForm extends Component {
   onInput(e) {
     e.preventDefault();
     this.setState({
-      input: this.refs.email.value.trim()
+      input: this.refs.email.value.trim(),
     });
     console.log(this.state.input);
-
   }
   onInput2(e) {
     e.preventDefault();
     this.setState({
-      pw: this.refs.password.value.trim()
+      pw: this.refs.password.value.trim(),
     });
     console.log(this.state.pw);
   }
@@ -40,24 +39,24 @@ class EmailPasswordForm extends Component {
   // submit handler
   onSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit(this.state.input,this.state.pw);
+    this.props.onSubmit(this.state.input, this.state.pw);
   }
   render() {
     return (
-      <form onSubmit={(e)=>this.onSubmit(e)}>
+      <form onSubmit={e => this.onSubmit(e)}>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input placeholder="Email" ref="email" className="form-control" onChange={(e)=>this.onInput(e)}/>
+          <input placeholder="Email" ref="email" className="form-control" onChange={e => this.onInput(e)} />
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          <input placeholder="Password" type="password" ref="password" className="form-control" onChange={(e)=>this.onInput2(e)}/>
+          <input placeholder="Password" type="password" ref="password" className="form-control" onChange={e => this.onInput2(e)} />
         </div>
         <div className="form-group">
           <button type="submit" className="btn btn-primary">SUBMIT</button>
         </div>
       </form>
-    )
+    );
   }
 }
 
@@ -65,8 +64,6 @@ class EmailPasswordForm extends Component {
 EmailPasswordForm.propTypes = {
 };
 
-export default createContainer(() => {
-  return {
-    currentUser: Meteor.user(),
-  };
-}, EmailPasswordForm);
+export default createContainer(() => ({
+  currentUser: Meteor.user(),
+}), EmailPasswordForm);

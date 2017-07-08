@@ -7,12 +7,12 @@ import Canvas from './Canvas.jsx';
 
 export default HubContainer = createContainer(({ hubName }) => {
   const canvases = Canvases.find(
-    {"hubName" : hubName },
-    { sort: { createdAt: -1 } }
+    { hubName },
+    { sort: { createdAt: -1 } },
   ).fetch();
   const hub = hubName;
   return {
     canvases,
-    hub
+    hub,
   };
 }, Hub);

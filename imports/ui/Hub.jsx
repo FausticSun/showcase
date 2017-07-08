@@ -7,11 +7,11 @@ import Canvas from './Canvas.jsx';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 // App component - represents the whole app
 export default class Hub extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   renderCanvas() {
-    return this.props.canvases.map((canvas) => (
+    return this.props.canvases.map(canvas => (
       <Canvas key={canvas._id} canvas={canvas} />
     ));
   }

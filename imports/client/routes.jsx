@@ -40,39 +40,39 @@ FlowRouter.route('/p/:postId', {
 FlowRouter.route('/hub/:hubName', {
   action(params) {
     mount(MainLayout, {
-        content: (<HubContainer hubName={params.hubName}/>)
-    })
-  }
+      content: (<HubContainer hubName={params.hubName} />),
+    });
+  },
 });
 
 FlowRouter.route('/settings', {
   action(params) {
-    if(Meteor.userId()){
+    if (Meteor.userId()) {
       mount(MainLayout, {
-          content: (<SettingsContainer userId={Meteor.userId()}/>)
-      })
+        content: (<SettingsContainer userId={Meteor.userId()} />),
+      });
     } else {
       FlowRouter.go('/login');
     }
-  }
+  },
 });
 FlowRouter.route('/login', {
   name: 'login',
-  action: function() {
-    if(!Meteor.userId()){
+  action() {
+    if (!Meteor.userId()) {
       mount(MainLayout, {
-          content: (<Login />)
-      })
+        content: (<Login />),
+      });
     } else {
       FlowRouter.go('/');
     }
-  }
+  },
 });
 
 FlowRouter.route('/:profileName', {
   action(params) {
     mount(MainLayout, {
-        content: (<ProfileContainer profileName={params.profileName}/>)
-    })
-  }
+      content: (<ProfileContainer profileName={params.profileName} />),
+    });
+  },
 });
