@@ -25,3 +25,4 @@ accounts-password
 dispatch:mocha
 practicalmeteor:mocha
 practicalmeteor:chai
+semantic:ui
