@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
+import HubDropdown from './HubDropdown.jsx';
 
 export default class SiteHeader extends Component {
   state = {};
@@ -11,9 +12,7 @@ export default class SiteHeader extends Component {
     return (
       <Menu>
         <Menu.Item header className="showcase-logo"> Showcase </Menu.Item>
-        <Menu.Item name="Hubs" active={activeItem === 'home'} onClick={this.handleItemClick}>
-          <Icon name="grid layout" size="large" /> Hubs
-        </Menu.Item>
+        <HubDropdown />
         <Menu.Menu position="right">
           <Menu.Item name="upload" active={activeItem === 'upload'} onClick={this.handleItemClick} />
           <Menu.Item name="login" active={activeItem === 'login'} onClick={this.handleItemClick} />
