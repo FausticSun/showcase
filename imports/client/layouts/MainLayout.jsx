@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SiteHeader from '../../ui/SiteHeader.jsx';
 import AccountsUIWrapper from '../../ui/AccountsUIWrapper.jsx';
 
 import '../../startup/accounts-config.js';
 
 export const MainLayout = ({ content }) => (
   <div className="main-layout">
+    <SiteHeader />
     <header>
       <AccountsUIWrapper />
       <div >
         <a href="/" id="showcasehead">Showcase</a>
       </div>
-
       <a href="/upload">Upload</a>
 
       <div>
