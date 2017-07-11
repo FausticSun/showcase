@@ -1,2 +1,6 @@
 node_modules/
 .idea/
+client/lib/*
+!client/lib/site
+!client/lib/custom.semantic.json
+!client/lib/theme.config.import.less
