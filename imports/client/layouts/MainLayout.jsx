@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SiteHeader from '../../ui/SiteHeader.jsx';
+import SiteHeader from '../../ui/header/SiteHeader.jsx';
 import AccountsUIWrapper from '../../ui/AccountsUIWrapper.jsx';
 
 import '../../startup/accounts-config.js';
