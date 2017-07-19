@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SiteHeader from '../../ui/header/SiteHeader.jsx';
-import AccountsUIWrapper from '../../ui/AccountsUIWrapper.jsx';
+import SiteHeader from '../components/header/SiteHeader.jsx';
+import AccountsUIWrapper from '../AccountsUIWrapper.jsx';
 
-import '../../startup/accounts-config.js';
+import '../../startup/client/accounts-config.js';
 
 export const MainLayout = ({ content }) => (
   <div className="main-layout">

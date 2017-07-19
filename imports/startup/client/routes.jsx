@@ -2,14 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { MainLayout } from './layouts/MainLayout.jsx';
-import App from '../ui/App.jsx';
-import Upload from '../ui/Upload.jsx';
-import PostContainer from '../ui/PostContainer.jsx';
-import SettingsContainer from '../ui/SettingsContainer.jsx';
+import { MainLayout } from '../../client/layouts/MainLayout.jsx';
+import App from '../../client/App.jsx';
+import Upload from '../../client/Upload.jsx';
+import PostContainer from '../../client/PostContainer.jsx';
+import SettingsContainer from '../../client/SettingsContainer.jsx';
 
-import HubContainer from '../ui/HubContainer.jsx';
-import ProfileContainer from '../ui/ProfileContainer.jsx';
+import HubContainer from '../../client/HubContainer.jsx';
+import ProfileContainer from '../../client/ProfileContainer.jsx';
 
 FlowRouter.route('/', {
   action() {
