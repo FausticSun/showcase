@@ -6,6 +6,10 @@ export const Canvases = new Mongo.Collection('canvases');
 
 Meteor.methods({
   'canvases.insert'(canvas) {
+    if (!Meteor.userId()) {
+      throw new Meteor.Error('not-authorized');
+    }
+
     check(canvas, {
       imgData: String,
       tags: Match.Any,
@@ -13,10 +17,6 @@ Meteor.methods({
       height: Number,
       hubName: String,
     });
-    // Make sure the user is logged in before inserting a task
-    if (!Meteor.userId()) {
-      throw new Meteor.Error('not-authorized');
-    }
 
     Canvases.insert({
       imgData: canvas.imgData,
@@ -30,10 +30,12 @@ Meteor.methods({
       username: Meteor.user().username,
     });
   },
+
   'canvases.remove'(taskId) {
     check(taskId, String);
     Canvases.remove(taskId);
   },
+
   'canvases.likePost'(argArray) {
     check(argArray, Array);
 
@@ -47,6 +49,7 @@ Meteor.methods({
     }
     Canvases.update({ _id: taskId }, { $set: { likes: likeArray } });
   },
+
   'canvases.retrieve'(canvasId) {
     check(canvasId, String);
 
