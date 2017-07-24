@@ -10,6 +10,7 @@ import SettingsContainer from '../../client/SettingsContainer.jsx';
 
 import HubContainer from '../../client/HubContainer.jsx';
 import ProfileContainer from '../../client/ProfileContainer.jsx';
+import FourOhFour from '../../client/pages/FourOhFour.jsx';
 
 FlowRouter.route('/', {
   action() {
@@ -61,3 +62,11 @@ FlowRouter.route('/:profileName', {
     });
   },
 });
+
+FlowRouter.notFound = {
+  action() {
+    mount(MainLayout, {
+      content: (<FourOhFour />),
+    });
+  },
+};
