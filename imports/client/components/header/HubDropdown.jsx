@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Dropdown, Grid, Image } from 'semantic-ui-react';
 
 const gridItem = {

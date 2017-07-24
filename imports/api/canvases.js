@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { check, Match  } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 
 export const Canvases = new Mongo.Collection('canvases');
 
