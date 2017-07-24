@@ -11,10 +11,10 @@ export default class SiteHeader extends Component {
     const { activeItem } = this.state;
     return (
       <Menu>
-        <Menu.Item header className="showcase-logo"> Showcase </Menu.Item>
+        <Menu.Item header className="showcase-logo" href="/"> Showcase </Menu.Item>
         <HubDropdown />
         <Menu.Menu position="right">
-          <Menu.Item name="upload" active={activeItem === 'upload'} onClick={this.handleItemClick} />
+          <Menu.Item name="upload" active={activeItem === 'upload'} onClick={this.handleItemClick} href="/upload" />
           <Menu.Item name="login" active={activeItem === 'login'} onClick={this.handleItemClick} />
         </Menu.Menu>
       </Menu>
