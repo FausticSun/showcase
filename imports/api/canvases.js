@@ -1,32 +1,32 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
+import { check, Match  } from 'meteor/check';
 
 export const Canvases = new Mongo.Collection('canvases');
 
 Meteor.methods({
-  'canvases.insert'(insertArray) {
-    check(insertArray, Array);
-    const imgData = insertArray[0];
-    const tags = insertArray[1];
-    const width = insertArray[2];
-    const height = insertArray[3];
-    const hubName = insertArray[4];
-    const likes = [];
+  'canvases.insert'(canvas) {
+    check(canvas, {
+      imgData: String,
+      tags: Match.Any,
+      width: Number,
+      height: Number,
+      hubName: String,
+    });
     // Make sure the user is logged in before inserting a task
     if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
 
     Canvases.insert({
-      imgData,
+      imgData: canvas.imgData,
       createdAt: new Date(), // current time
-      tags,
-      width,
-      height,
-      likes,
-      hubName,
-      owner: Meteor.userId(),           // _id of logged in user
+      tags: canvas.tags,
+      width: canvas.width,
+      height: canvas.height,
+      likes: [],
+      hubName: canvas.hubName,
+      owner: Meteor.userId(), // _id of logged in user
       username: Meteor.user().username,
     });
   },

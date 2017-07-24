@@ -49,7 +49,13 @@ class Upload extends React.Component {
     const hubName = this.hubInput.value.trim();
 
     // Using API to insert as Array of Objects
-    Meteor.call('canvases.insert', [imgData, tags, width, height, hubName]);
+    Meteor.call('canvases.insert', {
+      imgData,
+      tags,
+      width,
+      height,
+      hubName,
+    });
 
     // Reroute to home
     FlowRouter.go('/');
