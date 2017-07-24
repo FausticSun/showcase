@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Menu } from 'semantic-ui-react';
+import Blaze from 'meteor/gadicc:blaze-react-component';
 import HubDropdown from './HubDropdown.jsx';
 
-export default class SiteHeader extends Component {
-  state = {};
+const SiteHeader = () => (
+  <Menu>
+    <Menu.Item header className="showcase-logo" href="/"> Showcase </Menu.Item>
+    <HubDropdown />
+    <Menu.Menu position="right">
+      <Menu.Item name="upload" href="/upload" />
+      <Menu.Item name="login">
+        <Blaze template="loginButtons" align="right" />
+      </Menu.Item>
+    </Menu.Menu>
+  </Menu>
+);
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
-  render() {
-    const { activeItem } = this.state;
-    return (
-      <Menu>
-        <Menu.Item header className="showcase-logo" href="/"> Showcase </Menu.Item>
-        <HubDropdown />
-        <Menu.Menu position="right">
-          <Menu.Item name="upload" active={activeItem === 'upload'} onClick={this.handleItemClick} href="/upload" />
-          <Menu.Item name="login" active={activeItem === 'login'} onClick={this.handleItemClick} />
-        </Menu.Menu>
-      </Menu>
-    );
-  }
-}
+export default SiteHeader;
