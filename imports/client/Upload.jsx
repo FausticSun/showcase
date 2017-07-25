@@ -3,6 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import React, { PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import Tag from './Tag.jsx';
+import ImageTagger from "./components/imageTagging/ImageTagger";
 
 class Upload extends React.Component {
   constructor(props) {
@@ -137,7 +138,7 @@ class Upload extends React.Component {
     let $imagePreview = null;
     let $uploadBox = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img className="preview" id="imgBox" src={imagePreviewUrl} onLoad={e => this.resize(e)} alt="" />);
+      $imagePreview = (<ImageTagger imageSrc={imagePreviewUrl} />);
       $uploadBox = (<button className="submitButton" type="submit" onClick={e => this.handleClickToUpload(e)}>Upload Image</button>
     );
     } else {
