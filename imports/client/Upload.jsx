@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import React, { PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import Tag from './Tag.jsx';
-import ImageTagger from "./components/imageTagging/ImageTagger";
+import ImageTagger from './components/imageTagging/ImageTagger.jsx';
 
 class Upload extends React.Component {
   constructor(props) {
