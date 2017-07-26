@@ -12,7 +12,7 @@ class TagInput extends Component {
     super(props);
     this.state = {
       itemName: '',
-      itemURl: '',
+      itemURL: '',
     };
   }
 
@@ -21,7 +21,7 @@ class TagInput extends Component {
       left: this.props.clickPos.left,
       top: this.props.clickPos.top,
       itemName: this.state.itemName,
-      itemURL: this.state.itemURl,
+      itemURL: this.state.itemURL,
     });
     this.setState({ itemName: '', itemURL: '' });
   };

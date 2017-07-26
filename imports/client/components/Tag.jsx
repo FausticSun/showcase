@@ -1,27 +1,59 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Popup } from 'semantic-ui-react';
 
-// Task component - represents a single todo item
-export default class Tag extends Component {
-  constructor(props) {
-    super(props);
-    // Array is [ left %, top %, ChronologicalTagNumber, LabelDescription, LabelURL]
-    this.divStyle = {
-      left: this.props.objArray[0],
-      top: this.props.objArray[1],
+export const TagSize = 25;
+
+const initialTagStyle = {
+  fontSize: '12px',
+  textAlign: 'center',
+  verticalAlign: 'middle',
+
+  background: 'white',
+  borderRadius: '50%',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+
+  position: 'absolute',
+  height: TagSize,
+  width: TagSize,
+};
+
+class Tag extends Component {
+  render() {
+    const finalTagStyle = {
+      ...initialTagStyle,
+      left: this.props.tagData.left,
+      top: this.props.tagData.top,
     };
-    this.labelName = `label${this.props.objArray[2]}`;
-  }
 
-  render () {
-    return (
-      <div className="tag" style={this.divStyle} >
-        <div className="singleTag">{this.props.objArray[2]}</div>
-        <div className="label"><a className="labelUrl" href={this.props.objArray[4]}>{this.props.objArray[3]}</a></div>
+    const displayedTag = (
+      <div style={finalTagStyle}>
+        <span>{this.props.index}</span>
       </div>
+    );
+
+    const popupContent = (
+      <a href={this.props.tagData.itemURL}> {this.props.tagData.itemName} </a>
+    );
+
+    return (
+      <Popup
+        trigger={displayedTag}
+        content={popupContent}
+        hoverable
+      />
     );
   }
 }
 
 Tag.propTypes = {
-  objArray: PropTypes.arrayOf(PropTypes.any).isRequired,
+  tagData: PropTypes.shape({
+    left: PropTypes.string,
+    top: PropTypes.string,
+    itemName: PropTypes.string,
+    itemURL: PropTypes.string,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
 };
+
+export default Tag;
