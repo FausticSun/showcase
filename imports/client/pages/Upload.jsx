@@ -47,8 +47,7 @@ class Upload extends Component {
         streams: 'dynamic',
         chunkSize: 'dynamic',
         onUploaded: () => {
-          console.log(Images.find();
-          // FlowRouter.go(`/p/${postId}`);
+          FlowRouter.go(`/p/${postId}`);
         },
       });
     });
