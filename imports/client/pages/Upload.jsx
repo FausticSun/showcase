@@ -16,20 +16,31 @@ class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageURI: null,
+      imageURL: null,
       tags: [],
     };
   }
 
-  handleImageUploaded = (e) => {
+  imageUploadHandler = (e) => {
     this.setState({
-      imageURI: window.URL.createObjectURL(e.target.files[0])
+      imageURL: window.URL.createObjectURL(e.target.files[0]),
     });
     this.setState({ tags: [] });
   };
 
   newTagHandler = (newTag) => {
     this.setState({ tags: [...this.state.tags, newTag] });
+  }
+
+  submitPostHandler = () => {
+    const insertedData = {
+      imgData,
+      tags,
+      width,
+      height,
+      hubName,
+    };
+    Meteor.call('canvases.insert', insertedData);
   }
 
   render() {
@@ -40,16 +51,19 @@ class Upload extends Component {
           ref={r => (this.file = r)}
           style={{ display: 'none' }}
           accept="image/*"
-          onChange={this.handleImageUploaded}
+          onChange={this.imageUploadHandler}
         />
         <Button primary onClick={() => this.file.click()}>Upload Image</Button>
-        { this.state.imageURI ?
-          <ImageTagger
-            imageSrc={this.state.imageURI}
-            newTagHandler={this.newTagHandler}
-            tags={this.state.tags}
-          /> :
-          null }
+        { this.state.imageURL ?
+          <div>
+            <ImageTagger
+              imageSrc={this.state.imageURL}
+              newTagHandler={this.newTagHandler}
+              tags={this.state.tags}
+            />
+            <Button primary onClick={this.submitPostHandler}>Submit post</Button>
+          </div>
+          : null }
       </div>
     );
   }
