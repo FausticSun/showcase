@@ -5,7 +5,6 @@ import TagHolder from '../TagHolder.jsx';
 import TagInput from './TagInput.jsx';
 
 const imageTaggerStyle = {
-  position: 'relative',
   width: '600px',
 };
 
@@ -38,13 +37,17 @@ class ImageTagger extends Component {
   render() {
     return (
       <div style={imageTaggerStyle}>
-        <Card fluid onMouseDown={this.clickHandler}>
-          <TagHolder tags={this.state.tags} />
-          <Image fluid src={this.props.imageSrc} />
+        <Card fluid>
+          <div style={{ position: 'relative' }}>
+            <div onMouseDown={this.clickHandler}>
+              <Image fluid src={this.props.imageSrc} />
+              <TagHolder tags={this.state.tags} />
+            </div>
+            { this.state.clickPos ?
+              <TagInput clickPos={this.state.clickPos} newTagHandler={this.newTagHandler} /> : null
+            }
+          </div>
         </Card>
-        { this.state.clickPos ?
-          <TagInput clickPos={this.state.clickPos} newTagHandler={this.newTagHandler} /> : null
-        }
       </div>
     );
   }
