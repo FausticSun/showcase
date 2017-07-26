@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Popup } from 'semantic-ui-react';
 
@@ -18,33 +18,31 @@ const initialTagStyle = {
   width: TagSize,
 };
 
-class Tag extends Component {
-  render() {
-    const finalTagStyle = {
-      ...initialTagStyle,
-      left: this.props.tagData.left,
-      top: this.props.tagData.top,
-    };
+const Tag = (props) => {
+  const finalTagStyle = {
+    ...initialTagStyle,
+    left: props.tagData.left,
+    top: props.tagData.top,
+  };
 
-    const displayedTag = (
-      <div style={finalTagStyle}>
-        <span>{this.props.index}</span>
-      </div>
-    );
+  const displayedTag = (
+    <div style={finalTagStyle}>
+      <span>{props.index}</span>
+    </div>
+  );
 
-    const popupContent = (
-      <a href={this.props.tagData.itemURL}> {this.props.tagData.itemName} </a>
-    );
+  const popupContent = (
+    <a href={props.tagData.itemURL}> {props.tagData.itemName} </a>
+  );
 
-    return (
-      <Popup
-        trigger={displayedTag}
-        content={popupContent}
-        hoverable
-      />
-    );
-  }
-}
+  return (
+    <Popup
+      trigger={displayedTag}
+      content={popupContent}
+      hoverable
+    />
+  );
+};
 
 Tag.propTypes = {
   tagData: PropTypes.shape({

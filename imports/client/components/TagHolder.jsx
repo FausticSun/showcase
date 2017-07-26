@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import Tag from './Tag.jsx';
 
@@ -10,19 +10,17 @@ const tagHolderStyle = {
   top: 0,
 };
 
-class TagHolder extends Component {
-  render() {
-    const tags = this.props.tags.map((tag, index) =>
-      <Tag tagData={tag} index={index + 1} key={index} />,
-    );
+const TagHolder = (props) => {
+  const tags = props.tags.map((tag, index) =>
+    <Tag tagData={tag} index={index + 1} key={index} />,
+  );
 
-    return (
-      <div style={tagHolderStyle}>
-        {tags}
-      </div>
-    );
-  }
-}
+  return (
+    <div style={tagHolderStyle}>
+      {tags}
+    </div>
+  );
+};
 
 TagHolder.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.shape({
