@@ -23,9 +23,14 @@ class Upload extends Component {
 
   handleImageUploaded = (e) => {
     this.setState({
-      imageURI: window.URL.createObjectURL(e.target.files[0]),
+      imageURI: window.URL.createObjectURL(e.target.files[0])
     });
+    this.setState({ tags: [] });
   };
+
+  newTagHandler = (newTag) => {
+    this.setState({ tags: [...this.state.tags, newTag] });
+  }
 
   render() {
     return (
@@ -38,7 +43,13 @@ class Upload extends Component {
           onChange={this.handleImageUploaded}
         />
         <Button primary onClick={() => this.file.click()}>Upload Image</Button>
-        { this.state.imageURI ? <ImageTagger imageSrc={this.state.imageURI} /> : null }
+        { this.state.imageURI ?
+          <ImageTagger
+            imageSrc={this.state.imageURI}
+            newTagHandler={this.newTagHandler}
+            tags={this.state.tags}
+          /> :
+          null }
       </div>
     );
   }

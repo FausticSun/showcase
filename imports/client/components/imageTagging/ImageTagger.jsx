@@ -19,7 +19,7 @@ class ImageTagger extends Component {
   }
 
   newTagHandler = (newTag) => {
-    this.setState({ tags: [...this.state.tags, newTag] });
+    this.props.newTagHandler(newTag);
     this.setState({ clickPos: null });
   };
 
@@ -42,7 +42,7 @@ class ImageTagger extends Component {
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
               <Image fluid src={this.props.imageSrc} />
-              <TagHolder tags={this.state.tags} />
+              <TagHolder tags={this.props.tags} />
             </div>
             { this.state.clickPos ?
               <TagInput clickPos={this.state.clickPos} newTagHandler={this.newTagHandler} /> : null
@@ -56,10 +56,13 @@ class ImageTagger extends Component {
 
 ImageTagger.propTypes = {
   imageSrc: PropTypes.string.isRequired,
-};
-
-ImageTagger.defaultProps = {
-  imageSrc: '',
+  newTagHandler: PropTypes.func.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    left: PropTypes.string,
+    top: PropTypes.string,
+    itemName: PropTypes.string,
+    itemURL: PropTypes.string,
+  })).isRequired,
 };
 
 export default ImageTagger;
