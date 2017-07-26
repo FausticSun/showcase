@@ -4,7 +4,7 @@ import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { MainLayout } from '../../client/layouts/MainLayout.jsx';
 import App from '../../client/App.jsx';
-import Upload from '../../client/Upload.jsx';
+import Upload from '../../client/pages/Upload.jsx';
 import PostContainer from '../../client/PostContainer.jsx';
 import SettingsContainer from '../../client/SettingsContainer.jsx';
 
