@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Button } from 'semantic-ui-react';
+import Images from '../../api/images.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
 
 const uploadStyle = {
@@ -18,6 +20,7 @@ class Upload extends Component {
     this.state = {
       imageURL: null,
       tags: [],
+      hubName: '',
     };
   }
 
@@ -34,13 +37,21 @@ class Upload extends Component {
 
   submitPostHandler = () => {
     const insertedData = {
-      imgData,
-      tags,
-      width,
-      height,
-      hubName,
+      tags: this.state.tags,
+      hubName: this.state.hubName,
     };
-    Meteor.call('canvases.insert', insertedData);
+    Meteor.call('canvases.insert', insertedData, (e, postId) => {
+      Images.insert({
+        file: this.file.files[0],
+        meta: { postId },
+        streams: 'dynamic',
+        chunkSize: 'dynamic',
+        onUploaded: () => {
+          console.log(Images.find();
+          // FlowRouter.go(`/p/${postId}`);
+        },
+      });
+    });
   }
 
   render() {

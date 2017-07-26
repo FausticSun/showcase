@@ -11,23 +11,16 @@ Meteor.methods({
     }
 
     check(canvas, {
-      imgData: String,
       tags: Match.Any,
-      width: Number,
-      height: Number,
       hubName: String,
     });
 
-    Canvases.insert({
-      imgData: canvas.imgData,
-      createdAt: new Date(), // current time
+    return Canvases.insert({
+      createdAt: new Date(),
       tags: canvas.tags,
-      width: canvas.width,
-      height: canvas.height,
       likes: [],
       hubName: canvas.hubName,
-      owner: Meteor.userId(), // _id of logged in user
-      username: Meteor.user().username,
+      userId: Meteor.userId(),
     });
   },
 
