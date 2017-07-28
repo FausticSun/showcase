@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import createContainer from 'meteor/react-meteor-data';
+import FlowRouter from 'meteor/kadira:flow-router';
 import { Form } from 'semantic-ui-react';
 
 const LoginStyle = {
@@ -22,20 +22,19 @@ class Login extends Component {
   }
   onChangeHandler = (e, { name, value }) => {
     this.setState({ [name]: value });
-  }
+  };
   loginUser = () => {
-
-    Meteor.loginWithPassword(this.state.userName, this.state.password );
-    FlowRouter.go("/");
-  }
+    Meteor.loginWithPassword(this.state.userName, this.state.password);
+    FlowRouter.go('/');
+  };
   render() {
     const { password, userName } = this.state;
 
     return (
       <div style={LoginStyle}>
-        <Form size="big" onSubmit={this.loginUser}>
-          <Form.Input name="userName" value={userName} label='Username'  placeholder="Username" onChange={this.onChangeHandler} />
-          <Form.Input name="password" value={password} label='Password' type='password' placeholder="Password" onChange={this.onChangeHandler} />
+        <Form size="large" onSubmit={this.loginUser}>
+          <Form.Input name="userName" value={userName} label="Username" placeholder="Username" onChange={this.onChangeHandler} />
+          <Form.Input name="password" value={password} label="Password" type="password" placeholder="Password" onChange={this.onChangeHandler} />
           <Form.Button>Log In</Form.Button>
         </Form>
       </div>
