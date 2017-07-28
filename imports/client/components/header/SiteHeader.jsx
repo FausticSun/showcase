@@ -9,9 +9,7 @@ const SiteHeader = () => (
     <HubDropdown />
     <Menu.Menu position="right">
       <Menu.Item name="upload" href="/upload" />
-      <Menu.Item name="login">
-        <Blaze template="loginButtons" align="right" />
-      </Menu.Item>
+      <Menu.Item name="login" href="/login" />
     </Menu.Menu>
   </Menu>
 );
