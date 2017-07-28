@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import TagHolder from './TagHolder.jsx';
 
-const canvasStyle = {
+const showcaseStyle = {
   width: '600px',
 };
 
-class Canvas extends Component {
+class Showcase extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ class Canvas extends Component {
 
   render() {
     return (
-      <div style={canvasStyle}>
+      <div style={showcaseStyle}>
         <Card fluid>
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
@@ -30,7 +30,7 @@ class Canvas extends Component {
   }
 }
 
-Canvas.propTypes = {
+Showcase.propTypes = {
   canvasData: PropTypes.shape({
     createdAt: PropTypes.date,
     tags: PropTypes.arrayOf(PropTypes.shape({
@@ -44,4 +44,4 @@ Canvas.propTypes = {
   imageSrc: PropTypes.string.isRequired,
 };
 
-export default Canvas;
+export default Showcase;

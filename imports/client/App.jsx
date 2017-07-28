@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Canvases } from '../api/canvases.js';
+import { Showcases } from '../api/showcases.js';
 
 import Canvas from './Canvas.jsx';
 // App component - represents the whole app

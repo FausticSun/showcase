@@ -2,7 +2,7 @@
 /* exported ProfileContainer */
 
 import { createContainer } from 'meteor/react-meteor-data';
-import { Canvases } from '../api/canvases.js';
+import { Showcases } from '../api/showcases.js';
 import Profile from './Profile.jsx';
 
 export default ProfileContainer = createContainer(({ profileName }) => {

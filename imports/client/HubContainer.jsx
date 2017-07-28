@@ -2,7 +2,7 @@
 /* exported HubContainer */
 
 import { createContainer } from 'meteor/react-meteor-data';
-import { Canvases } from '../api/canvases.js';
+import { Showcases } from '../api/showcases.js';
 import Hub from './Hub.jsx';
 
 export default HubContainer = createContainer(({ hubName }) => {

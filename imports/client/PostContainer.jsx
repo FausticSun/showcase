@@ -2,7 +2,7 @@
 /* exported PostContainer */
 
 import { createContainer } from 'meteor/react-meteor-data';
-import { Canvases } from '../api/canvases.js';
+import { Showcases } from '../api/showcases.js';
 import Post from './Post.jsx';
 
 export default PostContainer = createContainer(({ postId }) => {

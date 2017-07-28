@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import Canvases from '../../api/canvases.js';
+import Showcases from '../../api/showcases.js';
 import Images from '../../api/images.js';
-import Canvas from '../components/Canvas.jsx';
+import Canvas from '../components/Showcase.jsx';
+
+const postStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  width: '100%',
+};
 
 class Post extends Component {
   constructor(props) {
@@ -16,19 +23,21 @@ class Post extends Component {
   render() {
     if (this.props.loading) {
       return null;
-    } else if (!this.props.canvas) {
+    } else if (!this.props.showcase) {
       FlowRouter.go('/404');
       return null;
     }
     return (
-      <Canvas canvasData={this.props.canvas} imageSrc={this.props.imageSrc} />
+      <div style={postStyle}>
+        <Canvas canvasData={this.props.showcase} imageSrc={this.props.imageSrc} />
+      </div>
     );
   }
 }
 
 Post.propTypes = {
   loading: PropTypes.bool.isRequired,
-  canvas: PropTypes.shape({
+  showcase: PropTypes.shape({
     createdAt: PropTypes.date,
     tags: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
@@ -42,16 +51,16 @@ Post.propTypes = {
 };
 
 Post.defaultProps = {
-  canvas: null,
+  showcase: null,
   imageSrc: null,
 };
 
 export default createContainer(({ id }) => {
-  const canvasSub = Meteor.subscribe('canvases.singlePost', id);
+  const showcasesSub = Meteor.subscribe('showcases.singlePost', id);
   const imageSub = Meteor.subscribe('files.images.singlePost', id);
   return {
-    loading: !canvasSub.ready() && !imageSub.ready(),
-    canvas: Canvases.findOne(),
+    loading: !showcasesSub.ready() && !imageSub.ready(),
+    showcase: Showcases.findOne(),
     imageSrc: Images.findOne().link(),
   };
 }, Post);

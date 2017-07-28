@@ -33,14 +33,14 @@ class Upload extends Component {
 
   newTagHandler = (newTag) => {
     this.setState({ tags: [...this.state.tags, newTag] });
-  }
+  };
 
   submitPostHandler = () => {
     const insertedData = {
       tags: this.state.tags,
       hubName: this.state.hubName,
     };
-    Meteor.call('canvases.insert', insertedData, (e, postId) => {
+    Meteor.call('showcases.insert', insertedData, (e, postId) => {
       Images.insert({
         file: this.file.files[0],
         meta: { postId },
@@ -51,7 +51,7 @@ class Upload extends Component {
         },
       });
     });
-  }
+  };
 
   render() {
     return (
