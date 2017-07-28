@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import Canvases from '../../api/canvases.js';
 import Images from '../../api/images.js';
 import Canvas from '../components/Canvas.jsx';
@@ -13,13 +14,14 @@ class Post extends Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return null;
+    } else if (!this.props.canvas) {
+      FlowRouter.go('/404');
+      return null;
+    }
     return (
-      <div>
-        { this.props.loading ?
-          null :
-          <Canvas canvasData={this.props.canvas} imageSrc={this.props.imageSrc} />
-        }
-      </div>
+      <Canvas canvasData={this.props.canvas} imageSrc={this.props.imageSrc} />
     );
   }
 }

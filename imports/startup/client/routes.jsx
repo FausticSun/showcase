@@ -19,6 +19,15 @@ FlowRouter.route('/', {
     });
   },
 });
+
+FlowRouter.route('/404', {
+  action() {
+    mount(MainLayout, {
+      content: (<FourOhFour />),
+    });
+  },
+});
+
 FlowRouter.route('/upload', {
   action() {
     mount(MainLayout, {
