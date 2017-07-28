@@ -5,7 +5,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { MainLayout } from '../../client/layouts/MainLayout.jsx';
 import App from '../../client/App.jsx';
 import Upload from '../../client/pages/Upload.jsx';
-import PostContainer from '../../client/PostContainer.jsx';
+import Post from '../../client/pages/Post.jsx';
 import SettingsContainer from '../../client/SettingsContainer.jsx';
 
 import HubContainer from '../../client/HubContainer.jsx';
@@ -30,7 +30,7 @@ FlowRouter.route('/upload', {
 FlowRouter.route('/p/:postId', {
   action(params) {
     mount(MainLayout, {
-      content: (<PostContainer postId={params.postId} />),
+      content: (<Post id={params.postId} />),
     });
   },
 });

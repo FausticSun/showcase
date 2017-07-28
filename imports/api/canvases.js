@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
-export const Canvases = new Mongo.Collection('canvases');
+const Canvases = new Mongo.Collection('canvases');
 
 Meteor.methods({
   'canvases.insert'(canvas) {
@@ -45,8 +45,10 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
-  Meteor.publish('singlePost', (id) => {
+  Meteor.publish('canvases.singlePost', (id) => {
     check(id, String);
-    return Canvases.findOne({ _id: id });
+    return Canvases.find({ _id: id });
   });
 }
+
+export default Canvases;
