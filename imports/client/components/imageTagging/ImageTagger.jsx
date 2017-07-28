@@ -14,7 +14,6 @@ class ImageTagger extends Component {
     super(props);
     this.state = {
       clickPos: null,
-      tags: [],
     };
   }
 
