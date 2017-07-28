@@ -42,10 +42,11 @@ Meteor.methods({
     }
     Canvases.update({ _id: taskId }, { $set: { likes: likeArray } });
   },
-
-  'canvases.retrieve'(canvasId) {
-    check(canvasId, String);
-
-    return Canvases.findOne({ _id: canvasId });
-  },
 });
+
+if (Meteor.isServer) {
+  Meteor.publish('singlePost', (id) => {
+    check(id, String);
+    return Canvases.findOne({ _id: id });
+  });
+}
