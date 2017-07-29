@@ -12,6 +12,12 @@ import HubContainer from '../../client/HubContainer.jsx';
 import ProfileContainer from '../../client/ProfileContainer.jsx';
 import FourOhFour from '../../client/pages/FourOhFour.jsx';
 
+const isLoggedIn = () => {
+  if (!(Meteor.loggingIn() || Meteor.userId())) {
+    FlowRouter.go('/login');
+  }
+};
+
 FlowRouter.route('/', {
   action() {
     mount(MainLayout, {
@@ -29,6 +35,7 @@ FlowRouter.route('/404', {
 });
 
 FlowRouter.route('/upload', {
+  triggersEnter: [isLoggedIn],
   action() {
     mount(MainLayout, {
       content: (<Upload />),
