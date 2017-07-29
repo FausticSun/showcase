@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import Showcases from '../../api/showcases.js';
 import Images from '../../api/images.js';
-import Canvas from '../components/Showcase.jsx';
+import Showcase from '../components/Showcase.jsx';
 
 const postStyle = {
   display: 'flex',
@@ -29,7 +29,7 @@ class Post extends Component {
     }
     return (
       <div style={postStyle}>
-        <Canvas canvasData={this.props.showcase} imageSrc={this.props.imageSrc} />
+        <Showcase canvasData={this.props.showcase} imageSrc={this.props.imageSrc} />
       </div>
     );
   }
