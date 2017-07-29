@@ -22,14 +22,12 @@ class SiteHeader extends Component {
       const imgStyle= {
         width: '25px',
         height: '25px',
-        display: 'inline-block',
-        verticalAlign: 'middle',
         marginRight : '5px',
       };
       const trigger = (
           <span>
-            <Image style={imgStyle} shape="circular" src="https://qph.ec.quoracdn.net/main-qimg-3b0b70b336bbae35853994ce0aa25013-c" />
-            {this.props.currentUser.username}
+            <Image style={imgStyle} shape="circular" centered inline avatar src={this.props.currentUser.profile.profilePic} />
+            {this.props.currentUser.profile.name}
           </span>
       );
       $menuView = (
