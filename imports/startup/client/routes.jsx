@@ -66,14 +66,11 @@ FlowRouter.route('/hub/:hubName', {
 });
 
 FlowRouter.route('/settings', {
+  triggersEnter: [isLoggedIn],
   action() {
-    if (Meteor.userId()) {
-      mount(MainLayout, {
-        content: (<Settings userId={Meteor.userId()} />),
-      });
-    } else {
-      FlowRouter.go('/login');
-    }
+    mount(MainLayout, {
+      content: (<Settings />),
+    });
   },
 });
 
