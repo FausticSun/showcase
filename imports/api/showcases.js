@@ -12,6 +12,8 @@ Meteor.methods({
 
     check(showcase, {
       tags: Match.Any,
+      title: String,
+      description: String,
       hubName: String,
       imageSrc: String,
     });
@@ -19,6 +21,8 @@ Meteor.methods({
     return Showcases.insert({
       createdAt: new Date(),
       tags: showcase.tags,
+      title: showcase.title,
+      description: showcase.description,
       imageSrc: showcase.imageSrc,
       hubName: showcase.hubName,
       likes: [],

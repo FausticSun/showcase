@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Button } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import Images from '../../api/images.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
 
@@ -21,8 +21,12 @@ class Upload extends Component {
       imageURL: null,
       tags: [],
       hubName: '',
+      title: '',
+      description: '',
     };
   }
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   imageUploadHandler = (e) => {
     this.setState({
@@ -36,14 +40,17 @@ class Upload extends Component {
   };
 
   submitPostHandler = () => {
+    const { tags, title, description, hubName } = this.state;
     Images.insert({
       file: this.file.files[0],
       streams: 'dynamic',
       chunkSize: 'dynamic',
       onUploaded: (error, fileRef) => {
         const insertedData = {
-          tags: this.state.tags,
-          hubName: this.state.hubName,
+          tags,
+          title,
+          description,
+          hubName,
           imageSrc: Images.link(fileRef),
         };
         Meteor.call('showcases.insert', insertedData, (e, postId) => {
@@ -54,6 +61,8 @@ class Upload extends Component {
   };
 
   render() {
+    const { title, description, hubName } = this.state;
+
     return (
       <div style={uploadStyle}>
         <input
@@ -71,7 +80,27 @@ class Upload extends Component {
               newTagHandler={this.newTagHandler}
               tags={this.state.tags}
             />
-            <Button primary onClick={this.submitPostHandler}>Submit post</Button>
+            <Form onSubmit={this.submitPostHandler}>
+              <Form.Input
+                name="title"
+                placeholder="Enter Title"
+                value={title}
+                onChange={this.handleChange}
+              />
+              <Form.TextArea
+                name="description"
+                placeholder="Enter a short description"
+                value={description}
+                onChange={this.handleChange}
+              />
+              <Form.Input
+                name="hubName"
+                placeholder="Enter name of hub to submit to"
+                value={hubName}
+                onChange={this.handleChange}
+              />
+              <Form.Button content="Submit post" />
+            </Form>
           </div>
           : null }
       </div>
