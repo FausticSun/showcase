@@ -51,9 +51,7 @@ if (Meteor.isServer) {
     check(id, String);
     return Showcases.find({ _id: id });
   });
-  Meteor.publish('showcases.allPost', () => {
-    return Showcases.find();
-  });
+  Meteor.publish('showcases.allPost', () => Showcases.find());
 }
 
 export default Showcases;

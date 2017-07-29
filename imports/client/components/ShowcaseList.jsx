@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import Showcases from '../../api/showcases.js';
-import Images from '../../api/images.js';
 import Showcase from './Showcase.jsx';
 
 const showcaseListStyle = {
