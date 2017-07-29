@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
-import FlowRouter from 'meteor/kadira:flow-router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Accounts } from 'meteor/accounts-base';
 import { Form } from 'semantic-ui-react';
 
@@ -28,7 +28,9 @@ class Register extends Component {
   };
   registerUser = () => {
     Accounts.createUser({
-      name: this.state.name,
+      profile: {
+        name: this.state.name,
+      },
       username: this.state.userName,
       password: this.state.password,
     });
