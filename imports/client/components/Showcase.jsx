@@ -4,6 +4,7 @@ import TagHolder from './TagHolder.jsx';
 
 const showcaseStyle = {
   width: '600px',
+  marginBottom: '20px',
 };
 
 class Showcase extends Component {
