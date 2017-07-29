@@ -1,5 +1,5 @@
 import React from 'react';
-import ShowcaseList from '../components/ShowcaseList.jsx';
+import ShowcaseList from '../components/showcase/ShowcaseList.jsx';
 
 const homeStyle = {
   display: 'flex',

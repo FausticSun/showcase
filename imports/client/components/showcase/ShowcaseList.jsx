@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Header, Icon } from 'semantic-ui-react';
-import Showcases from '../../api/showcases.js';
+import Showcases from '../../../api/showcases.js';
 import Showcase from './Showcase.jsx';
 
 const showcaseListStyle = {

@@ -4,8 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Divider } from 'semantic-ui-react';
-import Login from '../components/LoginAndRegister/Login.jsx';
-import Register from '../components/LoginAndRegister/Register.jsx';
+import Login from '../components/loginAndRegister/Login.jsx';
+import Register from '../components/loginAndRegister/Register.jsx';
 
 const LoginAndRegisterStyle = {
   display: 'flex',

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Image, Card } from 'semantic-ui-react';
-import TagHolder from '../TagHolder.jsx';
+import TagHolder from '../showcase/TagHolder.jsx';
 import TagInput from './TagInput.jsx';
-import { TagSize } from '../Tag.jsx';
+import { TagSize } from '../showcase/Tag.jsx';
 
 const imageTaggerStyle = {
   width: '600px',
