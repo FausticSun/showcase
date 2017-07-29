@@ -11,6 +11,7 @@ import SettingsContainer from '../../client/SettingsContainer.jsx';
 import HubContainer from '../../client/HubContainer.jsx';
 import ProfileContainer from '../../client/ProfileContainer.jsx';
 import FourOhFour from '../../client/pages/FourOhFour.jsx';
+import LoginAndRegister from '../../client/pages/LoginAndRegister.jsx';
 
 const isLoggedIn = () => {
   if (!(Meteor.loggingIn() || Meteor.userId())) {
@@ -39,6 +40,14 @@ FlowRouter.route('/upload', {
   action() {
     mount(MainLayout, {
       content: (<Upload />),
+    });
+  },
+});
+
+FlowRouter.route('/login', {
+  action() {
+    mount(MainLayout, {
+      content: (<LoginAndRegister />),
     });
   },
 });
