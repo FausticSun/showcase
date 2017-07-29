@@ -36,20 +36,20 @@ class Upload extends Component {
   };
 
   submitPostHandler = () => {
-    const insertedData = {
-      tags: this.state.tags,
-      hubName: this.state.hubName,
-    };
-    Meteor.call('showcases.insert', insertedData, (e, postId) => {
-      Images.insert({
-        file: this.file.files[0],
-        meta: { postId },
-        streams: 'dynamic',
-        chunkSize: 'dynamic',
-        onUploaded: () => {
+    Images.insert({
+      file: this.file.files[0],
+      streams: 'dynamic',
+      chunkSize: 'dynamic',
+      onUploaded: (error, fileRef) => {
+        const insertedData = {
+          tags: this.state.tags,
+          hubName: this.state.hubName,
+          imageSrc: Images.link(fileRef),
+        };
+        Meteor.call('showcases.insert', insertedData, (e, postId) => {
           FlowRouter.go(`/p/${postId}`);
-        },
-      });
+        });
+      },
     });
   };
 

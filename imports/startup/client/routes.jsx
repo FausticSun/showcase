@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { MainLayout } from '../../client/layouts/MainLayout.jsx';
-import App from '../../client/App.jsx';
+import Home from '../../client/pages/Home.jsx';
 import Upload from '../../client/pages/Upload.jsx';
 import Post from '../../client/pages/Post.jsx';
 import SettingsContainer from '../../client/SettingsContainer.jsx';
@@ -15,7 +15,7 @@ import FourOhFour from '../../client/pages/FourOhFour.jsx';
 FlowRouter.route('/', {
   action() {
     mount(MainLayout, {
-      content: (<App />),
+      content: (<Home />),
     });
   },
 });

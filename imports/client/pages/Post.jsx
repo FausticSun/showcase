@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import Showcases from '../../api/showcases.js';
-import Images from '../../api/images.js';
 import Showcase from '../components/Showcase.jsx';
 
 const postStyle = {
@@ -29,7 +28,7 @@ class Post extends Component {
     }
     return (
       <div style={postStyle}>
-        <Showcase canvasData={this.props.showcase} imageSrc={this.props.imageSrc} />
+        <Showcase showcaseData={this.props.showcase} />
       </div>
     );
   }
@@ -43,11 +42,11 @@ Post.propTypes = {
       name: PropTypes.string,
       url: PropTypes.string,
     })),
-    likes: PropTypes.arrayOf(PropTypes.string),
     hubName: PropTypes.string,
+    imageSrc: PropTypes.string,
+    likes: PropTypes.arrayOf(PropTypes.string),
     userId: PropTypes.string,
   }),
-  imageSrc: PropTypes.string,
 };
 
 Post.defaultProps = {
@@ -61,6 +60,5 @@ export default createContainer(({ id }) => {
   return {
     loading: !showcasesSub.ready() && !imageSub.ready(),
     showcase: Showcases.findOne(),
-    imageSrc: Images.findOne().link(),
   };
 }, Post);

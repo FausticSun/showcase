@@ -13,13 +13,15 @@ Meteor.methods({
     check(showcase, {
       tags: Match.Any,
       hubName: String,
+      imageSrc: String,
     });
 
     return Showcases.insert({
       createdAt: new Date(),
       tags: showcase.tags,
-      likes: [],
+      imageSrc: showcase.imageSrc,
       hubName: showcase.hubName,
+      likes: [],
       userId: Meteor.userId(),
     });
   },
@@ -48,6 +50,9 @@ if (Meteor.isServer) {
   Meteor.publish('showcases.singlePost', (id) => {
     check(id, String);
     return Showcases.find({ _id: id });
+  });
+  Meteor.publish('showcases.allPost', () => {
+    return Showcases.find();
   });
 }
 

@@ -20,8 +20,8 @@ class Showcase extends Component {
         <Card fluid>
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
-              <Image fluid src={this.props.imageSrc} />
-              <TagHolder tags={this.props.canvasData.tags} />
+              <Image fluid src={this.props.showcaseData.imageSrc} />
+              <TagHolder tags={this.props.showcaseData.tags} />
             </div>
           </div>
         </Card>
@@ -31,17 +31,17 @@ class Showcase extends Component {
 }
 
 Showcase.propTypes = {
-  canvasData: PropTypes.shape({
+  showcaseData: PropTypes.shape({
     createdAt: PropTypes.date,
     tags: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
       url: PropTypes.string,
     })),
-    likes: PropTypes.arrayOf(PropTypes.string),
     hubName: PropTypes.string,
+    imageSrc: PropTypes.string,
+    likes: PropTypes.arrayOf(PropTypes.string),
     userId: PropTypes.string,
   }).isRequired,
-  imageSrc: PropTypes.string.isRequired,
 };
 
 export default Showcase;
