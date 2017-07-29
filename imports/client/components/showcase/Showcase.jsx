@@ -38,6 +38,9 @@ class Showcase extends Component {
             </div>
           </div>
           <Card.Content>
+            <TagList tags={showcaseData.tags} />
+          </Card.Content>
+          <Card.Content>
             <Card.Meta>
               by {showcaseData.userName}{' '}
               to {showcaseData.hubName}{' '}
@@ -47,22 +50,12 @@ class Showcase extends Component {
               {showcaseData.description}
             </Card.Description>
           </Card.Content>
-          <Card.Content>
-            <Card.Header>
-              Title
-            </Card.Header>
-            <Card.Description>
-              <span>
-                <Likes
-                  numLikes={showcaseData.likes.length}
-                  clickLike={this.likePost}
-                />
-              </span>
-              <br />
-              <h2>Items found in this Showcase</h2>
-              <TagList tags={showcaseData.tags} />
-            </Card.Description>
-          </Card.Content>	  
+          <Card.Content meta>
+            <Likes
+              numLikes={showcaseData.likes.length}
+              clickLike={this.likePost}
+            />
+          </Card.Content>
         </Card>
       </div>
     );
