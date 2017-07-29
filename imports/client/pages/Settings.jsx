@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
 import { Header, Icon, Form, Image, Button } from 'semantic-ui-react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -15,7 +16,7 @@ const profilePicDisplayStyle = {
   height: '200px',
 };
 // Settings component - represents a single canvas
-export default class Settings extends Component {
+class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,3 +120,11 @@ Settings.propTypes = {
 Settings.defaultProps = {
   currentUser: null,
 };
+
+export default createContainer(() => {
+  const currentUser = Meteor.user();
+
+  return {
+    currentUser,
+  };
+}, Settings);

@@ -6,10 +6,7 @@ import { MainLayout } from '../../client/layouts/MainLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
 import Upload from '../../client/pages/Upload.jsx';
 import Post from '../../client/pages/Post.jsx';
-import SettingsContainer from '../../client/pages/SettingsContainer.jsx';
-
-import HubContainer from '../../client/HubContainer.jsx';
-import ProfileContainer from '../../client/ProfileContainer.jsx';
+import Settings from '../../client/pages/Settings.jsx';
 import FourOhFour from '../../client/pages/FourOhFour.jsx';
 import LoginAndRegister from '../../client/pages/LoginAndRegister.jsx';
 
