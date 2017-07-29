@@ -46,19 +46,17 @@ Meteor.methods({
     Showcases.remove(taskId);
   },
 
-  'showcases.likePost'(argArray) {
-    check(argArray, Array);
-
-    const liker = argArray[0];
-    const taskId = argArray[1];
-    const likeArray = Showcases.findOne({ _id: taskId }).likes;
+  'showcases.likePost'(showcaseId) {
+    check(showcaseId, String);
+    const liker = Meteor.userId();
+    const likeArray = Showcases.findOne({ _id: showcaseId }).likes;
     if (likeArray.indexOf(liker) === -1) {
-      likeArray.push(liker);
+      Showcases.update({ _id: showcaseId }, { $push: { likes: liker } });
     } else {
-      likeArray.splice(likeArray.indexOf(liker), 1);
+      Showcases.update({ _id: showcaseId }, { $pull: { likes: liker } });
     }
-    Showcases.update({ _id: taskId }, { $set: { likes: likeArray } });
   },
+
 });
 
 if (Meteor.isServer) {
