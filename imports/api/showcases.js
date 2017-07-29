@@ -2,7 +2,18 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check, Match } from 'meteor/check';
 
-const Showcases = new Mongo.Collection('showcases');
+const Showcases = new Mongo.Collection('showcases', {
+  transform: (showcase) => {
+    const user = Meteor.users.findOne(showcase.userId);
+    let tShowcase;
+    if (user) {
+      tShowcase = { ...showcase, userName: user.profile.name };
+    } else {
+      tShowcase = { ...showcase, userName: '[User not found]' };
+    }
+    return tShowcase;
+  },
+});
 
 Meteor.methods({
   'showcases.insert'(showcase) {

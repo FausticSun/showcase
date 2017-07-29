@@ -22,15 +22,31 @@ class Showcase extends Component {
   };
 
   render() {
+    const showcaseData = this.props.showcaseData;
     return (
       <div style={showcaseStyle}>
         <Card fluid>
+          <Card.Content>
+            <Card.Header>
+              {showcaseData.title}
+            </Card.Header>
+          </Card.Content>
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
-              <Image fluid src={this.props.showcaseData.imageSrc} />
-              <TagHolder tags={this.props.showcaseData.tags} />
+              <Image fluid src={showcaseData.imageSrc} />
+              <TagHolder tags={showcaseData.tags} />
             </div>
           </div>
+          <Card.Content>
+            <Card.Meta>
+              by {showcaseData.userName}{' '}
+              to {showcaseData.hubName}{' '}
+              at {showcaseData.createdAt.toString()}
+            </Card.Meta>
+            <Card.Description>
+              {showcaseData.description}
+            </Card.Description>
+          </Card.Content>
           <Card.Content>
             <Card.Header>
               Title
@@ -38,21 +54,15 @@ class Showcase extends Component {
             <Card.Description>
               <span>
                 <Likes
-                  numLikes={this.props.showcaseData.likes.length}
+                  numLikes={showcaseData.likes.length}
                   clickLike={this.likePost}
                 />
               </span>
               <br />
               <h2>Items found in this Showcase</h2>
-              <TagList tags={this.props.showcaseData.tags} />
+              <TagList tags={showcaseData.tags} />
             </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <a>
-              <Icon name="user" />
-              22 Friends
-            </a>
-          </Card.Content>
+          </Card.Content>	  
         </Card>
       </div>
     );
@@ -66,10 +76,13 @@ Showcase.propTypes = {
       name: PropTypes.string,
       url: PropTypes.string,
     })),
+    title: PropTypes.string,
+    description: PropTypes.string,
     hubName: PropTypes.string,
     imageSrc: PropTypes.string,
     likes: PropTypes.arrayOf(PropTypes.string),
     userId: PropTypes.string,
+    userName: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
