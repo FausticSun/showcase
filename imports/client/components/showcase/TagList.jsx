@@ -7,7 +7,7 @@ const TagList = (props) => {
     <TagListItem tagData={tag} index={index + 1} key={index} />,
   );
   return (
-    <List>
+    <List ordered>
       {TagListItems}
     </List>
   );

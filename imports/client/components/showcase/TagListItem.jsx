@@ -4,9 +4,8 @@ import { List } from 'semantic-ui-react';
 const TagListItem = (props) => {
   return (
     <List.Item>
-      <span>{props.tagData.index}</span>
       <a className="labelTextUrl" href={props.tagData.itemURL}>
-        {props.tagData.itemName} - {props.tagData.itemURL}
+        {props.tagData.itemName}
       </a>
     </List.Item>
   );
@@ -17,7 +16,6 @@ TagListItem.propTypes = {
     itemName: PropTypes.string,
     itemURL: PropTypes.string,
   }).isRequired,
-  index: PropTypes.number.isRequired,
 };
 
 export default TagListItem;

@@ -30,6 +30,11 @@ class Showcase extends Component {
             <Card.Header>
               {showcaseData.title}
             </Card.Header>
+            <Card.Meta>
+              by {showcaseData.userName}{' '}
+              to {showcaseData.hubName}{' '}
+              on {showcaseData.createdAt.toDateString()}
+            </Card.Meta>
           </Card.Content>
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
@@ -41,16 +46,11 @@ class Showcase extends Component {
             <TagList tags={showcaseData.tags} />
           </Card.Content>
           <Card.Content>
-            <Card.Meta>
-              by {showcaseData.userName}{' '}
-              to {showcaseData.hubName}{' '}
-              at {showcaseData.createdAt.toString()}
-            </Card.Meta>
             <Card.Description>
               {showcaseData.description}
             </Card.Description>
           </Card.Content>
-          <Card.Content meta>
+          <Card.Content>
             <Likes
               numLikes={showcaseData.likes.length}
               clickLike={this.likePost}
