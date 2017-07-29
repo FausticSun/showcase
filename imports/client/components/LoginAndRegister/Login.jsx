@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import createContainer from 'meteor/react-meteor-data';
-import FlowRouter from 'meteor/kadira:flow-router';
+import { createContainer } from 'meteor/react-meteor-data';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Form } from 'semantic-ui-react';
 
 const LoginStyle = {

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown } from 'semantic-ui-react';
-import createContainer from 'meteor/react-meteor-data';
+import { Menu, Dropdown, Image, Header} from 'semantic-ui-react';
+import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import FlowRouter from 'meteor/kadira:flow-router';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import HubDropdown from './HubDropdown.jsx';
 
 
 class SiteHeader extends Component {
+
   logout = () => {
     Meteor.logout();
     FlowRouter.go('/');
@@ -18,8 +19,18 @@ class SiteHeader extends Component {
   render() {
     let $menuView = '';
     if (this.props.currentUser) {
+      const imgStyle= {
+        width: '25px',
+        height: '25px',
+      }
+      const trigger = (
+          <Menu.Item>
+            <Image style={imgStyle} shape="circular" src="https://qph.ec.quoracdn.net/main-qimg-3b0b70b336bbae35853994ce0aa25013-c" />
+            {this.props.currentUser.username}
+          </Menu.Item>
+      );
       $menuView = (
-        <Dropdown item text={this.props.currentUser.username} >
+        <Dropdown item trigger={trigger}>
           <Dropdown.Menu>
             <Dropdown.Item onClick={this.goSettings}>My Profile</Dropdown.Item>
             <Dropdown.Item onClick={this.logout}>Logout</Dropdown.Item>
@@ -42,7 +53,9 @@ class SiteHeader extends Component {
   }
 }
 SiteHeader.propTypes = {
-  currentUser: PropTypes.string,
+  currentUser: PropTypes.shape({
+    username: PropTypes.string,
+  }),
 };
 
 SiteHeader.defaultProps = {

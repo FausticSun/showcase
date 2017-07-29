@@ -63,3 +63,7 @@ Settings.propTypes = {
     username: PropTypes.string,
   }).isRequired,
 };
+
+Settings.defaultProps = {
+  currentUser: null,
+};
