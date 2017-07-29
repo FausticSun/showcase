@@ -63,11 +63,13 @@ ShowcaseList.defaultProps = {
   images: null,
 };
 
-export default createContainer(() => {
+export default createContainer(({ hubName }) => {
   const showcasesSub = Meteor.subscribe('showcases.allPost');
   const imageSub = Meteor.subscribe('files.images.allPost');
   return {
     loading: !showcasesSub.ready() && !imageSub.ready(),
-    showcases: Showcases.find().fetch(),
+    showcases: hubName ?
+      Showcases.find({ hubName }, { sort: { createdAt: -1 } }).fetch() :
+      Showcases.find({}, { sort: { createdAt: -1 } }).fetch(),
   };
 }, ShowcaseList);
