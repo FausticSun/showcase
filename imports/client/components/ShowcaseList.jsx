@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Header, Icon } from 'semantic-ui-react';
 import Showcases from '../../api/showcases.js';
 import Showcase from './Showcase.jsx';
 
@@ -12,6 +13,17 @@ const showcaseListStyle = {
 
 class ShowcaseList extends Component {
   renderShowcaseCards() {
+    if (!this.props.showcases.length) {
+      return (
+        <Header as="h1" icon>
+          <Icon name="upload" />
+          There are no showcases
+          <Header.Subheader>
+            Upload one!
+          </Header.Subheader>
+        </Header>
+      );
+    }
     return this.props.showcases.map(showcase => (
       <Showcase
         showcaseData={showcase}
@@ -19,6 +31,7 @@ class ShowcaseList extends Component {
       />
     ));
   }
+
   render() {
     return (
       <div style={showcaseListStyle}>
