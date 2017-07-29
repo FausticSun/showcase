@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Icon } from 'semantic-ui-react';
 import TagHolder from './TagHolder.jsx';
+import Likes from './Likes.jsx';
 
 const showcaseStyle = {
   width: '600px',
@@ -12,8 +13,12 @@ class Showcase extends Component {
     super(props);
     this.state = {
       isLiked: null,
+      likeArray: this.props.showcaseData.likes,
     };
   }
+  likePost = () => {
+    Meteor.call('showcases.likePost', this.props.showcaseData._id);
+  };
 
   render() {
     return (
@@ -25,6 +30,27 @@ class Showcase extends Component {
               <TagHolder tags={this.props.showcaseData.tags} />
             </div>
           </div>
+          <Card.Content>
+            <Card.Header>
+              Title
+            </Card.Header>
+            <Card.Description>
+              <span>
+                <Likes
+                  numLikes={this.props.showcaseData.likes.length}
+                  clickLike={this.likePost}
+                />
+              </span>
+              <br />
+              Tag listing
+            </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <a>
+              <Icon name='user' />
+              22 Friends
+            </a>
+          </Card.Content>
         </Card>
       </div>
     );
@@ -42,6 +68,7 @@ Showcase.propTypes = {
     imageSrc: PropTypes.string,
     likes: PropTypes.arrayOf(PropTypes.string),
     userId: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
 

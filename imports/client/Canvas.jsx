@@ -3,6 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Showcases } from '../api/showcases.js';
 import Tag from './Tag.jsx';
 import Label from './Label.jsx';
+
 // Showcase component - represents a single showcase
 class Canvas extends Component {
   constructor(props) {
