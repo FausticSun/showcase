@@ -24,6 +24,7 @@ export default class Settings extends Component {
     this.state = {
       editName: false,
       name: '',
+      oldPassword: '',
       password: '',
       userName: '',
       repeatPassword: '',
@@ -42,11 +43,13 @@ export default class Settings extends Component {
     });
   };
   updateUserSettings = () => {
-    Accounts.createUser({
-      name: this.state.name,
-      username: this.state.userName,
-      password: this.state.password,
-    });
+    if (this.state.name){
+      Meteor.users.update(Meteor.userId(), { $set: { 'profile.name': this.state.name } });
+    }
+    if (this.state.password) {
+      Accounts.changePassword(this.state.oldPassword, this.state.password);
+    }
+
     FlowRouter.go('/');
   };
   updateState = () => {
@@ -57,7 +60,7 @@ export default class Settings extends Component {
     const { name, password, userName, repeatPassword, tempProfilePic } = this.state;
 
     let $profilePic = '';
-    if(!currentUser) {
+    if (!currentUser) {
       $profilePic = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
     } else if(!this.state.editPic){
       $profilePic = this.props.currentUser.profile.profilePic;
@@ -88,6 +91,7 @@ export default class Settings extends Component {
           <Form size="large" onSubmit={this.updateUserSettings} >
             <Form.Input name="name" value={name} label="Edit Name" placeholder={currentUser.profile.name} onChange={this.onChangeHandler} />
             <Form.Input name="userName" value={userName} label="Edit Username" placeholder={currentUser.username} onChange={this.onChangeHandler} />
+            <Form.Input name="oldPassword" value={password} label="Old Password" type="password" placeholder="Old Password" onChange={this.onChangeHandler} />
             <Form.Input name="password" value={password} label="Password" type="password" placeholder="Password" onChange={this.onChangeHandler} />
             <Form.Input name="repeatPassword" value={repeatPassword} label="Repeat Password" type="password" placeholder="Repeat Password" onChange={this.onChangeHandler} />
             <Form.Button>Update Settings</Form.Button>
