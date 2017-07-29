@@ -32,6 +32,7 @@ Meteor.methods({
   },
 
   'showcases.likePost'(showcaseId) {
+    check(showcaseId, String);
     const liker = Meteor.userId();
     const likeArray = Showcases.findOne({ _id: showcaseId }).likes;
     if (likeArray.indexOf(liker) === -1) {
