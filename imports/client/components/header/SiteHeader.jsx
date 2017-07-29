@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown, Image, Header} from 'semantic-ui-react';
+import { Menu, Dropdown, Image } from 'semantic-ui-react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
@@ -19,16 +19,16 @@ class SiteHeader extends Component {
   render() {
     let $menuView = '';
     if (this.props.currentUser) {
-      const imgStyle= {
+      const imgStyle = {
         width: '25px',
         height: '25px',
-        marginRight : '5px',
+        marginRight: '5px',
       };
       const trigger = (
-          <span>
-            <Image style={imgStyle} shape="circular" centered inline avatar src={this.props.currentUser.profile.profilePic} />
-            {this.props.currentUser.profile.name}
-          </span>
+        <span>
+          <Image style={imgStyle} shape="circular" centered inline avatar src={this.props.currentUser.profile.profilePic} />
+          {this.props.currentUser.profile.name}
+        </span>
       );
       $menuView = (
         <Dropdown item trigger={trigger}>
@@ -56,6 +56,10 @@ class SiteHeader extends Component {
 SiteHeader.propTypes = {
   currentUser: PropTypes.shape({
     username: PropTypes.string,
+    profile: PropTypes.shape({
+      name: PropTypes.string,
+      profilePic: PropTypes.string,
+    }),
   }),
 };
 
