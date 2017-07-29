@@ -1,43 +1,28 @@
-import React, { Component, PropTypes } from 'react';
-import { Button, Popup } from 'semantic-ui-react';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import React, { PropTypes } from 'react';
+import { List } from 'semantic-ui-react';
+import TagListItem from './TagListItem.jsx';
 
-export default class Likes extends Component {
-  render () {
-    return (
-      <div>
-        { Meteor.user() ?
-          <Button
-            color="red"
-            content="Like"
-            icon="heart"
-            label={{ basic: true, color: 'red', pointing: 'left', content: `${this.props.numLikes}` }}
-            onClick={this.props.clickLike}
-          />
-          :
-          <div>
-            <Popup
-              trigger={
-                <Button
-                  color="red"
-                  content="Like"
-                  icon="heart"
-                  label={{ basic: true, color: 'red', pointing: 'left', content: `${this.props.numLikes}` }}
-                />
-              }
-              content={<Button color="grey" content="Log in to like this" onClick={() => { FlowRouter.go('/login'); }} />}
-              on="click"
-              position="top left"
-            />
-          </div>
-        }
-      </div>
-    );
-  }
-}
-
-Likes.propTypes = {
-  numLikes: PropTypes.number.isRequired,
-  clickLike: PropTypes.func.isRequired,
+const TagList = (props) => {
+  const TagListItems = props.tags.map((tag, index) =>
+    <TagListItem tagData={tag} index={index + 1} key={index} />,
+  );
+  return (
+    <List>
+      {TagListItems}
+    </List>
+  );
 };
+
+TagList.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    url: PropTypes.string,
+  })),
+};
+
+TagList.defaultProps = {
+  tags: [],
+};
+
+export default TagList;
 

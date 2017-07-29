@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Card, Image, Icon } from 'semantic-ui-react';
 import TagHolder from './TagHolder.jsx';
 import Likes from './Likes.jsx';
+import TagList from './TagList.jsx';
 
 const showcaseStyle = {
   width: '600px',
@@ -42,12 +43,13 @@ class Showcase extends Component {
                 />
               </span>
               <br />
-              Tag listing
+              <h2>Items found in this Showcase</h2>
+              <TagList tags={this.props.showcaseData.tags} />
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
             <a>
-              <Icon name='user' />
+              <Icon name="user" />
               22 Friends
             </a>
           </Card.Content>
