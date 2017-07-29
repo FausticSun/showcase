@@ -22,10 +22,12 @@
     "react-addons-transition-group": "^15.6.0",
     "react-addons-update": "^15.6.0",
     "react-dom": "^15.6.1",
-    "react-mounter": "^1.2.0"
+    "react-mounter": "^1.2.0",
+    "semantic-ui-react": "^0.71.2"
   },
   "devDependencies": {
     "@meteorjs/eslint-config-meteor": "^1.0.5",
+    "autoprefixer": "^6.3.1",
     "babel-eslint": "^7.2.3",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
@@ -34,6 +36,15 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-meteor": "^4.0.1",
     "eslint-plugin-react": "^6.9.0"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "parserOptions": {
@@ -61,7 +72,9 @@
         "never"
       ],
       "import/prefer-default-export": "off",
-      "linebreak-style": "off"
+      "linebreak-style": "off",
+      "react/no-array-index-key": "off",
+      "jsx-a11y/no-static-element-interactions": "off"
     }
   }
 }
