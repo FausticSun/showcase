@@ -26,7 +26,7 @@ class ShowcaseList extends Component {
     }
     return this.props.showcases.map(showcase => (
       <ShowcaseCard
-        showcaseData={showcase}
+        showcase={showcase}
         key={showcase._id}
       />
     ));

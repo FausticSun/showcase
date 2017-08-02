@@ -14,15 +14,15 @@ class ShowcaseCard extends Component {
     super(props);
     this.state = {
       isLiked: null,
-      likeArray: this.props.showcaseData.likes,
+      likeArray: this.props.showcase.likes,
     };
   }
   likePost = () => {
-    Meteor.call('showcases.likePost', this.props.showcaseData._id);
+    this.props.showcase.toggleLike();
   };
 
   render() {
-    const showcaseData = this.props.showcaseData;
+    const showcaseData = this.props.showcase;
     return (
       <div style={showcaseStyle}>
         <Card fluid>
@@ -63,7 +63,7 @@ class ShowcaseCard extends Component {
 }
 
 ShowcaseCard.propTypes = {
-  showcaseData: PropTypes.shape({
+  showcase: PropTypes.shape({
     createdAt: PropTypes.date,
     tags: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string,
