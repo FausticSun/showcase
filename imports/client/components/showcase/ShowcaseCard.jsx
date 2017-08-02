@@ -1,8 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import { Card, Image, Icon } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Card, Image } from 'semantic-ui-react';
 import TagHolder from './TagHolder.jsx';
 import Likes from './Likes.jsx';
 import TagList from './TagList.jsx';
+import { Showcase } from '../../../api/showcases.js';
 
 const showcaseStyle = {
   width: '600px',
@@ -63,21 +65,7 @@ class ShowcaseCard extends Component {
 }
 
 ShowcaseCard.propTypes = {
-  showcase: PropTypes.shape({
-    createdAt: PropTypes.date,
-    tags: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-    })),
-    title: PropTypes.string,
-    description: PropTypes.string,
-    hubName: PropTypes.string,
-    imageSrc: PropTypes.string,
-    likes: PropTypes.arrayOf(PropTypes.string),
-    userId: PropTypes.string,
-    userName: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
+  showcase: PropTypes.instanceOf(Showcase).isRequired,
 };
 
 export default ShowcaseCard;

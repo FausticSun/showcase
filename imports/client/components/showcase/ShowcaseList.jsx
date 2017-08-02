@@ -43,19 +43,8 @@ class ShowcaseList extends Component {
 
 ShowcaseList.propTypes = {
   loading: PropTypes.bool.isRequired,
-  showcases: PropTypes.arrayOf(PropTypes.shape(
-    {
-      createdAt: PropTypes.date,
-      tags: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        url: PropTypes.string,
-      })),
-      hubName: PropTypes.string,
-      imageSrc: PropTypes.string,
-      likes: PropTypes.arrayOf(PropTypes.string),
-      userId: PropTypes.string,
-    },
-  )).isRequired,
+  showcases: PropTypes.arrayOf(
+    PropTypes.instanceOf(Showcase)).isRequired,
 };
 
 ShowcaseList.defaultProps = {
