@@ -49,7 +49,7 @@ export const Showcase = Class.create({
       const doc = e.currentTarget;
       const user = Meteor.users.findOne(doc.userId);
       if (user) {
-        doc.userName = user.profile.username;
+        doc.userName = user.profile.name;
       } else {
         doc.userName = '[DELETED]';
       }
