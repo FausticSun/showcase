@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Header, Icon } from 'semantic-ui-react';
 import Showcases from '../../../api/showcases.js';
-import Showcase from './Showcase.jsx';
+import Showcase from './ShowcaseCard.jsx';
 
 const showcaseListStyle = {
   display: 'flex',

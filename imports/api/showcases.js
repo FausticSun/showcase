@@ -16,7 +16,7 @@ export const Tag = Class.create({
 });
 
 export const Showcase = Class.create({
-  name: 'Showcase',
+  name: 'ShowcaseCard',
   collection: Showcases,
   fields: {
     title: String,

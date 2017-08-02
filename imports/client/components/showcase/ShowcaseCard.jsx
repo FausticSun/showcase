@@ -9,7 +9,7 @@ const showcaseStyle = {
   marginBottom: '20px',
 };
 
-class Showcase extends Component {
+class ShowcaseCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,7 +62,7 @@ class Showcase extends Component {
   }
 }
 
-Showcase.propTypes = {
+ShowcaseCard.propTypes = {
   showcaseData: PropTypes.shape({
     createdAt: PropTypes.date,
     tags: PropTypes.arrayOf(PropTypes.shape({
@@ -80,4 +80,4 @@ Showcase.propTypes = {
   }).isRequired,
 };
 
-export default Showcase;
+export default ShowcaseCard;
