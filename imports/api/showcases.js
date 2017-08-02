@@ -1,17 +1,73 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
+import { Class } from 'meteor/jagi:astronomy';
 import { check, Match } from 'meteor/check';
 
-const Showcases = new Mongo.Collection('showcases', {
-  transform: (showcase) => {
-    const user = Meteor.users.findOne(showcase.userId);
-    let tShowcase;
-    if (user) {
-      tShowcase = { ...showcase, userName: user.profile.name };
-    } else {
-      tShowcase = { ...showcase, userName: '[User not found]' };
-    }
-    return tShowcase;
+const Showcases = new Mongo.Collection('showcases');
+
+export const Tag = Class.create({
+  name: 'Tag',
+  fields: {
+    name: String,
+    url: String,
+  },
+});
+
+export const Showcase = Class.create({
+  name: 'Showcase',
+  collection: Showcases,
+  fields: {
+    title: String,
+    description: String,
+    imageSrc: String,
+    tags: [Tag],
+    likes: {
+      type: [String],
+      default: [],
+    },
+    userId: {
+      type: String,
+      default: Meteor.userId(),
+    },
+    username: {
+      type: String,
+      transient: true,
+    },
+  },
+  behaviors: {
+    timestamp: {
+      hasCreatedField: true,
+      createdFieldName: 'createdAt',
+      hasUpdatedField: true,
+      updatedFieldName: 'updatedAt',
+    },
+  },
+  events: {
+    afterInit(e) {
+      const doc = e.currentTarget;
+      const user = Meteor.users.findOne(doc.userId);
+      if (user) {
+        doc.username = user.profile.username;
+      } else {
+        doc.username = '[DELETED]';
+      }
+    },
+  },
+  meteorMethods: {
+    create() {
+      if (!Meteor.userId()) {
+        throw new Meteor.Error('not-authorized');
+      }
+      this.save();
+    },
+    toggleLike() {
+      const liker = Meteor.userId();
+      if (this.likes.indexOf(liker) === -1) {
+        Showcase.update(this._id, { $push: { likes: liker } });
+      } else {
+        Showcase.update(this._id, { $pull: { likes: liker } });
+      }
+    },
   },
 });
 
@@ -62,9 +118,7 @@ Meteor.methods({
 if (Meteor.isServer) {
   Meteor.publish('showcases.singlePost', (id) => {
     check(id, String);
-    return Showcases.find({ _id: id });
+    return Showcase.find({ _id: id });
   });
-  Meteor.publish('showcases.allPost', () => Showcases.find());
+  Meteor.publish('showcases.allPost', () => Showcase.find());
 }
-
-export default Showcases;
