@@ -8,8 +8,10 @@ const Showcases = new Mongo.Collection('showcases');
 export const Tag = Class.create({
   name: 'Tag',
   fields: {
-    name: String,
-    url: String,
+    left: String,
+    top: String,
+    itemName: String,
+    itemURL: String,
   },
 });
 
@@ -19,15 +21,15 @@ export const Showcase = Class.create({
   fields: {
     title: String,
     description: String,
-    imageSrc: String,
     tags: [Tag],
+    hubName: String,
+    imageSrc: String,
     likes: {
       type: [String],
       default: [],
     },
     userId: {
       type: String,
-      default: Meteor.userId(),
     },
     username: {
       type: String,
@@ -54,11 +56,12 @@ export const Showcase = Class.create({
     },
   },
   meteorMethods: {
-    create() {
+    insert(callback) {
       if (!Meteor.userId()) {
         throw new Meteor.Error('not-authorized');
       }
-      this.save();
+      this.userId = Meteor.userId();
+      this.save(callback);
     },
     toggleLike() {
       const liker = Meteor.userId();

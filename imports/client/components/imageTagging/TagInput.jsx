@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Segment, Form } from 'semantic-ui-react';
+import { Tag } from '../../../api/showcases.js';
 
 const initialTagInputStyle = {
   position: 'absolute',
@@ -17,12 +18,12 @@ class TagInput extends Component {
   }
 
   onSubmitHandler = () => {
-    this.props.newTagHandler({
-      left: this.props.clickPos.left,
-      top: this.props.clickPos.top,
-      itemName: this.state.itemName,
-      itemURL: this.state.itemURL,
-    });
+    const newTag = new Tag();
+    newTag.left = this.props.clickPos.left;
+    newTag.top = this.props.clickPos.top;
+    newTag.itemName = this.state.itemName;
+    newTag.itemURL = this.state.itemURL;
+    this.props.newTagHandler(newTag);
     this.setState({ itemName: '', itemURL: '' });
   };
 

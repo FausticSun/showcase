@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Button, Form } from 'semantic-ui-react';
 import Images from '../../api/images.js';
+import { Showcase } from '../../api/showcases.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
 
 const uploadStyle = {
@@ -41,20 +42,19 @@ class Upload extends Component {
 
   submitPostHandler = () => {
     const { tags, title, description, hubName } = this.state;
+    const newShowcase = new Showcase();
+    newShowcase.title = title;
+    newShowcase.description = description;
+    newShowcase.tags = tags;
+    newShowcase.hubName = hubName;
     Images.insert({
       file: this.file.files[0],
       streams: 'dynamic',
       chunkSize: 'dynamic',
       onUploaded: (error, fileRef) => {
-        const insertedData = {
-          tags,
-          title,
-          description,
-          hubName,
-          imageSrc: Images.link(fileRef),
-        };
-        Meteor.call('showcases.insert', insertedData, (e, postId) => {
-          FlowRouter.go(`/p/${postId}`);
+        newShowcase.imageSrc = Images.link(fileRef);
+        newShowcase.insert(() => {
+          FlowRouter.go('/');
         });
       },
     });
