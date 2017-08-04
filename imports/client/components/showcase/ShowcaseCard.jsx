@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Card, Image } from 'semantic-ui-react';
-import TagHolder from './TagHolder.jsx';
+import ShowcaseCardTagHolder from './ShowcaseCardTagHolder.jsx';
 import Likes from './Likes.jsx';
 import TagList from './TagList.jsx';
 import { Showcase } from '../../../api/showcases.js';
@@ -41,7 +41,7 @@ class ShowcaseCard extends Component {
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
               <Image fluid src={showcaseData.imageSrc} />
-              <TagHolder tags={showcaseData.tags} />
+              <ShowcaseCardTagHolder tags={showcaseData.tags} />
             </div>
           </div>
           <Card.Content>

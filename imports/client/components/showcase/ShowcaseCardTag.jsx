@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Popup } from 'semantic-ui-react';
+import { Tag } from '../../../api/showcases.js';
 
 export const TagSize = 25;
 
@@ -18,7 +19,7 @@ const initialTagStyle = {
   width: TagSize,
 };
 
-const Tag = (props) => {
+const ShowcaseCardTag = (props) => {
   const finalTagStyle = {
     ...initialTagStyle,
     left: props.tagData.left,
@@ -44,14 +45,9 @@ const Tag = (props) => {
   );
 };
 
-Tag.propTypes = {
-  tagData: PropTypes.shape({
-    left: PropTypes.string,
-    top: PropTypes.string,
-    itemName: PropTypes.string,
-    itemURL: PropTypes.string,
-  }).isRequired,
+ShowcaseCardTag.propTypes = {
+  tagData: PropTypes.instanceOf(Tag).isRequired,
   index: PropTypes.number.isRequired,
 };
 
-export default Tag;
+export default ShowcaseCardTag;

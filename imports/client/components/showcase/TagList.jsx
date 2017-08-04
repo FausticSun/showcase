@@ -25,4 +25,3 @@ TagList.defaultProps = {
 };
 
 export default TagList;
-
