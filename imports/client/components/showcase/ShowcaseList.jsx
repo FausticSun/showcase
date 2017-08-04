@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Header, Icon } from 'semantic-ui-react';
-import Showcases from '../../../api/showcases.js';
-import Showcase from './Showcase.jsx';
+import { Showcase } from '../../../api/showcases.js';
+import ShowcaseCard from './ShowcaseCard.jsx';
 
 const showcaseListStyle = {
   display: 'flex',
@@ -25,8 +25,8 @@ class ShowcaseList extends Component {
       );
     }
     return this.props.showcases.map(showcase => (
-      <Showcase
-        showcaseData={showcase}
+      <ShowcaseCard
+        showcase={showcase}
         key={showcase._id}
       />
     ));
@@ -43,19 +43,8 @@ class ShowcaseList extends Component {
 
 ShowcaseList.propTypes = {
   loading: PropTypes.bool.isRequired,
-  showcases: PropTypes.arrayOf(PropTypes.shape(
-    {
-      createdAt: PropTypes.date,
-      tags: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        url: PropTypes.string,
-      })),
-      hubName: PropTypes.string,
-      imageSrc: PropTypes.string,
-      likes: PropTypes.arrayOf(PropTypes.string),
-      userId: PropTypes.string,
-    },
-  )).isRequired,
+  showcases: PropTypes.arrayOf(
+    PropTypes.instanceOf(Showcase)).isRequired,
 };
 
 ShowcaseList.defaultProps = {
@@ -69,7 +58,7 @@ export default createContainer(({ hubName }) => {
   return {
     loading: !showcasesSub.ready() && !imageSub.ready(),
     showcases: hubName ?
-      Showcases.find({ hubName }, { sort: { createdAt: -1 } }).fetch() :
-      Showcases.find({}, { sort: { createdAt: -1 } }).fetch(),
+      Showcase.find({ hubName }, { sort: { createdAt: -1 } }).fetch() :
+      Showcase.find({}, { sort: { createdAt: -1 } }).fetch(),
   };
 }, ShowcaseList);

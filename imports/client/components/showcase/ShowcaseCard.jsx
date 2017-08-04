@@ -1,28 +1,30 @@
-import React, { Component, PropTypes } from 'react';
-import { Card, Image, Icon } from 'semantic-ui-react';
-import TagHolder from './TagHolder.jsx';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Card, Image } from 'semantic-ui-react';
+import ShowcaseCardTagHolder from './ShowcaseCardTagHolder.jsx';
 import Likes from './Likes.jsx';
 import TagList from './TagList.jsx';
+import { Showcase } from '../../../api/showcases.js';
 
 const showcaseStyle = {
   width: '600px',
   marginBottom: '20px',
 };
 
-class Showcase extends Component {
+class ShowcaseCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLiked: null,
-      likeArray: this.props.showcaseData.likes,
+      likeArray: this.props.showcase.likes,
     };
   }
   likePost = () => {
-    Meteor.call('showcases.likePost', this.props.showcaseData._id);
+    this.props.showcase.toggleLike();
   };
 
   render() {
-    const showcaseData = this.props.showcaseData;
+    const showcaseData = this.props.showcase;
     return (
       <div style={showcaseStyle}>
         <Card fluid>
@@ -39,7 +41,7 @@ class Showcase extends Component {
           <div style={{ position: 'relative' }}>
             <div onClick={this.clickHandler} >
               <Image fluid src={showcaseData.imageSrc} />
-              <TagHolder tags={showcaseData.tags} />
+              <ShowcaseCardTagHolder tags={showcaseData.tags} />
             </div>
           </div>
           <Card.Content>
@@ -62,22 +64,8 @@ class Showcase extends Component {
   }
 }
 
-Showcase.propTypes = {
-  showcaseData: PropTypes.shape({
-    createdAt: PropTypes.date,
-    tags: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-    })),
-    title: PropTypes.string,
-    description: PropTypes.string,
-    hubName: PropTypes.string,
-    imageSrc: PropTypes.string,
-    likes: PropTypes.arrayOf(PropTypes.string),
-    userId: PropTypes.string,
-    userName: PropTypes.string,
-    _id: PropTypes.string,
-  }).isRequired,
+ShowcaseCard.propTypes = {
+  showcase: PropTypes.instanceOf(Showcase).isRequired,
 };
 
-export default Showcase;
+export default ShowcaseCard;

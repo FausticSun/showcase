@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Image, Card } from 'semantic-ui-react';
-import TagHolder from '../showcase/TagHolder.jsx';
+import TagHolder from '../showcase/ShowcaseCardTagHolder.jsx';
 import TagInput from './TagInput.jsx';
-import { TagSize } from '../showcase/Tag.jsx';
+import { TagSize } from '../showcase/ShowcaseCardTag.jsx';
+import { Tag } from '../../../api/showcases.js';
 
 const imageTaggerStyle = {
   width: '600px',
@@ -56,12 +57,7 @@ class ImageTagger extends Component {
 ImageTagger.propTypes = {
   imageSrc: PropTypes.string.isRequired,
   newTagHandler: PropTypes.func.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.shape({
-    left: PropTypes.string,
-    top: PropTypes.string,
-    itemName: PropTypes.string,
-    itemURL: PropTypes.string,
-  })).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.instanceOf(Tag)).isRequired,
 };
 
 export default ImageTagger;

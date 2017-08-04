@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import Showcases from '../../api/showcases.js';
-import Showcase from '../components/showcase/Showcase.jsx';
+import Showcase from '../components/showcase/ShowcaseCard.jsx';
 
 const postStyle = {
   display: 'flex',
