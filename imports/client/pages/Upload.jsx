@@ -8,13 +8,6 @@ import Images from '../../api/images.js';
 import { Showcase } from '../../api/showcases.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
 
-const uploadStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  width: '100%',
-};
-
 class Upload extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +57,7 @@ class Upload extends Component {
     const { title, description, hubName } = this.state;
 
     return (
-      <div style={uploadStyle}>
+      <div>
         <input
           type="file"
           ref={r => (this.file = r)}

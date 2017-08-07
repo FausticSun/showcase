@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { Class } from 'meteor/jagi:astronomy';
 import { check, Match } from 'meteor/check';
 
-const Showcases = new Mongo.Collection('showcases');
+const Showcases = new Mongo.Collection('Showcases');
 
 export const Tag = Class.create({
   name: 'Tag',

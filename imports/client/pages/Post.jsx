@@ -4,13 +4,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import Showcases from '../../api/showcases.js';
 import Showcase from '../components/showcase/ShowcaseCard.jsx';
 
-const postStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  width: '100%',
-};
-
 class Post extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +20,7 @@ class Post extends Component {
       return null;
     }
     return (
-      <div style={postStyle}>
+      <div>
         <Showcase showcaseData={this.props.showcase} />
       </div>
     );

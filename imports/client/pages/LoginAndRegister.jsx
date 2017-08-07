@@ -7,13 +7,6 @@ import { Divider } from 'semantic-ui-react';
 import Login from '../components/loginAndRegister/Login.jsx';
 import Register from '../components/loginAndRegister/Register.jsx';
 
-const LoginAndRegisterStyle = {
-  display: 'flex',
-  width: '100%',
-  flexDirection: 'column',
-  alignItems: 'center',
-};
-
 class LoginAndRegister extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +15,7 @@ class LoginAndRegister extends Component {
 
   render() {
     return (
-      <div style={LoginAndRegisterStyle}>
+      <div>
         <Login />
         <Divider horizontal>Or</Divider>
         <Register />
