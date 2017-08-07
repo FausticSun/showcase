@@ -4,12 +4,6 @@ import React, { Component, PropTypes } from 'react';
 import { Header, Icon, Form, Image, Button } from 'semantic-ui-react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-const settingsStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  width: '100%',
-};
 const profilePicDisplayStyle = {
   margin: 'auto',
   width: '200px',
@@ -71,7 +65,7 @@ class Settings extends Component {
     }
 
     return (
-      <article style={settingsStyle} className="postWrapper">
+      <article className="postWrapper">
         { currentUser ?
           <div>
             <Header as="h2" icon >
