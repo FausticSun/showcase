@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import Showcases from '../../api/showcases.js';
-import Showcase from '../components/showcase/ShowcaseCard.jsx';
+import { Showcase } from '../../api/showcases.js';
+import ShowcaseCard from '../components/showcase/ShowcaseCard.jsx';
 
 class Post extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Post extends Component {
     }
     return (
       <div>
-        <Showcase showcaseData={this.props.showcase} />
+        <ShowcaseCard showcase={this.props.showcase} />
       </div>
     );
   }
@@ -29,17 +29,7 @@ class Post extends Component {
 
 Post.propTypes = {
   loading: PropTypes.bool.isRequired,
-  showcase: PropTypes.shape({
-    createdAt: PropTypes.date,
-    tags: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-      url: PropTypes.string,
-    })),
-    hubName: PropTypes.string,
-    imageSrc: PropTypes.string,
-    likes: PropTypes.arrayOf(PropTypes.string),
-    userId: PropTypes.string,
-  }),
+  showcase: PropTypes.instanceOf(Showcase),
 };
 
 Post.defaultProps = {
@@ -52,6 +42,6 @@ export default createContainer(({ id }) => {
   const imageSub = Meteor.subscribe('files.images.singlePost', id);
   return {
     loading: !showcasesSub.ready() && !imageSub.ready(),
-    showcase: Showcases.findOne(),
+    showcase: Showcase.findOne(),
   };
 }, Post);
