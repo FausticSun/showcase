@@ -6,9 +6,10 @@ import { Tag } from '../../../api/showcases.js';
 export const TagSize = 25;
 
 const initialTagStyle = {
-  fontSize: '12px',
+  fontSize: '0.75em',
   textAlign: 'center',
   verticalAlign: 'middle',
+  paddingTop: '5px',
 
   background: 'white',
   borderRadius: '50%',
