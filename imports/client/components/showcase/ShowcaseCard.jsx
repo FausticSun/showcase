@@ -10,7 +10,10 @@ const showcaseStyle = {
   width: '600px',
   marginBottom: '20px',
 };
-
+const urlStyle = {
+  textDecoration: 'none',
+  color: 'black',
+};
 class ShowcaseCard extends Component {
   constructor(props) {
     super(props);
@@ -25,12 +28,13 @@ class ShowcaseCard extends Component {
 
   render() {
     const showcaseData = this.props.showcase;
+    let postURL = (showcaseData) ? `p/${showcaseData._id}` : '404';
     return (
       <div style={showcaseStyle}>
         <Card fluid>
           <Card.Content>
             <Card.Header>
-              {showcaseData.title}
+              <a href={postURL} style={urlStyle}>{showcaseData.title}</a>
             </Card.Header>
             <Card.Meta>
               by {showcaseData.userName}{' '}
