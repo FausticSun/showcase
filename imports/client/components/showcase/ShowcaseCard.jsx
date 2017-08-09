@@ -28,7 +28,7 @@ class ShowcaseCard extends Component {
 
   render() {
     const showcaseData = this.props.showcase;
-    let postURL = (showcaseData) ? `p/${showcaseData._id}` : '404';
+    const postURL = (showcaseData) ? `p/${showcaseData._id}` : '404';
     return (
       <div style={showcaseStyle}>
         <Card fluid>
