@@ -5,3 +5,7 @@
     font-family: 'Pacifico', cursive;
     font-size: large;
 }
+
+#react-root {
+    height: 100%;
+}
