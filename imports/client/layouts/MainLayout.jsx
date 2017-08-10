@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import { Dimmer } from 'semantic-ui-react';
+import { Dimmer, Header, Icon } from 'semantic-ui-react';
 import SiteHeader from '../components/header/SiteHeader.jsx';
 
 import '../../startup/client/accounts-config.js';
@@ -45,9 +45,12 @@ class MainLayout extends Component {
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
       >
-        <Dimmer
-          active={this.state.dimmerActive}
-        />
+        <Dimmer active={this.state.dimmerActive}>
+          <Header as="h1" inverted icon>
+            <Icon name="edit" />
+            Drop to create a new showcase!
+          </Header>
+        </Dimmer>
         <SiteHeader />
         <div style={centeredContent}>
           {this.props.content}
