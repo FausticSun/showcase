@@ -45,7 +45,7 @@ class MainLayout extends Component {
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
       >
-        <Dimmer active={this.state.dimmerActive}>
+        <Dimmer active={this.state.dimmerActive} style={{ position: 'fixed', height: '100vh', width: '100vw' }}>
           <Header as="h1" inverted icon>
             <Icon name="edit" />
             Drop to create a new showcase!
