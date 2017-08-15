@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Class } from 'meteor/jagi:astronomy';
 import { check, Match } from 'meteor/check';
+import './users.js';
 
 const Showcases = new Mongo.Collection('Showcases');
 
