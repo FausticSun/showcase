@@ -3,9 +3,9 @@
  */
 
 const Hubs = [
-  'EDC',
-  'MFA',
-  'Fashion',
+  { hubName: 'EDC', image: '/assets/img/backpack.png' },
+  { hubName: 'MFA', image: '/assets/img/mfa.png' },
+  { hubName: 'Fashion', image: '/assets/img/dress.png' },
 ];
 
 export default Hubs;
