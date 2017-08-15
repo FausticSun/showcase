@@ -55,6 +55,7 @@ class ImageTagger extends Component {
                 clickPos={this.state.clickPos}
                 newTagHandler={this.newTagHandler}
                 cancelTagInput={this.cancelTagInput}
+                numTags={this.props.tags.length}
               /> : null
             }
           </div>
