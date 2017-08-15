@@ -35,6 +35,12 @@ class ImageTagger extends Component {
     });
   };
 
+  cancelTagInput = () => {
+    this.setState({
+      clickPos: null,
+    });
+  };
+
   render() {
     return (
       <div style={imageTaggerStyle}>
@@ -45,7 +51,11 @@ class ImageTagger extends Component {
               <TagHolder tags={this.props.tags} />
             </div>
             { this.state.clickPos ?
-              <TagInput clickPos={this.state.clickPos} newTagHandler={this.newTagHandler} /> : null
+              <TagInput
+                clickPos={this.state.clickPos}
+                newTagHandler={this.newTagHandler}
+                cancelTagInput={this.cancelTagInput}
+              /> : null
             }
           </div>
         </Card>

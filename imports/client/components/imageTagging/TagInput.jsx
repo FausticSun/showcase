@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Segment, Form } from 'semantic-ui-react';
+import { Segment, Form, Button, Icon } from 'semantic-ui-react';
 import { Tag } from '../../../api/showcases.js';
 
 const initialTagInputStyle = {
@@ -8,6 +8,11 @@ const initialTagInputStyle = {
   width: '200px',
 };
 
+const cancelButtonStyle = {
+  position: 'absolute',
+  left: '93%',
+  bottom: '86%',
+};
 class TagInput extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +34,12 @@ class TagInput extends Component {
 
   onChangeHandler = (e, { name, value }) => {
     this.setState({ [name]: value });
-  }
+  };
+
+  cancelTagInput = () => {
+    this.setState({ itemName: '', itemURL: '' });
+    this.props.cancelTagInput();
+  };
 
   render() {
     const finalTagInputStyle = {
@@ -42,6 +52,9 @@ class TagInput extends Component {
 
     return (
       <Segment style={finalTagInputStyle}>
+        <Button icon circular size="mini" style={cancelButtonStyle} onClick={this.cancelTagInput}>
+          <Icon name="x" />
+        </Button>
         <Form size="mini" onSubmit={this.onSubmitHandler}>
           <Form.Input name="itemName" value={itemName} placeholder="Item Name" onChange={this.onChangeHandler} />
           <Form.Input name="itemURL" value={itemURL} placeholder="URL" onChange={this.onChangeHandler} />
@@ -58,6 +71,7 @@ TagInput.propTypes = {
     top: PropTypes.string,
   }).isRequired,
   newTagHandler: PropTypes.func.isRequired,
+  cancelTagInput: PropTypes.func.isRequired,
 };
 
 export default TagInput;
