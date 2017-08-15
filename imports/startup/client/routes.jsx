@@ -10,6 +10,7 @@ import Post from '../../client/pages/Post.jsx';
 import Settings from '../../client/pages/Settings.jsx';
 import FourOhFour from '../../client/pages/FourOhFour.jsx';
 import LoginAndRegister from '../../client/pages/LoginAndRegister.jsx';
+import ErrorPage from '../../client/pages/ErrorPage.jsx';
 
 const isLoggedIn = () => {
   if (!(Meteor.loggingIn() || Meteor.userId())) {
@@ -29,6 +30,14 @@ FlowRouter.route('/404', {
   action() {
     mount(MainLayout, {
       content: (<FourOhFour />),
+    });
+  },
+});
+
+FlowRouter.route('/error', {
+  action() {
+    mount(MainLayout, {
+      content: (<ErrorPage />),
     });
   },
 });

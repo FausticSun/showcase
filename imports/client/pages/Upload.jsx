@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Button, Form, Label } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 import Images from '../../api/images.js';
 import { Showcase } from '../../api/showcases.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
 import Hubs from '../../api/hubs.js';
+
 const dropdownOptions = Hubs.map(hubObject => ({
   key: hubObject.hubName,
   text: hubObject.hubName,
@@ -57,8 +58,12 @@ class Upload extends Component {
       chunkSize: 'dynamic',
       onUploaded: (error, fileRef) => {
         newShowcase.imageSrc = Images.link(fileRef);
-        newShowcase.insert(() => {
-          FlowRouter.go('/');
+        newShowcase.insert((error) => {
+          if (error) {
+            FlowRouter.go('/error');
+          } else {
+            FlowRouter.go('/');
+          }
         });
       },
     });
