@@ -7,10 +7,10 @@ const Likes = props => (
   <div>
     {Meteor.user() ?
       <Button
-        color="red"
-        content="Like"
-        icon="heart"
-        label={{ basic: true, color: 'red', pointing: 'left', content: `${props.numLikes}` }}
+        color={props.isLiked ? 'grey' : 'red'}
+        // content={props.isLiked ? 'Like' : 'Liked'}
+        icon={props.isLiked ? "empty heart" : "heart"}
+        label={{ basic: true, color: (props.isLiked ? 'grey' : 'red'), pointing: 'left', content: `${props.numLikes}` }}
         onClick={props.clickLike}
       />
         :

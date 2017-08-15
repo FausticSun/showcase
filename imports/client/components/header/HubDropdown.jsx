@@ -1,56 +1,24 @@
 import React from 'react';
-import { Dropdown, Grid, Image } from 'semantic-ui-react';
+import { Dropdown, } from 'semantic-ui-react';
+import Hubs from '../../../api/hubs.js';
 
-const gridItem = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-  height: '100px',
-  width: '100px',
-  padding: '10px',
-};
+let hubOptions = Hubs.map(hubName => ({
+  key: hubName,
+  text: hubName,
+  value: hubName,
+  as: 'a',
+  href: `/hub/${hubName}`,
+}));
 
-const gridItemText = {
-  display: 'block',
-  textAlign: 'center',
-  marginTop: '5px',
-  fontFamily: 'Cormorant Garamond',
-  fontSize: '1.2em',
-};
+hubOptions = [{
+  key: 'All',
+  text: 'All',
+  value: 'All',
+  as: 'a',
+  href: '/' }, ...hubOptions];
 
 const HubDropdown = () => (
-  <Dropdown item text="Hubs" icon="grid layout">
-    <Dropdown.Menu>
-      <Grid style={{ width: '400px' }}>
-        <Grid.Row columns={1}>
-          <Grid.Column>
-            <a href="/">All Showcases</a>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row columns={3}>
-          <Grid.Column>
-            <div style={gridItem}>
-              <Image src="/assets/img/mfa.png" size="mini" />
-              <span style={gridItemText}>Male Fashion</span>
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <div style={gridItem}>
-              <Image src="/assets/img/mfa.png" size="mini" />
-              <span style={gridItemText}>Male Fashion</span>
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <div style={gridItem}>
-              <Image src="/assets/img/mfa.png" size="mini" />
-              <span style={gridItemText}>Male Fashion</span>
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Dropdown.Menu>
-  </Dropdown>
+  <Dropdown item text="Hubs" icon="grid layout" options={hubOptions} />
 );
 
 export default HubDropdown;

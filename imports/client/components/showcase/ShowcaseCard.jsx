@@ -16,12 +16,13 @@ class ShowcaseCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLiked: null,
       likeArray: this.props.showcase.likes,
     };
+    this.isLiked = (this.state.likeArray.indexOf(Meteor.userId()) === -1);
   }
   likePost = () => {
     this.props.showcase.toggleLike();
+    this.isLiked = !this.isLiked;
   };
 
   render() {
@@ -57,6 +58,7 @@ class ShowcaseCard extends Component {
             <Likes
               numLikes={showcaseData.likes.length}
               clickLike={this.likePost}
+              isLiked={this.isLiked}
             />
           </Card.Content>
         </Card>
