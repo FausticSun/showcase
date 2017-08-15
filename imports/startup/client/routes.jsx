@@ -35,9 +35,10 @@ FlowRouter.route('/404', {
 
 FlowRouter.route('/upload', {
   triggersEnter: [isLoggedIn],
-  action() {
+  action(params, queryParams) {
+    console.log(queryParams);
     mount(MainLayout, {
-      content: (<Upload />),
+      content: (<Upload image={queryParams.image} />),
     });
   },
 });

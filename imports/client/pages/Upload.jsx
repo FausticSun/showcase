@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Button, Form } from 'semantic-ui-react';
 import Images from '../../api/images.js';
@@ -12,18 +10,26 @@ class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      imageFile: null,
       imageURL: null,
       tags: [],
       hubName: '',
       title: '',
       description: '',
     };
+    if (props.image) {
+      this.setState({
+        imageFile: props.image,
+        imageIRL: window.URL.createObjectURL(),
+      });
+    }
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   imageUploadHandler = (e) => {
     this.setState({
+      imageFile: e.target.files[0],
       imageURL: window.URL.createObjectURL(e.target.files[0]),
     });
     this.setState({ tags: [] });
@@ -41,7 +47,7 @@ class Upload extends Component {
     newShowcase.tags = tags;
     newShowcase.hubName = hubName;
     Images.insert({
-      file: this.file.files[0],
+      file: this.state.imageFile,
       streams: 'dynamic',
       chunkSize: 'dynamic',
       onUploaded: (error, fileRef) => {
@@ -102,13 +108,11 @@ class Upload extends Component {
 }
 
 Upload.propTypes = {
-  currentUser: PropTypes.string,
+  image: PropTypes.object,
 };
 
 Upload.defaultProps = {
-  currentUser: null,
+  image: null,
 };
 
-export default createContainer(() => ({
-  currentUser: Meteor.userId(),
-}), Upload);
+export default Upload;

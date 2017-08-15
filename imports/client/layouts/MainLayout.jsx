@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import { Dimmer, Header, Icon } from 'semantic-ui-react';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import SiteHeader from '../components/header/SiteHeader.jsx';
 
 import '../../startup/client/accounts-config.js';
@@ -30,8 +31,11 @@ class MainLayout extends Component {
     this.setState({ dimmerActive: false });
   };
 
-  onDrop = () => {
+  onDrop = (files) => {
     this.setState({ dimmerActive: false });
+    const queryParams = { image: files[0] };
+    console.log(queryParams);
+    FlowRouter.go('/upload', null, queryParams);
   };
 
   render() {
