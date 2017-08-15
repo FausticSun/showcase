@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Card, Image } from 'semantic-ui-react';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import ShowcaseCardTagHolder from './ShowcaseCardTagHolder.jsx';
 import Likes from './Likes.jsx';
 import TagList from './TagList.jsx';
@@ -29,7 +30,7 @@ class ShowcaseCard extends Component {
       <div style={showcaseStyle}>
         <Card fluid>
           <Card.Content>
-            <Card.Header>
+            <Card.Header as="a" href={`/p/${showcaseData._id}`}>
               {showcaseData.title}
             </Card.Header>
             <Card.Meta>

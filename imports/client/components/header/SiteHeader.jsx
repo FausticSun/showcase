@@ -42,7 +42,7 @@ class SiteHeader extends Component {
       $menuView = (<Menu.Item name="login" href="/login" />);
     }
     return (
-      <Menu>
+      <Menu style={{ marginTop: '0' }}>
         <Menu.Item header className="showcase-logo" href="/"> Showcase </Menu.Item>
         <HubDropdown />
         <Menu.Menu position="right">

@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { MainLayout } from '../../client/layouts/MainLayout.jsx';
+import MainLayout from '../../client/layouts/MainLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
 import Hub from '../../client/pages/Hub.jsx';
 import Upload from '../../client/pages/Upload.jsx';
@@ -35,9 +35,10 @@ FlowRouter.route('/404', {
 
 FlowRouter.route('/upload', {
   triggersEnter: [isLoggedIn],
-  action() {
+  action(params, queryParams) {
+    console.log(queryParams);
     mount(MainLayout, {
-      content: (<Upload />),
+      content: (<Upload image={queryParams.image} />),
     });
   },
 });
