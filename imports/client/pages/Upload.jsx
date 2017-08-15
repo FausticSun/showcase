@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Label } from 'semantic-ui-react';
 import Images from '../../api/images.js';
 import { Showcase } from '../../api/showcases.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
-
+import Hubs from '../../api/hubs.js';
+const dropdownOptions = Hubs.map(hubObject => ({
+  key: hubObject.hubName,
+  text: hubObject.hubName,
+  value: hubObject.hubName,
+}));
 class Upload extends Component {
   constructor(props) {
     super(props);
@@ -92,10 +97,10 @@ class Upload extends Component {
                 value={description}
                 onChange={this.handleChange}
               />
-              <Form.Input
+              <Form.Select
                 name="hubName"
                 placeholder="Enter name of hub to submit to"
-                value={hubName}
+                options={dropdownOptions}
                 onChange={this.handleChange}
               />
               <Form.Button content="Submit post" />
