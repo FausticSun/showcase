@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Accounts } from 'meteor/accounts-base';
-import { Form } from 'semantic-ui-react';
+import { Header, Form, Message } from 'semantic-ui-react';
 
 const RegisterStyle = {
   display: 'flex',
@@ -12,7 +12,6 @@ const RegisterStyle = {
   alignItems: 'center',
   width: '100%',
 };
-
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +41,9 @@ class Register extends Component {
 
     return (
       <div style={RegisterStyle}>
+        <Header as="h2">
+          Register for an account
+        </Header>
         <Form size="large" onSubmit={this.registerUser}>
           <Form.Input name="name" value={name} label="Name" placeholder="Name" onChange={this.onChangeHandler} />
           <Form.Input name="userName" value={userName} label="Desired Username" placeholder="Username" onChange={this.onChangeHandler} />
