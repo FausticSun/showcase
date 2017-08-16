@@ -9,3 +9,7 @@
 #react-root {
     min-height: 100%;
 }
+
+.column {
+    margin: auto;
+}

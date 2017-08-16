@@ -24,22 +24,30 @@ class Register extends Component {
       password: '',
       userName: '',
       repeatPassword: '',
-      usernameError: 'false',
-      passwordError: 'false',
-      repeatError: 'false',
+      usernameError: false,
+      passwordError: false,
+      repeatError: false,
     };
   }
   onChangeHandler = (e, { name, value }) => {
-    this.setState({ [name]: value });
+    this.setState({
+      [name]: value,
+      usernameError: false,
+      passwordError: false,
+      repeatError: false,
+    });
   };
   trySubmit = () => {
     console.log(this.state);
     if (this.state.userName.length < 6) {
       console.log('cmi');
+      this.setState({ usernameError: true });
     } else if (this.state.password.length < 6) {
       console.log('tooshort');
+      this.setState({ passwordError: true });
     } else if (this.state.repeatPassword !== this.state.password) {
       console.log('not match');
+      this.setState({ repeatError: true });
     } else {
       this.registerUser();
     }
@@ -72,9 +80,7 @@ class Register extends Component {
               <Grid.Column width={centerWidth}>
                 <Form.Input name="name" value={name} placeholder="Name" onChange={this.onChangeHandler} />
               </Grid.Column>
-              <Grid.Column>
-                Ayy
-              </Grid.Column>
+              <Grid.Column />
             </Grid.Row>
             <Grid.Row>
               <Grid.Column style={{ margin: 'auto' }}>
@@ -83,8 +89,11 @@ class Register extends Component {
               <Grid.Column width={centerWidth}>
                 <Form.Input name="userName" value={userName} placeholder="Username" onChange={this.onChangeHandler} />
               </Grid.Column>
-              <Grid.Column>
-                Ayy
+              <Grid.Column style={{ margin: 'auto' }}>
+                { this.state.usernameError ?
+                  <Label basic color="red" pointing="left">Username must be at least six characters long!</Label>
+                  : ''
+                }
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -94,8 +103,11 @@ class Register extends Component {
               <Grid.Column width={centerWidth}>
                 <Form.Input name="password" value={password} type="password" placeholder="Password" onChange={this.onChangeHandler} />
               </Grid.Column>
-              <Grid.Column>
-                Ayy
+              <Grid.Column style={{ margin: 'auto' }}>
+                { this.state.passwordError ?
+                  <Label basic color="red" pointing="left">Password must be at least six characters long!</Label>
+                  : ''
+                }
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -105,8 +117,11 @@ class Register extends Component {
               <Grid.Column width={centerWidth}>
                 <Form.Input name="repeatPassword" value={repeatPassword} type="password" placeholder="Repeat Password" onChange={this.onChangeHandler} />
               </Grid.Column>
-              <Grid.Column>
-                Ayy
+              <Grid.Column style={{ margin: 'auto' }}>
+                { this.state.repeatError ?
+                  <Label basic color="red" pointing="left">Passwords do not match!</Label>
+                  : ''
+                }
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -114,9 +129,7 @@ class Register extends Component {
               <Grid.Column width={centerWidth} style={{ margin: 'auto' }}>
                 <Form.Button>Register</Form.Button>
               </Grid.Column>
-              <Grid.Column>
-                Ayy
-              </Grid.Column>
+              <Grid.Column style={{ margin: 'auto' }} />
             </Grid.Row>
           </Grid>
         </Form>
