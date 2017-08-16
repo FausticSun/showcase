@@ -4,14 +4,18 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Accounts } from 'meteor/accounts-base';
-import { Header, Form, Message } from 'semantic-ui-react';
+import { Grid, Label, Header, Form, Message } from 'semantic-ui-react';
 
 const RegisterStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '100%',
+  width: '65%',
+  margin: 'auto',
 };
+const leftWidth = 4;
+const centerWidth = 8;
+const rightWidth = 2;
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -20,10 +24,25 @@ class Register extends Component {
       password: '',
       userName: '',
       repeatPassword: '',
+      usernameError: 'false',
+      passwordError: 'false',
+      repeatError: 'false',
     };
   }
   onChangeHandler = (e, { name, value }) => {
     this.setState({ [name]: value });
+  };
+  trySubmit = () => {
+    console.log(this.state);
+    if (this.state.userName.length < 6) {
+      console.log('cmi');
+    } else if (this.state.password.length < 6) {
+      console.log('tooshort');
+    } else if (this.state.repeatPassword !== this.state.password) {
+      console.log('not match');
+    } else {
+      this.registerUser();
+    }
   };
   registerUser = () => {
     Accounts.createUser({
@@ -44,12 +63,62 @@ class Register extends Component {
         <Header as="h2">
           Register for an account
         </Header>
-        <Form size="large" onSubmit={this.registerUser}>
-          <Form.Input name="name" value={name} label="Name" placeholder="Name" onChange={this.onChangeHandler} />
-          <Form.Input name="userName" value={userName} label="Desired Username" placeholder="Username" onChange={this.onChangeHandler} />
-          <Form.Input name="password" value={password} label="Password" type="password" placeholder="Password" onChange={this.onChangeHandler} />
-          <Form.Input name="repeatPassword" value={repeatPassword} label="Repeat Password" type="password" placeholder="Repeat Password" onChange={this.onChangeHandler} />
-          <Form.Button>Register</Form.Button>
+        <Form onSubmit={this.trySubmit}>
+          <Grid columns="equal">
+            <Grid.Row>
+              <Grid.Column style={{ margin: 'auto' }}>
+                <Header as="h4">Name</Header>
+              </Grid.Column>
+              <Grid.Column width={centerWidth}>
+                <Form.Input name="name" value={name} placeholder="Name" onChange={this.onChangeHandler} />
+              </Grid.Column>
+              <Grid.Column>
+                Ayy
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column style={{ margin: 'auto' }}>
+                <Header as="h4">Desired Username</Header>
+              </Grid.Column>
+              <Grid.Column width={centerWidth}>
+                <Form.Input name="userName" value={userName} placeholder="Username" onChange={this.onChangeHandler} />
+              </Grid.Column>
+              <Grid.Column>
+                Ayy
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={leftWidth} style={{ margin: 'auto' }}>
+                <Header as="h4">Password</Header>
+              </Grid.Column>
+              <Grid.Column width={centerWidth}>
+                <Form.Input name="password" value={password} type="password" placeholder="Password" onChange={this.onChangeHandler} />
+              </Grid.Column>
+              <Grid.Column>
+                Ayy
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={leftWidth} style={{ margin: 'auto' }}>
+                <Header as="h4">Repeat password</Header>
+              </Grid.Column>
+              <Grid.Column width={centerWidth}>
+                <Form.Input name="repeatPassword" value={repeatPassword} type="password" placeholder="Repeat Password" onChange={this.onChangeHandler} />
+              </Grid.Column>
+              <Grid.Column>
+                Ayy
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={leftWidth} style={{ margin: 'auto' }} />
+              <Grid.Column width={centerWidth} style={{ margin: 'auto' }}>
+                <Form.Button>Register</Form.Button>
+              </Grid.Column>
+              <Grid.Column>
+                Ayy
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Form>
       </div>
     );
