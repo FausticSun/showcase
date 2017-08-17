@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Accounts } from 'meteor/accounts-base';
-import { Grid, Label, Header, Form, Message } from 'semantic-ui-react';
+import { Grid, Label, Header, Form } from 'semantic-ui-react';
 
 const RegisterStyle = {
   display: 'flex',
@@ -13,8 +13,8 @@ const RegisterStyle = {
   width: '65%',
   margin: 'auto',
 };
-const leftWidth = 4;
-const centerWidth = 8;
+export const leftWidth = 4;
+export const centerWidth = 8;
 const rightWidth = 2;
 class Register extends Component {
   constructor(props) {
@@ -40,13 +40,10 @@ class Register extends Component {
   trySubmit = () => {
     console.log(this.state);
     if (this.state.userName.length < 6) {
-      console.log('cmi');
       this.setState({ usernameError: true });
     } else if (this.state.password.length < 6) {
-      console.log('tooshort');
       this.setState({ passwordError: true });
     } else if (this.state.repeatPassword !== this.state.password) {
-      console.log('not match');
       this.setState({ repeatError: true });
     } else {
       this.registerUser();
