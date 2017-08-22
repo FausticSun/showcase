@@ -38,8 +38,7 @@ class Register extends Component {
     });
   };
   trySubmit = () => {
-    console.log(this.state);
-    if (this.state.userDisplayname.length < 6) {
+    if (this.state.userName.length < 6) {
       this.setState({ usernameError: true });
     } else if (this.state.password.length < 6) {
       this.setState({ passwordError: true });
@@ -54,8 +53,9 @@ class Register extends Component {
       profile: {
         name: this.state.name,
         profilePic: 'https://qph.ec.quoracdn.net/main-qimg-3b0b70b336bbae35853994ce0aa25013-c',
+        subscriptions: [],
       },
-      username: this.state.userDisplayname,
+      username: this.state.userName,
       password: this.state.password,
     });
     FlowRouter.go('/');
