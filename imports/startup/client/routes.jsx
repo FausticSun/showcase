@@ -4,6 +4,7 @@ import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import MainLayout from '../../client/layouts/MainLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
+import All from '../../client/pages/All.jsx';
 import Hub from '../../client/pages/Hub.jsx';
 import User from '../../client/pages/User.jsx';
 import Upload from '../../client/pages/Upload.jsx';
@@ -40,6 +41,14 @@ FlowRouter.route('/error', {
   action() {
     mount(MainLayout, {
       content: (<ErrorPage />),
+    });
+  },
+});
+
+FlowRouter.route('/all', {
+  action() {
+    mount(MainLayout, {
+      content: (<All />),
     });
   },
 });

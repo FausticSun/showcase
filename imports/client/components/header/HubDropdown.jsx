@@ -3,7 +3,7 @@ import { Dropdown, Image } from 'semantic-ui-react';
 import Hubs from '../../../api/hubs.js';
 
 const allOption = (
-  <Dropdown.Item as="a" href={'/'}>
+  <Dropdown.Item as="a" href={'/all'}>
     <Image src='/assets/img/earth-globe.png' inline size='mini' />
     All
   </Dropdown.Item>);
