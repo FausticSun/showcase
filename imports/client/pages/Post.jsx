@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Showcase } from '../../api/showcases.js';
 import ShowcaseCard from '../components/showcase/ShowcaseCard.jsx';
-import DisqusThread from "../components/DisqusThread";
+import DisqusThread from '../components/DisqusThread.jsx';
 
 class Post extends Component {
   constructor(props) {
