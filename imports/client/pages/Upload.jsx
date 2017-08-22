@@ -126,11 +126,12 @@ class Upload extends Component {
 
 Upload.propTypes = {
   image: PropTypes.instanceOf(File),
-  clearImage: PropTypes.func.isRequired,
+  clearImage: PropTypes.func,
 };
 
 Upload.defaultProps = {
   image: null,
+  clearImage: null,
 };
 
 export default Upload;
