@@ -53,6 +53,7 @@ class Register extends Component {
       profile: {
         name: this.state.name,
         profilePic: 'https://qph.ec.quoracdn.net/main-qimg-3b0b70b336bbae35853994ce0aa25013-c',
+        subscriptions: [],
       },
       username: this.state.userName,
       password: this.state.password,

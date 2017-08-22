@@ -44,7 +44,11 @@ export const Showcase = Class.create({
     userId: {
       type: String,
     },
-    userName: {
+    userDisplayname: {
+      type: String,
+      transient: true,
+    },
+    userUsername: {
       type: String,
       transient: true,
     },
@@ -62,9 +66,11 @@ export const Showcase = Class.create({
       const doc = e.currentTarget;
       const user = Meteor.users.findOne(doc.userId);
       if (user) {
-        doc.userName = user.profile.name;
+        doc.userDisplayname = user.profile.name;
+        doc.userUsername = user.username;
       } else {
-        doc.userName = '[DELETED]';
+        doc.userDisplayname = '[DELETED]';
+        doc.userUsername = '404';
       }
     },
   },

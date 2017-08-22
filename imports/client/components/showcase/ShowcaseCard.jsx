@@ -58,8 +58,8 @@ class ShowcaseCard extends Component {
               {showcaseData.title}
             </Card.Header>
             <Card.Meta>
-              by {showcaseData.userName}{' '}
-              to {showcaseData.hubName}{' '}
+              by <a href={`/${showcaseData.userUsername}`}>{showcaseData.userDisplayname}</a>
+              to <a href={`/hub/${showcaseData.hubName}`}>{showcaseData.hubName}{' '}</a>
               on {showcaseData.createdAt.toDateString()}
             </Card.Meta>
           </Card.Content>
