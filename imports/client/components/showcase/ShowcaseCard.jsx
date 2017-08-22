@@ -33,21 +33,22 @@ class ShowcaseCard extends Component {
   confirmDelete = () => {
     this.setState({ cancelButtonOpen: false });
     this.deletePost();
-  }
+  };
   cancelDelete = () => this.setState({ cancelButtonOpen: false });
   render() {
     const showcaseData = this.props.showcase;
     return (
       <div style={showcaseStyle}>
         <Card fluid>
-          <Image
-            label={{ as: 'a', corner: 'right', icon: 'delete' }}
-            onClick={this.showDelete}
-          />
+          { showcaseData.userId === Meteor.userId() ?
+            <Image
+              label={{ as: 'a', corner: 'right', icon: 'delete' }}
+              onClick={this.showDelete}
+            /> : '' }
           <Confirm
             open={this.state.cancelButtonOpen}
-            content='Are you sure you want to delete your post?'
-            cancelButton='Never mind'
+            content="Are you sure you want to delete your post?"
+            cancelButton="Never mind"
             confirmButton="Let's do it"
             onCancel={this.cancelDelete}
             onConfirm={this.confirmDelete}
