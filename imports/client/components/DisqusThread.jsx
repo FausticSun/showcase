@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SHORTNAME = 'showcaseyou';
-const WEBSITE_URL = 'https://showcaseyou.heroku.com';
+const WEBSITE_URL = 'showcaseyou.heroku.com';
 
 function renderDisqus() {
   if (window.DISQUS === undefined) {
