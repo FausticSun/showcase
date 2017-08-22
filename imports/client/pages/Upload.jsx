@@ -63,7 +63,7 @@ class Upload extends Component {
       file: this.state.imageFile,
       streams: 'dynamic',
       chunkSize: 'dynamic',
-      onUploaded: (error, fileRef) => {
+      onUploaded: (err, fileRef) => {
         newShowcase.imageSrc = Images.link(fileRef);
         newShowcase.insert((error) => {
           if (error) {
@@ -77,7 +77,7 @@ class Upload extends Component {
   };
 
   render() {
-    const { title, description, hubName } = this.state;
+    const { title, description } = this.state;
 
     return (
       <div>
