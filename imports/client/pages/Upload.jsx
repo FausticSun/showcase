@@ -5,7 +5,13 @@ import { Button, Form } from 'semantic-ui-react';
 import Images from '../../api/images.js';
 import { Showcase } from '../../api/showcases.js';
 import ImageTagger from '../components/imageTagging/ImageTagger.jsx';
+import Hubs from '../../api/hubs.js';
 
+const dropdownOptions = Hubs.map(hubObject => ({
+  key: hubObject.hubName,
+  text: hubObject.hubName,
+  value: hubObject.hubName,
+}));
 class Upload extends Component {
   constructor(props) {
     super(props);
@@ -59,8 +65,12 @@ class Upload extends Component {
       chunkSize: 'dynamic',
       onUploaded: (error, fileRef) => {
         newShowcase.imageSrc = Images.link(fileRef);
-        newShowcase.insert(() => {
-          FlowRouter.go('/');
+        newShowcase.insert((error) => {
+          if (error) {
+            FlowRouter.go('/error');
+          } else {
+            FlowRouter.go('/');
+          }
         });
       },
     });
@@ -99,10 +109,10 @@ class Upload extends Component {
                 value={description}
                 onChange={this.handleChange}
               />
-              <Form.Input
+              <Form.Select
                 name="hubName"
                 placeholder="Enter name of hub to submit to"
-                value={hubName}
+                options={dropdownOptions}
                 onChange={this.handleChange}
               />
               <Form.Button content="Submit post" />

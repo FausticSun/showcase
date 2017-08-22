@@ -20,10 +20,22 @@ export const Showcase = Class.create({
   name: 'ShowcaseCard',
   collection: Showcases,
   fields: {
-    title: String,
+    title: {
+      type: String,
+      validators: [{
+        type: 'minLength',
+        param: 1,
+      }],
+    },
     description: String,
     tags: [Tag],
-    hubName: String,
+    hubName: {
+      type: String,
+      validators: [{
+        type: 'minLength',
+        param: 3,
+      }],
+    },
     imageSrc: String,
     likes: {
       type: [String],

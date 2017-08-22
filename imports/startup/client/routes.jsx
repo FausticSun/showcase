@@ -3,6 +3,7 @@ import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import MainLayout from '../../client/layouts/MainLayout.jsx';
+import HubLayout from '../../client/layouts/HubLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
 import Hub from '../../client/pages/Hub.jsx';
 import User from '../../client/pages/User.jsx';
@@ -11,6 +12,7 @@ import Post from '../../client/pages/Post.jsx';
 import Settings from '../../client/pages/Settings.jsx';
 import FourOhFour from '../../client/pages/FourOhFour.jsx';
 import LoginAndRegister from '../../client/pages/LoginAndRegister.jsx';
+import ErrorPage from '../../client/pages/ErrorPage.jsx';
 import '../../api/users.js';
 
 const isLoggedIn = () => {
@@ -31,6 +33,14 @@ FlowRouter.route('/404', {
   action() {
     mount(MainLayout, {
       content: (<FourOhFour />),
+    });
+  },
+});
+
+FlowRouter.route('/error', {
+  action() {
+    mount(MainLayout, {
+      content: (<ErrorPage />),
     });
   },
 });
@@ -63,7 +73,7 @@ FlowRouter.route('/p/:postId', {
 FlowRouter.route('/hub/:hubName', {
   action(params) {
     mount(MainLayout, {
-      content: (<Hub hubName={params.hubName} />),
+      content: (<HubLayout hubName={params.hubName} />),
     });
   },
 });

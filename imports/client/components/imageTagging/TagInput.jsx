@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Segment, Form, Button, Icon } from 'semantic-ui-react';
 import { Tag } from '../../../api/showcases.js';
+import { initialTagStyle } from '../showcase/ShowcaseCardTag.jsx';
 
 const initialTagInputStyle = {
   position: 'absolute',
-  width: '200px',
 };
+const inputFormStyle = {
+  width: '200px',
+  marginTop: '35px',
+};
+
 
 const cancelButtonStyle = {
   position: 'absolute',
@@ -51,16 +56,21 @@ class TagInput extends Component {
     const { itemName, itemURL } = this.state;
 
     return (
-      <Segment style={finalTagInputStyle}>
-        <Button icon circular size="mini" style={cancelButtonStyle} onClick={this.cancelTagInput}>
-          <Icon name="x" />
-        </Button>
-        <Form size="mini" onSubmit={this.onSubmitHandler}>
-          <Form.Input name="itemName" value={itemName} placeholder="Item Name" onChange={this.onChangeHandler} />
-          <Form.Input name="itemURL" value={itemURL} placeholder="URL" onChange={this.onChangeHandler} />
-          <Form.Button style={{ display: 'none' }}>Submit</Form.Button>
-        </Form>
-      </Segment>
+      <div style={finalTagInputStyle}>
+        <div style={initialTagStyle}>
+          <span>{this.props.numTags+1}</span>
+        </div>
+        <Segment style={inputFormStyle}>
+          <Button icon circular size="mini" style={cancelButtonStyle} onClick={this.cancelTagInput}>
+            <Icon name="x" />
+          </Button>
+          <Form size="mini" onSubmit={this.onSubmitHandler}>
+            <Form.Input name="itemName" value={itemName} placeholder="Item Name" onChange={this.onChangeHandler} />
+            <Form.Input name="itemURL" value={itemURL} placeholder="URL" onChange={this.onChangeHandler} />
+            <Form.Button style={{ display: 'none' }}>Submit</Form.Button>
+          </Form>
+        </Segment>
+      </div>
     );
   }
 }
@@ -72,6 +82,7 @@ TagInput.propTypes = {
   }).isRequired,
   newTagHandler: PropTypes.func.isRequired,
   cancelTagInput: PropTypes.func.isRequired,
+  numTags: PropTypes.number.isRequired,
 };
 
 export default TagInput;
