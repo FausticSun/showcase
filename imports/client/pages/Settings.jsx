@@ -88,7 +88,6 @@ class Settings extends Component {
             </Button>
             <Form size="large" onSubmit={this.updateUserSettings} >
               <Form.Input name="name" value={name} label="Edit Name" placeholder={currentUser.profile.name} onChange={this.onChangeHandler} />
-              <Form.Input name="userName" value={userName} label="Edit Username" placeholder={currentUser.username} onChange={this.onChangeHandler} />
               <Form.Input name="oldPassword" value={password} label="Old Password" type="password" placeholder="Old Password" onChange={this.onChangeHandler} />
               <Form.Input name="password" value={password} label="Password" type="password" placeholder="Password" onChange={this.onChangeHandler} />
               <Form.Input name="repeatPassword" value={repeatPassword} label="Repeat Password" type="password" placeholder="Repeat Password" onChange={this.onChangeHandler} />

@@ -38,7 +38,6 @@ class Register extends Component {
     });
   };
   trySubmit = () => {
-    console.log(this.state);
     if (this.state.userName.length < 6) {
       this.setState({ usernameError: true });
     } else if (this.state.password.length < 6) {
