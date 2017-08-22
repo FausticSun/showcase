@@ -16,19 +16,26 @@ class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imageFile: null,
-      imageURL: null,
+      imageFile: props.image,
+      imageURL: props.image ? window.URL.createObjectURL(props.image) : null,
       tags: [],
       hubName: '',
       title: '',
       description: '',
     };
-    if (props.image) {
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.image) {
       this.setState({
-        imageFile: props.image,
-        imageIRL: window.URL.createObjectURL(),
+        imageFile: nextProps.image,
+        imageURL: window.URL.createObjectURL(nextProps.image),
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearImage();
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
@@ -118,7 +125,8 @@ class Upload extends Component {
 }
 
 Upload.propTypes = {
-  image: PropTypes.object,
+  image: PropTypes.instanceOf(File),
+  clearImage: PropTypes.func.isRequired,
 };
 
 Upload.defaultProps = {

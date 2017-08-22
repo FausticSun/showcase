@@ -5,12 +5,15 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import MainLayout from '../../client/layouts/MainLayout.jsx';
 import HubLayout from '../../client/layouts/HubLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
+import Hub from '../../client/pages/Hub.jsx';
+import User from '../../client/pages/User.jsx';
 import Upload from '../../client/pages/Upload.jsx';
 import Post from '../../client/pages/Post.jsx';
 import Settings from '../../client/pages/Settings.jsx';
 import FourOhFour from '../../client/pages/FourOhFour.jsx';
 import LoginAndRegister from '../../client/pages/LoginAndRegister.jsx';
 import ErrorPage from '../../client/pages/ErrorPage.jsx';
+import '../../api/users.js';
 
 const isLoggedIn = () => {
   if (!(Meteor.loggingIn() || Meteor.userId())) {
@@ -44,10 +47,9 @@ FlowRouter.route('/error', {
 
 FlowRouter.route('/upload', {
   triggersEnter: [isLoggedIn],
-  action(params, queryParams) {
-    console.log(queryParams);
+  action() {
     mount(MainLayout, {
-      content: (<Upload image={queryParams.image} />),
+      content: (<Upload />),
     });
   },
 });
@@ -85,10 +87,10 @@ FlowRouter.route('/settings', {
   },
 });
 
-FlowRouter.route('/:profileName', {
+FlowRouter.route('/:username', {
   action(params) {
     mount(MainLayout, {
-      content: (<Profile profileName={params.profileName} />),
+      content: (<User username={params.username} />),
     });
   },
 });

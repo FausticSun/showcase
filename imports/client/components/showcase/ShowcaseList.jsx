@@ -52,13 +52,24 @@ ShowcaseList.defaultProps = {
   images: null,
 };
 
-export default createContainer(({ hubName }) => {
+export default createContainer(({ hubName, username }) => {
   const showcasesSub = Meteor.subscribe('showcases.allPost');
   const imageSub = Meteor.subscribe('files.images.allPost');
+  const userSub = Meteor.subscribe('allUserData');
+  let showcases;
+  if (hubName) {
+    showcases = Showcase.find({ hubName }, { sort: { createdAt: -1 } }).fetch();
+  } else if (username) {
+    const user = Meteor.users.findOne({ username: username.trim() });
+    const userId = user ? user._id : 'null';
+    showcases = Showcase.find(
+      { userId }, { sort: { createdAt: -1 } },
+    ).fetch();
+  } else {
+    showcases = Showcase.find({}, { sort: { createdAt: -1 } }).fetch();
+  }
   return {
-    loading: !showcasesSub.ready() && !imageSub.ready(),
-    showcases: hubName ?
-      Showcase.find({ hubName }, { sort: { createdAt: -1 } }).fetch() :
-      Showcase.find({}, { sort: { createdAt: -1 } }).fetch(),
+    loading: !showcasesSub.ready() && !imageSub.ready() && !userSub.ready(),
+    showcases,
   };
 }, ShowcaseList);
