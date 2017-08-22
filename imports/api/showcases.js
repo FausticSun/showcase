@@ -114,7 +114,7 @@ Meteor.methods({
   },
 
   'showcases.remove'(showcaseId) {
-    check(taskId, String);
+    check(showcaseId, String);
     Showcases.remove(showcaseId);
   },
 
