@@ -3,8 +3,8 @@ import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import MainLayout from '../../client/layouts/MainLayout.jsx';
+import HubLayout from '../../client/layouts/HubLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
-import Hub from '../../client/pages/Hub.jsx';
 import Upload from '../../client/pages/Upload.jsx';
 import Post from '../../client/pages/Post.jsx';
 import Settings from '../../client/pages/Settings.jsx';
@@ -71,7 +71,7 @@ FlowRouter.route('/p/:postId', {
 FlowRouter.route('/hub/:hubName', {
   action(params) {
     mount(MainLayout, {
-      content: (<Hub hubName={params.hubName} />),
+      content: (<HubLayout hubName={params.hubName} />),
     });
   },
 });

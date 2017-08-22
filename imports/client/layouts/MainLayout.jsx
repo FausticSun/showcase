@@ -10,9 +10,7 @@ import '../../startup/client/accounts-config.js';
 const centeredContent = {
   width: '100%',
   height: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+
 };
 
 class MainLayout extends Component {
