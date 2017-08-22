@@ -119,9 +119,9 @@ Meteor.methods({
     });
   },
 
-  'showcases.remove'(taskId) {
-    check(taskId, String);
-    Showcases.remove(taskId);
+  'showcases.remove'(showcaseId) {
+    check(showcaseId, String);
+    Showcases.remove(showcaseId);
   },
 
   'showcases.likePost'(showcaseId) {

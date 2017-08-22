@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
-import { Header, Icon, Form, Image, Button } from 'semantic-ui-react';
+import { Dimmer, Loader, Header, Icon, Form, Image, Button } from 'semantic-ui-react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 const profilePicDisplayStyle = {
@@ -88,14 +88,17 @@ class Settings extends Component {
             </Button>
             <Form size="large" onSubmit={this.updateUserSettings} >
               <Form.Input name="name" value={name} label="Edit Name" placeholder={currentUser.profile.name} onChange={this.onChangeHandler} />
-              <Form.Input name="userName" value={userName} label="Edit Username" placeholder={currentUser.username} onChange={this.onChangeHandler} />
               <Form.Input name="oldPassword" value={password} label="Old Password" type="password" placeholder="Old Password" onChange={this.onChangeHandler} />
               <Form.Input name="password" value={password} label="Password" type="password" placeholder="Password" onChange={this.onChangeHandler} />
               <Form.Input name="repeatPassword" value={repeatPassword} label="Repeat Password" type="password" placeholder="Repeat Password" onChange={this.onChangeHandler} />
               <Form.Button>Update Settings</Form.Button>
             </Form>
           </div>
-        : <div>LOADING GIF</div> }
+        :
+          <Dimmer active>
+            <Loader />
+          </Dimmer>
+        }
       </article>
     );
   }

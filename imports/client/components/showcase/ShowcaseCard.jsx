@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Card, Image } from 'semantic-ui-react';
+import { Confirm, Card, Image } from 'semantic-ui-react';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import ShowcaseCardTagHolder from './ShowcaseCardTagHolder.jsx';
 import Likes from './Likes.jsx';
 import TagList from './TagList.jsx';
@@ -16,6 +17,7 @@ class ShowcaseCard extends Component {
     super(props);
     this.state = {
       likeArray: this.props.showcase.likes,
+      cancelButtonOpen: false,
     };
     this.isLiked = (this.state.likeArray.indexOf(Meteor.userId()) === -1);
   }
@@ -23,12 +25,34 @@ class ShowcaseCard extends Component {
     this.props.showcase.toggleLike();
     this.isLiked = !this.isLiked;
   };
-
+  deletePost = () => {
+    Meteor.call('showcases.remove', this.props.showcase._id);
+    this.setState({ cancelButtonOpen: false });
+  };
+  showDelete = () => this.setState({ cancelButtonOpen: true });
+  confirmDelete = () => {
+    this.setState({ cancelButtonOpen: false });
+    this.deletePost();
+  };
+  cancelDelete = () => this.setState({ cancelButtonOpen: false });
   render() {
     const showcaseData = this.props.showcase;
     return (
       <div style={showcaseStyle}>
         <Card fluid>
+          { showcaseData.userId === Meteor.userId() ?
+            <Image
+              label={{ as: 'a', corner: 'right', icon: 'delete' }}
+              onClick={this.showDelete}
+            /> : '' }
+          <Confirm
+            open={this.state.cancelButtonOpen}
+            content="Are you sure you want to delete your post?"
+            cancelButton="Never mind"
+            confirmButton="Let's do it"
+            onCancel={this.cancelDelete}
+            onConfirm={this.confirmDelete}
+          />
           <Card.Content>
             <Card.Header as="a" href={`/p/${showcaseData._id}`}>
               {showcaseData.title}

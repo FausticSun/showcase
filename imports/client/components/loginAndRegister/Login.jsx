@@ -5,6 +5,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Grid, Label, Header, Form } from 'semantic-ui-react';
 import { leftWidth, centerWidth } from './Register.jsx';
+
 const LoginStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -19,14 +20,35 @@ class Login extends Component {
     this.state = {
       userName: '',
       password: '',
+      loginError403: false,
+      errorMessage: '',
     };
   }
   onChangeHandler = (e, { name, value }) => {
     this.setState({ [name]: value });
+    this.setState({ loginError403: false });
+  };
+  loginHandler = (error) => {
+    if (!error) {
+      FlowRouter.go('/');
+    } else if (error.error === 403) {
+      this.setState({
+        loginError403: true,
+        errorMessage: error.reason,
+      });
+    }
   };
   loginUser = () => {
-    Meteor.loginWithPassword(this.state.userName, this.state.password);
-    FlowRouter.go('/');
+    Meteor.loginWithPassword(this.state.userName, this.state.password, this.loginHandler);
+  };
+  trySubmit = () => {
+    if (this.state.userName.length < 6) {
+      this.setState({ usernameError: true });
+    } else if (this.state.password.length < 6) {
+      this.setState({ passwordError: true });
+    } else {
+      this.loginUser();
+    }
   };
   render() {
     const { password, userName } = this.state;
@@ -35,14 +57,14 @@ class Login extends Component {
         <Header as="h2">
           Log in to your account
         </Header>
-        <Form onSubmit={this.loginUser}>
+        <Form onSubmit={this.trySubmit}>
           <Grid columns="equal">
             <Grid.Row>
               <Grid.Column style={{ margin: 'auto' }}>
                 <Header as="h4">Username</Header>
               </Grid.Column>
               <Grid.Column width={centerWidth}>
-                <Form.Input name="userName" value={userName} placeholder="Username" onChange={this.onChangeHandler}  />
+                <Form.Input name="userName" value={userName} placeholder="Username" onChange={this.onChangeHandler} />
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }}>
                 { this.state.usernameError ?
@@ -60,7 +82,7 @@ class Login extends Component {
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }}>
                 { this.state.passwordError ?
-                  <Label basic color="red" pointing="left">Password must be at least six characters long!</Label>
+                  <Label basic color="red" pointing="left">Enter a password!</Label>
                   : ''
                 }
               </Grid.Column>
@@ -70,7 +92,12 @@ class Login extends Component {
               <Grid.Column width={centerWidth} style={{ margin: 'auto' }}>
                 <Form.Button>Log In</Form.Button>
               </Grid.Column>
-              <Grid.Column style={{ margin: 'auto' }} />
+              <Grid.Column style={{ margin: 'auto' }}>
+                { this.state.loginError403 ?
+                  <Label basic color="red" pointing="left">{this.state.errorMessage}</Label>
+                  : ''
+                }
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </Form>
