@@ -9,7 +9,9 @@ const LoginStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '100%',
+  width: '65%',
+  margin: 'auto',
+  
 };
 
 class Login extends Component {
