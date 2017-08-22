@@ -20,6 +20,7 @@ class MainLayout extends Component {
     super(props);
     this.state = {
       dimmerActive: false,
+      image: null,
     };
   }
 
@@ -32,10 +33,15 @@ class MainLayout extends Component {
   };
 
   onDrop = (files) => {
-    this.setState({ dimmerActive: false });
-    const queryParams = { image: files[0] };
-    console.log(queryParams);
-    FlowRouter.go('/upload', null, queryParams);
+    this.setState({
+      dimmerActive: false,
+      image: files[0],
+    });
+    FlowRouter.go('/upload');
+  };
+
+  clearImageHandler = () => {
+    this.setState({ image: null });
   };
 
   render() {
@@ -57,7 +63,11 @@ class MainLayout extends Component {
         </Dimmer>
         <SiteHeader />
         <div style={centeredContent}>
-          {this.props.content}
+          {React.cloneElement(this.props.content,
+            { image: this.state.image,
+              clearImage: this.clearImageHandler,
+            })
+          }
         </div>
       </Dimmer.Dimmable>
     );
