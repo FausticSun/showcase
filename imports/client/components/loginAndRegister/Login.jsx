@@ -26,7 +26,11 @@ class Login extends Component {
   }
   onChangeHandler = (e, { name, value }) => {
     this.setState({ [name]: value });
-    this.setState({ loginError403: false });
+    this.setState({
+      loginError403: false,
+      usernameError: false,
+      passwordError: false,
+    });
   };
   loginHandler = (error) => {
     if (!error) {
@@ -82,7 +86,7 @@ class Login extends Component {
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }}>
                 { this.state.passwordError ?
-                  <Label basic color="red" pointing="left">Enter a password!</Label>
+                  <Label basic color="red" pointing="left">Password should be 6 characters long!</Label>
                   : ''
                 }
               </Grid.Column>
@@ -94,7 +98,7 @@ class Login extends Component {
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }}>
                 { this.state.loginError403 ?
-                  <Label basic color="red" pointing="left">{this.state.errorMessage}</Label>
+                  <Label basic color="red" pointing="left">Login failed!</Label>
                   : ''
                 }
               </Grid.Column>

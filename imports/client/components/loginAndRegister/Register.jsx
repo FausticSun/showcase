@@ -52,7 +52,7 @@ class Register extends Component {
     Accounts.createUser({
       profile: {
         name: this.state.name,
-        profilePic: 'https://qph.ec.quoracdn.net/main-qimg-3b0b70b336bbae35853994ce0aa25013-c',
+          profilePic: '/assets/img/default_profile_pic.jpg',
         subscriptions: [],
       },
       username: this.state.userName,

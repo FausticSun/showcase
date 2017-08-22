@@ -20,7 +20,7 @@ class User extends Component {
             <Image shape="circular" src={this.props.user.profile.profilePic} />
             {` @${this.props.user.username}`}
             <Header.Subheader>
-              Showcases uploaded by {this.props.user.profile.name}
+              Showcases uploaded by {this.props.user._id === Meteor.userId() ? 'you' : this.props.user.profile.name}
             </Header.Subheader>
           </Header>
           :
