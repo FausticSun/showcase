@@ -3,7 +3,7 @@ import { check } from 'meteor/check';
 
 const Images = new FilesCollection({
   collectionName: 'Images',
-  storagePath: 'data/Meteor/uploads',
+  storagePath: '/data/Meteor/uploads',
 });
 
 if (Meteor.isServer) {
