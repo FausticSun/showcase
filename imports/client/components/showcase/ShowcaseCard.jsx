@@ -24,12 +24,18 @@ class ShowcaseCard extends Component {
     this.props.showcase.toggleLike();
     this.isLiked = !this.isLiked;
   };
-
+  deletePost = () => {
+    console.log('lel');
+  };
   render() {
     const showcaseData = this.props.showcase;
     return (
       <div style={showcaseStyle}>
         <Card fluid>
+          <Image
+            label={{ as: 'a', corner: 'right', icon: 'delete' }}
+            onClick={this.deletePost}
+          />
           <Card.Content>
             <Card.Header as="a" href={`/p/${showcaseData._id}`}>
               {showcaseData.title}

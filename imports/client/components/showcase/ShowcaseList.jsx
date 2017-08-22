@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Header, Icon } from 'semantic-ui-react';
+import { Dimmer, Loader, Header, Icon } from 'semantic-ui-react';
 import { Showcase } from '../../../api/showcases.js';
 import ShowcaseCard from './ShowcaseCard.jsx';
 
@@ -35,7 +35,12 @@ class ShowcaseList extends Component {
   render() {
     return (
       <div style={showcaseListStyle}>
-        { this.props.loading ? null : this.renderShowcaseCards()}
+        { this.props.loading ?
+          <Dimmer active>
+            <Loader />
+          </Dimmer>
+          :
+          this.renderShowcaseCards()}
       </div>
     );
   }

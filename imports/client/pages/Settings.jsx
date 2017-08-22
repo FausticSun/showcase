@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import React, { Component, PropTypes } from 'react';
-import { Header, Icon, Form, Image, Button } from 'semantic-ui-react';
+import { Dimmer, Loader, Header, Icon, Form, Image, Button } from 'semantic-ui-react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 const profilePicDisplayStyle = {
@@ -95,7 +95,11 @@ class Settings extends Component {
               <Form.Button>Update Settings</Form.Button>
             </Form>
           </div>
-        : <div>LOADING GIF</div> }
+        :
+          <Dimmer active>
+            <Loader />
+          </Dimmer>
+        }
       </article>
     );
   }
