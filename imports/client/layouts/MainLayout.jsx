@@ -10,7 +10,9 @@ import '../../startup/client/accounts-config.js';
 const centeredContent = {
   width: '100%',
   height: '100%',
-
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 class MainLayout extends Component {
@@ -48,7 +50,7 @@ class MainLayout extends Component {
         as={Dropzone}
         accept="image/*"
         disableClick
-        style={{ height: '100%' }}
+        style={{ minHeight: '100vh' }}
         onDragEnter={this.onDragEnter}
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
