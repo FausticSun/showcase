@@ -3,6 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Showcase } from '../../api/showcases.js';
 import ShowcaseCard from '../components/showcase/ShowcaseCard.jsx';
+import DisqusThread from "../components/DisqusThread";
 
 class Post extends Component {
   constructor(props) {
@@ -22,6 +23,11 @@ class Post extends Component {
     return (
       <div>
         <ShowcaseCard showcase={this.props.showcase} />
+        <DisqusThread
+          id={FlowRouter.current().path}
+          title={this.props.showcase.title}
+          path={FlowRouter.current().path}
+        />
       </div>
     );
   }
