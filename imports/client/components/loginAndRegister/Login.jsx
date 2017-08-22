@@ -26,7 +26,7 @@ class Login extends Component {
     this.setState({ [name]: value });
   };
   loginUser = () => {
-    Meteor.loginWithPassword(this.state.userName, this.state.password);
+    Meteor.loginWithPassword(this.state.userDisplayname, this.state.password);
     FlowRouter.go('/');
   };
   render() {
