@@ -1,1 +1,15 @@
-/* CSS declarations go here */
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:500');
+
+.showcase-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: large;
+}
+
+#react-root {
+    min-height: 100%;
+}
+
+.column {
+    margin: auto;
+}

@@ -2,10 +2,80 @@
   "name": "showcase",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "lint": "eslint .",
+    "pretest": "meteor npm run lint --silent",
+    "test": "meteor test --once --driver-package dispatch:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
-    "meteor-node-stubs": "~0.2.4"
+    "bcrypt": "^1.0.2",
+    "classnames": "^2.2.5",
+    "meteor-node-stubs": "~0.2.4",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-addons-create-fragment": "^15.6.0",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-addons-linked-state-mixin": "^15.6.0",
+    "react-addons-perf": "^15.4.2",
+    "react-addons-pure-render-mixin": "^15.6.0",
+    "react-addons-test-utils": "^15.6.0",
+    "react-addons-transition-group": "^15.6.0",
+    "react-addons-update": "^15.6.0",
+    "react-dom": "^15.6.1",
+    "react-dropzone": "^4.0.0",
+    "react-mounter": "^1.2.0",
+    "semantic-ui-react": "^0.71.2"
+  },
+  "devDependencies": {
+    "@meteorjs/eslint-config-meteor": "^1.0.5",
+    "autoprefixer": "^6.3.1",
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-meteor": "^4.0.1",
+    "eslint-plugin-react": "^6.9.0"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true,
+      "meteor": true
+    },
+    "settings": {
+      "import/resolver": "meteor"
+    },
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "@meteorjs/eslint-config-meteor"
+    ],
+    "rules": {
+      "import/extensions": [
+        "off",
+        "never"
+      ],
+      "import/prefer-default-export": "off",
+      "linebreak-style": "off",
+      "react/no-array-index-key": "off",
+      "jsx-a11y/no-static-element-interactions": "off"
+    }
   }
 }
