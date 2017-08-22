@@ -3,7 +3,6 @@ import React from 'react';
 import { mount } from 'react-mounter';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import MainLayout from '../../client/layouts/MainLayout.jsx';
-import HubLayout from '../../client/layouts/HubLayout.jsx';
 import Home from '../../client/pages/Home.jsx';
 import Hub from '../../client/pages/Hub.jsx';
 import User from '../../client/pages/User.jsx';
@@ -73,7 +72,7 @@ FlowRouter.route('/p/:postId', {
 FlowRouter.route('/hub/:hubName', {
   action(params) {
     mount(MainLayout, {
-      content: (<HubLayout hubName={params.hubName} />),
+      content: (<Hub hubName={params.hubName} />),
     });
   },
 });
