@@ -22,11 +22,17 @@ class Login extends Component {
       password: '',
       loginError403: false,
       errorMessage: '',
+      clickedLogin: false,
     };
   }
   onChangeHandler = (e, { name, value }) => {
     this.setState({ [name]: value });
-    this.setState({ loginError403: false });
+    this.setState({
+      loginError403: false,
+      usernameError: false,
+      passwordError: false,
+      clickedLogin: false,
+    });
   };
   loginHandler = (error) => {
     if (!error) {
@@ -42,6 +48,7 @@ class Login extends Component {
     Meteor.loginWithPassword(this.state.userName, this.state.password, this.loginHandler);
   };
   trySubmit = () => {
+    this.setState({ clickedLogin: true });
     if (this.state.userName.length < 6) {
       this.setState({ usernameError: true });
     } else if (this.state.password.length < 6) {
@@ -82,7 +89,7 @@ class Login extends Component {
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }}>
                 { this.state.passwordError ?
-                  <Label basic color="red" pointing="left">Enter a password!</Label>
+                  <Label basic color="red" pointing="left">Password should be 6 characters long!</Label>
                   : ''
                 }
               </Grid.Column>
@@ -90,11 +97,15 @@ class Login extends Component {
             <Grid.Row>
               <Grid.Column width={leftWidth} style={{ margin: 'auto' }} />
               <Grid.Column width={centerWidth} style={{ margin: 'auto' }}>
-                <Form.Button>Log In</Form.Button>
+                { this.state.clickedLogin ?
+                  <Form.Button disabled>Log In</Form.Button>
+                  :
+                  <Form.Button >Log In</Form.Button>
+                }
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }}>
                 { this.state.loginError403 ?
-                  <Label basic color="red" pointing="left">{this.state.errorMessage}</Label>
+                  <Label basic color="red" pointing="left">Login failed!</Label>
                   : ''
                 }
               </Grid.Column>
