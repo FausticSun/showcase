@@ -6,6 +6,7 @@ import { initialTagStyle } from '../showcase/ShowcaseCardTag.jsx';
 
 const initialTagInputStyle = {
   position: 'absolute',
+  zIndex: '99',
 };
 const inputFormStyle = {
   width: '200px',
