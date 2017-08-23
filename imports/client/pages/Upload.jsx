@@ -44,6 +44,7 @@ class Upload extends Component {
     this.setState({
       imageFile: e.target.files[0],
       imageURL: window.URL.createObjectURL(e.target.files[0]),
+      clickedSubmit: false,
     });
     this.setState({ tags: [] });
   };
@@ -53,6 +54,7 @@ class Upload extends Component {
   };
 
   submitPostHandler = () => {
+    this.setState({ clickedSubmit: true });
     const { tags, title, description, hubName } = this.state;
     const newShowcase = new Showcase();
     newShowcase.title = title;
@@ -115,7 +117,11 @@ class Upload extends Component {
                 options={dropdownOptions}
                 onChange={this.handleChange}
               />
-              <Form.Button content="Submit post" />
+              {this.state.clickedSubmit ?
+                <Form.Button disabled content="Submit post" />
+                :
+                <Form.Button content="Submit post" />
+              }
             </Form>
           </div>
           : null }
