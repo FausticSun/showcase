@@ -209,7 +209,7 @@ class Settings extends Component {
           </div>
         :
           <Dimmer active>
-            <Loader />
+            <Loader content='Getting User Settings' />
           </Dimmer>
         }
       </article>

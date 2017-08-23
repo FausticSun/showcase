@@ -25,7 +25,7 @@ class User extends Component {
           </Header>
           :
           <Dimmer active>
-            <Loader />
+            <Loader content='Fetching Showcases' />
           </Dimmer>}
         <Divider section />
         <ShowcaseList username={this.props.username} />

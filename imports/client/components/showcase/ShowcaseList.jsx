@@ -37,7 +37,7 @@ class ShowcaseList extends Component {
       <div style={showcaseListStyle}>
         { this.props.loading ?
           <Dimmer active>
-            <Loader />
+            <Loader content='Fetching Showcases' />
           </Dimmer>
           :
           this.renderShowcaseCards()}
