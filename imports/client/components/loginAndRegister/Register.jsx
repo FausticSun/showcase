@@ -15,7 +15,6 @@ const RegisterStyle = {
 };
 export const leftWidth = 4;
 export const centerWidth = 8;
-const rightWidth = 2;
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +26,7 @@ class Register extends Component {
       usernameError: false,
       passwordError: false,
       repeatError: false,
+      clickedRegister: false,
     };
   }
   onChangeHandler = (e, { name, value }) => {
@@ -35,9 +35,11 @@ class Register extends Component {
       usernameError: false,
       passwordError: false,
       repeatError: false,
+      clickedRegister: false,
     });
   };
   trySubmit = () => {
+    this.setState({ clickedRegister: true });
     if (this.state.userName.length < 6) {
       this.setState({ usernameError: true });
     } else if (this.state.password.length < 6) {
@@ -52,7 +54,7 @@ class Register extends Component {
     Accounts.createUser({
       profile: {
         name: this.state.name,
-        profilePic: 'https://qph.ec.quoracdn.net/main-qimg-3b0b70b336bbae35853994ce0aa25013-c',
+        profilePic: '/assets/img/default_profile_pic.jpg',
         subscriptions: ['EDC', 'MFA'],
       },
       username: this.state.userName,
@@ -124,7 +126,11 @@ class Register extends Component {
             <Grid.Row>
               <Grid.Column width={leftWidth} style={{ margin: 'auto' }} />
               <Grid.Column width={centerWidth} style={{ margin: 'auto' }}>
-                <Form.Button>Register</Form.Button>
+                { this.state.clickedRegister ?
+                  <Form.Button disabled>Register</Form.Button>
+                  :
+                  <Form.Button>Register</Form.Button>
+                }
               </Grid.Column>
               <Grid.Column style={{ margin: 'auto' }} />
             </Grid.Row>
