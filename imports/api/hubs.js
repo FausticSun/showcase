@@ -19,6 +19,10 @@ const Hubs = [
     hubName: 'Battlestations',
     image: '/assets/img/battlestations.png',
     fullName: 'Battlestations: Desktop setups for maximum performance',
+  }, {
+    hubName: 'Makeup',
+    image: '/assets/img/makeup.png',
+    fullName: 'Makeup: Creating beauty from the outside in',
   },
 ];
 
