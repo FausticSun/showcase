@@ -54,8 +54,8 @@ class Register extends Component {
     Accounts.createUser({
       profile: {
         name: this.state.name,
-          profilePic: '/assets/img/default_profile_pic.jpg',
-        subscriptions: [],
+        profilePic: '/assets/img/default_profile_pic.jpg',
+        subscriptions: ['EDC', 'MFA'],
       },
       username: this.state.userName,
       password: this.state.password,

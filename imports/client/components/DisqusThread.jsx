@@ -40,12 +40,11 @@ class DisqusThread extends React.Component {
   render() {
     const { id, title, path, ...other } = this.props;
 
-    if (process.env.BROWSER) {
-      window.disqus_shortname = SHORTNAME;
-      window.disqus_identifier = id;
-      window.disqus_title = title;
-      window.disqus_url = WEBSITE_URL + path;
-    }
+    window.disqus_config = function() {
+      this.page.identifier = id;
+      this.page.title = title;
+      this.page.url = WEBSITE_URL + path;
+    };
 
     return <div {...other} id="disqus_thread" />;
   }
