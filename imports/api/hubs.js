@@ -23,6 +23,10 @@ const Hubs = [
     hubName: 'Makeup',
     image: '/assets/img/makeup.png',
     fullName: 'Makeup: Creating beauty from the outside in',
+  }, {
+    hubName: 'PC Builds',
+    image: '/assets/img/PCBuilds.png',
+    fullName: 'PC Builds: FPS is not just a number',
   },
 ];
 
