@@ -118,9 +118,9 @@ class Upload extends Component {
                 onChange={this.handleChange}
               />
               {this.state.clickedSubmit ?
-                <Form.Button disabled content="Submit post" />
+                <Form.Button disabled content="Uploading post" />
                 :
-                <Form.Button content="Submit post" />
+                <Form.Button content="Upload post" />
               }
             </Form>
           </div>

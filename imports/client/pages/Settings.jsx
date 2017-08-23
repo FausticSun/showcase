@@ -34,6 +34,7 @@ class Settings extends Component {
       wrongOldPasswordError: false,
       passwordError: false,
       repeatError: false,
+      clickedUpdate: false,
     };
   }
   onChangeHandler = (e, { name, value }) => {
@@ -43,7 +44,8 @@ class Settings extends Component {
       passwordError: false,
       repeatError: false,
       oldPasswordError: false,
-    })
+      clickedUpdate: false,
+    });
   };
   imageUploadHandler = (e) => {
     const reader = new FileReader();
@@ -80,6 +82,7 @@ class Settings extends Component {
     }
   };
   trySubmit = () => {
+    this.setState({ clickedUpdate: true });
     if (!this.state.oldPassword && (this.state.password || this.state.repeatPassword)) {
       this.setState({ oldPasswordError: true});
     } else if (this.state.password.length > 0 && this.state.password.length < 6) {
@@ -188,7 +191,11 @@ class Settings extends Component {
                 <Grid.Row>
                   <Grid.Column width={leftWidth} style={{ margin: 'auto' }} />
                   <Grid.Column width={centerWidth} style={{ margin: 'auto' }}>
-                    <Form.Button>Update Settings</Form.Button>
+                    { this.state.clickedUpdate ?
+                      <Form.Button disabled>Update Settings</Form.Button>
+                       :
+                      <Form.Button>Update Settings</Form.Button>
+                    }
                   </Grid.Column>
                   <Grid.Column style={{ margin: 'auto' }}>
                     { this.state.wrongOldPasswordError ?
