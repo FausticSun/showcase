@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Dropdown, Image } from 'semantic-ui-react';
+import { Menu, Dropdown, Image, Icon } from 'semantic-ui-react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
@@ -46,7 +46,9 @@ class SiteHeader extends Component {
         <Menu.Item header className="showcase-logo" href="/"> Showcase </Menu.Item>
         <HubDropdown />
         <Menu.Menu position="right">
-          <Menu.Item name="upload" href="/upload" />
+          <Menu.Item name="upload" href="/upload">
+            <Icon name='upload' /> Upload
+          </Menu.Item>
           {$menuView}
         </Menu.Menu>
       </Menu>
