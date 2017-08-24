@@ -8,7 +8,8 @@ import TagList from './TagList.jsx';
 import { Showcase } from '../../../api/showcases.js';
 
 const showcaseStyle = {
-  width: '600px',
+  width: '100vw',
+  maxWidth: '600px',
   marginBottom: '20px',
 };
 
